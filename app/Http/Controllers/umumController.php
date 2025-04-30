@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class bpjsController extends Controller
+class umumController extends Controller
 {
     public function index(){
-        return view('bpjs.index');
+        return view('umum.index');
     }
 
     public function validasiUser(Request $request){
@@ -19,20 +19,20 @@ class bpjsController extends Controller
         $validasi_pasien = $request->input('validasi');
 
         if($validasi_pasien == 'lama'){
-            return redirect('/bpjs/lama');
+            return redirect('/umum/lama');
         }else{
-            return redirect('/bpjs/baru');
+            return redirect('/umum/baru');
         }
     }
 
-    public function pasien_lama_bpjs(){
-        return view('bpjs.lama');
+    public function pasien_lama_umum(){
+        return view('umum.lama');
     }
-    public function pasien_baru_bpjs(){
-        return view('bpjs.baru');
+    public function pasien_baru_umum(){
+        return view('umum.baru');
     }
 
-    public function pasien_baru_bpjs_input(Request $request){
+    public function pasien_baru_umum_input(Request $request){
         $request->validate([
             'validasi' => 'required',
         ]);
@@ -40,18 +40,15 @@ class bpjsController extends Controller
         $validasi_input = $request->input('validasi');
 
         if($validasi_input == 'Rujukan Rumah Sakit'){
-            return view('bpjs.rujukan');
-        }else if($validasi_input == 'BPJS'){
-            return view('bpjs.bpjs');
+            return view('umum.rujukan');
         }else{
-            return view('bpjs.buatPasienBaru');
+            return view('umum.buatPasienBaru');
         }
     }
 
     public function store(Request $request){
         $request->validate([
             'no_rm' => 'required',
-            'no_bpjs' => 'required',
             'nama_lengkap' => 'required',
             'nik' => 'required',
             'jenis_kelamin' => 'required',
@@ -64,7 +61,6 @@ class bpjsController extends Controller
 
         $data = [
             'no_rm' => $request->no_rm,
-            'no_bpjs' => $request->no_bpjs,
             'nama_lengkap' => $request->nama_lengkap,
             'nik' => $request->nik,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -80,11 +76,11 @@ class bpjsController extends Controller
         if($data)
         {
             // Simpan data ke database
-            DB::table('pasien_bpjs')->insert($data);
+            DB::table('pasien_umum')->insert($data);
 
-            return redirect('/bpjs')->with('success', 'Data pasien baru berhasil disimpan.');
+            return redirect('/umum')->with('success', 'Data pasien baru berhasil disimpan.');
         } else {
-            return redirect('/bpjs/baru')->with('error', 'Gagal menyimpan data pasien baru.');
+            return redirect('/umum/baru')->with('error', 'Gagal menyimpan data pasien baru.');
         }
     }
 }

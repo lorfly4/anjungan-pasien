@@ -24,10 +24,6 @@
                     <input type="text" name="no_rm" class="form-control" id="no_rm" required>
                 </div>
                 <div class="mb-3">
-                    <label for="no_bpjs" class="form-label">No. BPJS</label>
-                    <input type="text" name="no_bpjs" class="form-control" id="no_bpjs" required>
-                </div>
-                <div class="mb-3">
                     <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                     <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" required>
                 </div>

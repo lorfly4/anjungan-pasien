@@ -16,27 +16,41 @@
         ANJUNGAN PASIEN MANDIRI
       </h1>
     </div>
-    <form action="/bpjs/baru" method="POST">
+    <form action="/umum" method="POST">
         @csrf
-        <div class="flex justify-center max-w-5xl mx-auto gap-8 flex-wrap">
-          <button
-            class="bg-[#3DB4FF] rounded-[32px] px-16 py-1 flex-1 max-w-[35%] min-w-[220px] ml-[-20px] text-left text-white font-extrabold text-[20px] leading-[28px] font-sans uppercase"
-            type="submit"
-            name="validasi"
-            value="Rujukan Rumah Sakit"
-          >
-            Rujukan Rumah Sakit
-          </button>
-          <button
+        <div class="flex justify-between max-w-5xl mx-auto gap-8 flex-wrap">
+          <input
             class="bg-[#3DB4FF] rounded-[32px] px-20 py-12 flex-1 max-w-[40%] min-w-[280px] text-white font-extrabold text-[32px] leading-[40px] font-sans uppercase"
             type="submit"
             name="validasi"
-            value="BPJS"
+            value="lama"
           >
-            BPJS
-          </button>
+          <input
+            class="bg-[#3DB4FF] rounded-[32px] px-20 py-12 flex-1 max-w-[40%] min-w-[280px] text-white font-extrabold text-[32px] leading-[40px] font-sans uppercase"
+            type="submit"
+            name="validasi"
+            value="baru"
+          >
         </div>
     </form>
   </div>
 </body>
 </html>
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session("success") }}',
+    });
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: '{{ session("error") }}',
+    });
+</script>
+@endif
