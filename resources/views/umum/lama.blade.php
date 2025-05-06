@@ -12,7 +12,8 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="/bpjs/lama" method="POST">
+            <form action="/umum/lama" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="nomor pasien" class="form-label">masukan nomor pasien</label>
                     <input type="text" name="nomor" class="form-control" id="exampleInputtext1">
@@ -24,3 +25,21 @@
 </div>
 </body>
 </html>
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session("success") }}',
+    });
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: '{{ session("error") }}',
+    });
+</script>
+@endif

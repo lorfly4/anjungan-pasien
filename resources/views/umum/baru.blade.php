@@ -8,6 +8,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
   />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="bg-white">
   <div class="max-w-full px-8 py-16">
@@ -40,3 +41,21 @@
   </div>
 </body>
 </html>
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session("success") }}',
+    });
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: '{{ session("error") }}',
+    });
+</script>
+@endif

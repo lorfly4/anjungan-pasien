@@ -46,41 +46,108 @@ class umumController extends Controller
         }
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+{
+    $request->validate([
+        'no_rm' => 'required',
+        'nama_lengkap' => 'required',
+        'nik' => 'required',
+        'jenis_kelamin' => 'required',
+        'tempat_lahir' => 'required',
+        'tanggal_lahir' => 'required|date',
+        'alamat' => 'required',
+        'no_hp' => 'required',
+        'email' => 'required',
+    ]);
+
+    $data = [
+        'no_rm' => $request->no_rm,
+        'nama_lengkap' => $request->nama_lengkap,
+        'nik' => $request->nik,
+        'jenis_kelamin' => $request->jenis_kelamin,
+        'tempat_lahir' => $request->tempat_lahir,
+        'tanggal_lahir' => $request->tanggal_lahir,
+        'tanggal_daftar' => now(),
+        'alamat' => $request->alamat,
+        'no_hp' => $request->no_hp,
+        'email' => $request->email,
+    ];
+
+    $insert = DB::table('pasien_umum')->insert($data);
+
+    if ($insert) {
+        // Simpan data pasien ke dalam session
+        session(['pasien' => $data]);
+        return view('umum.rekap', ['data' => $data]);
+    } else {
+        return redirect('/umum/baru')->with('error', 'Gagal menyimpan data pasien baru.');
+    }
+}
+
+public function registrasi()
+{
+    // Ambil data pasien dari session
+    $pasien = session('pasien');
+
+    if (!$pasien) {
+        return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
+    }
+
+    return view('umum.registrasi', ['pasien' => $pasien]);
+}
+
+public function printAntrian(Request $request)
+{
+    $request->validate([
+        'tujuan' => 'required',
+    ]);
+
+    $pasien = session('pasien');
+    if (!$pasien) {
+        return redirect('/umum/registrasi')->with('error', 'Data pasien tidak ditemukan.');
+    }
+
+    $data = [
+        'no_rm' => $pasien['no_rm'],
+        'no_antrian' => 'A' . rand(100, 999), // Generate nomor antrian
+        'tujuan' => $request->tujuan,
+        'tanggal_antrian' => now(),
+    ];
+
+    // Simpan data antrian ke database
+    DB::table('riwayat_antrians')->insert($data);
+
+    return view('umum.print', ['data' => $data, 'pasien' => $pasien]);
+}
+
+    public function cari_pasien(Request $request){
         $request->validate([
-            'no_rm' => 'required',
-            'nama_lengkap' => 'required',
-            'nik' => 'required',
-            'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|date',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nomor' => 'required',
         ]);
 
-        $data = [
-            'no_rm' => $request->no_rm,
-            'nama_lengkap' => $request->nama_lengkap,
-            'nik' => $request->nik,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-        'tanggal_daftar' => now(),
+        $nomor = $request->input('nomor');
 
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
-        ];
+        $pasien = DB::table('pasien_umum')->where(function($query) use ($nomor){
+            $query->where('nik', $nomor)
+            ->orWhere('no_rm', $nomor);
+        })->first();
 
-        if($data)
-        {
-            // Simpan data ke database
-            DB::table('pasien_umum')->insert($data);
-
-            return redirect('/umum')->with('success', 'Data pasien baru berhasil disimpan.');
-        } else {
-            return redirect('/umum/baru')->with('error', 'Gagal menyimpan data pasien baru.');
+        if($pasien){
+            $data = [
+                'nama_lengkap' => $pasien->nama_lengkap,
+                'no_rm' => $pasien->no_rm,
+                'nik' => $pasien->nik,
+                'jenis_kelamin' => $pasien->jenis_kelamin,
+                'tempat_lahir' => $pasien->tempat_lahir,
+                'tanggal_lahir' => $pasien->tanggal_lahir,
+                'alamat' => $pasien->alamat,
+                'no_hp' => $pasien->no_hp,
+                'email' => $pasien->email,
+                'tanggal_daftar' => $pasien->tanggal_daftar,
+            ];
+            return view('umum.rekap', compact('data'));
+        }else{
+            return redirect('/umum/lama')->with('error', 'Data pasien tidak ditemukan.');
         }
     }
 }

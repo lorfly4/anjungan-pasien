@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-6">
-            <form action="/bpjs/buatPasienBaru" method="POST">
+            <form action="/umum/buatPasienBaru" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="no_rm" class="form-label">No. Rekam Medis</label>
@@ -34,6 +34,7 @@
                 <div class="mb-3">
                     <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
+                        <option value="">Pilih jenis kelamin</option>
                         <option value="laki-laki">Laki-laki</option>
                         <option value="perempuan">Perempuan</option>
                     </select>
@@ -65,4 +66,21 @@
 </div>
 </body>
 </html>
-
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session("success") }}',
+    });
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: '{{ session("error") }}',
+    });
+</script>
+@endif

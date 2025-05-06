@@ -19,18 +19,18 @@
     <form action="/umum" method="POST">
         @csrf
         <div class="flex justify-between max-w-5xl mx-auto gap-8 flex-wrap">
-          <input
+          <button
             class="bg-[#3DB4FF] rounded-[32px] px-20 py-12 flex-1 max-w-[40%] min-w-[280px] text-white font-extrabold text-[32px] leading-[40px] font-sans uppercase"
             type="submit"
             name="validasi"
             value="lama"
-          >
-          <input
+          >lama</button>
+          <button
             class="bg-[#3DB4FF] rounded-[32px] px-20 py-12 flex-1 max-w-[40%] min-w-[280px] text-white font-extrabold text-[32px] leading-[40px] font-sans uppercase"
             type="submit"
             name="validasi"
             value="baru"
-          >
+          >baru</button>
         </div>
     </form>
   </div>

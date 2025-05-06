@@ -27,6 +27,10 @@ Route::post('/bpjs/buatPasienBaru', [App\Http\Controllers\bpjsController::class,
 Route::get('/umum', [App\Http\Controllers\umumController::class, 'index']);
 Route::post('/umum', [App\Http\Controllers\umumController::class, 'validasiUser']);
 Route::get('/umum/lama', [App\Http\Controllers\umumController::class, 'pasien_lama_umum']);
+Route::post('/umum/lama', [App\Http\Controllers\umumController::class, 'cari_pasien']);
 Route::get('/umum/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum']);
 Route::post('/umum/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum_input']);
-Route::post('/bpjs/buatPasienBaru', [App\Http\Controllers\bpjsController::class, 'store']);
+Route::post('/umum/buatPasienBaru', [App\Http\Controllers\umumController::class, 'store']);
+Route::get('/registrasi', [App\Http\Controllers\registrasiController::class, 'index']);
+Route::get('/umum/registrasi', [App\Http\Controllers\umumController::class, 'registrasi']);
+Route::post('/umum/print', [App\Http\Controllers\umumController::class, 'printAntrian']);
