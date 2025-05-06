@@ -21,7 +21,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="no_rm" class="form-label">No. Rekam Medis</label>
-                    <input type="text" name="no_rm" class="form-control" id="no_rm" required>
+                    <input type="text" name="no_rm" class="form-control" id="no_rm" value="{{ old('no_rm') }}" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="nama_lengkap" class="form-label">Nama Lengkap</label>

@@ -46,10 +46,9 @@ class umumController extends Controller
         }
     }
 
-    public function store(Request $request)
+public function store(Request $request)
 {
     $request->validate([
-        'no_rm' => 'required',
         'nama_lengkap' => 'required',
         'nik' => 'required',
         'jenis_kelamin' => 'required',
@@ -60,8 +59,21 @@ class umumController extends Controller
         'email' => 'required',
     ]);
 
+    // Ambil tanggal lahir
+    $tanggal_lahir = $request->tanggal_lahir;
+    $tanggal = date('d', strtotime($tanggal_lahir)); // Tanggal lahir (dd)
+    $bulan = date('m', strtotime($tanggal_lahir)); // Bulan lahir (mm)
+    $tahun = date('y', strtotime($tanggal_lahir)); // Tahun lahir (yy)
+
+    // Hitung jumlah pasien umum yang sudah ada
+    $jumlah_pasien = DB::table('pasien_umum')->count() + 1;
+    $kode_sekuensial = str_pad($jumlah_pasien, 3, '0', STR_PAD_LEFT); // Format 3 digit (001, 002, dst.)
+
+    // Generate no_rm
+    $no_rm = "A" . $kode_sekuensial . $tanggal . $bulan . $tahun;
+
     $data = [
-        'no_rm' => $request->no_rm,
+        'no_rm' => $no_rm,
         'nama_lengkap' => $request->nama_lengkap,
         'nik' => $request->nik,
         'jenis_kelamin' => $request->jenis_kelamin,
@@ -109,7 +121,9 @@ public function printAntrian(Request $request)
 
     $data = [
         'no_rm' => $pasien['no_rm'],
-        'no_antrian' => 'A' . rand(100, 999), // Generate nomor antrian
+        'no_antrian' => 'A' . (DB::table('riwayat_antrians')
+            ->whereRaw('DATE(tanggal_antrian) = CURDATE()')
+            ->max('no_antrian') + 1), // Generate nomor antrian seqential
         'tujuan' => $request->tujuan,
         'tanggal_antrian' => now(),
     ];
