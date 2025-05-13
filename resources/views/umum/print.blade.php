@@ -22,8 +22,8 @@
         <p><span class="font-semibold">Nama:</span> {{ $pasien['nama_lengkap'] ?? '-' }}</p>
         <p><span class="font-semibold">NIK:</span> {{ $pasien['nik'] ?? '-' }}</p>
         <p><span class="font-semibold">No. RM:</span> {{ $pasien['no_rm'] ?? '-' }}</p>
-        <p><span class="font-semibold">No. RM:</span> {{ $poli ?? '-' }}</p>
-        <p><span class="font-semibold">No. RM:</span> {{ $dokter ?? '-' }}</p>
+        <p><span class="font-semibold">Poli:</span> {{ $poli ?? '-' }}</p>
+        <p><span class="font-semibold">Dokter:</span> {{ $dokter ?? '-' }}</p>
         <h1 class="text-2xl font-bold text-gray-800 mb-2">Nomor Antrian: {{ $data['no_antrian'] ?? '-' }}</h1>
         
         </div>
