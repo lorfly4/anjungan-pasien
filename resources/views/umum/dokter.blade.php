@@ -26,78 +26,48 @@
             <p class="text-sm text-gray-600 mb-2">Nama: <span class="font-semibold">{{ $pasien['nama_lengkap'] }}</span></p>
             <p class="text-sm text-gray-600 mb-2">No RM: <span class="font-semibold">{{ $pasien['no_rm'] }}</span></p>
             <p class="text-sm text-gray-600 mb-4">NIK: <span class="font-semibold">{{ $pasien['nik'] }}</span></p>
-
-            {{-- <form action="{{ url('/umum/print') }}" method="POST" class="space-y-4">
-                @csrf
-                <div>
-                    <label for="tujuan" class="block text-sm font-medium text-gray-700">Pilih Tujuan Poli:</label>
-                    <select name="tujuan" id="tujuan" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                        <option value="">Pilih tujuan poli</option>
-                        <option value="Poli Umum">Poli Umum</option>
-                        <option value="Poli Gigi">Poli Gigi</option>
-                        <option value="Poli Anak">Poli Anak</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded shadow hover:bg-blue-700">
-                    Print
-                </button>
-            </form> --}}
+            <p class="text-sm text-gray-600 mb-4">Tujuan Poli: <span class="font-semibold">{{ $poli }}</span></p>
         </section>
         &nbsp;
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="flex items-center bg-white rounded shadow px-4 py-3">
-             <img alt="Avatar icon of a person with short hair and light skin tone" class="w-8 h-8 rounded-full mr-3" height="32" src="https://storage.googleapis.com/a1aa/image/bdda96c4-e18c-4bb1-5096-17648609155d.jpg" width="32"/>
-             <div class="flex-1 text-sm font-semibold text-gray-700">
-              Dr. Axel Aaron Giordano
-             </div>
-             <div class="text-xs text-gray-500 flex items-center space-x-1">
-              <i class="fas fa-user-md">
-              </i>
-              <span>
-               Doctor
-              </span>
-             </div>
-            </div>
-            <div class="flex items-center bg-white rounded shadow px-4 py-3">
-             <img alt="Avatar icon of a man with short hair and medium skin tone wearing medical scrubs" class="w-8 h-8 rounded-full mr-3" height="32" src="https://storage.googleapis.com/a1aa/image/771de25b-9378-41d2-4ecc-5b219282d3fd.jpg" width="32"/>
-             <div class="flex-1 text-sm font-semibold text-gray-700">
-              Eng. Bendicho Quintero
-             </div>
-             <div class="text-xs text-gray-500 flex items-center space-x-1">
-              <i class="fas fa-cogs">
-              </i>
-              <span>
-               Engineer
-              </span>
-             </div>
-            </div>
-            <div class="flex items-center bg-white rounded shadow px-4 py-3">
-             <img alt="Avatar icon of a woman with medium skin tone and long hair" class="w-8 h-8 rounded-full mr-3" height="32" src="https://storage.googleapis.com/a1aa/image/73277d2c-6dd2-43f2-4636-4b96c3d5d069.jpg" width="32"/>
-             <div class="flex-1 text-sm font-semibold text-gray-700">
-              Anna Williams
-             </div>
-             <div class="text-xs text-gray-500 flex items-center space-x-1">
-              <i class="fas fa-user-nurse">
-              </i>
-              <span>
-               Nurse
-              </span>
-             </div>
-            </div>
-            <div class="flex items-center bg-white rounded shadow px-4 py-3">
-             <img alt="Avatar icon of a man with dark skin tone and short hair" class="w-8 h-8 rounded-full mr-3" height="32" src="https://storage.googleapis.com/a1aa/image/9aecaebf-8f73-4bd3-3513-75b634334c51.jpg" width="32"/>
-             <div class="flex-1 text-sm font-semibold text-gray-700">
-              John Miller
-             </div>
-             <div class="text-xs text-gray-500 flex items-center space-x-1">
-              <i class="fas fa-stethoscope">
-              </i>
-              <span>
-               Therapist
-              </span>
-             </div>
-            </div>
-           </section>
+
+        <form action="/umum/print" method="POST">
+            @csrf
+            <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex items-center bg-white rounded shadow px-4 py-3">
+                    <img alt="Avatar icon of Dr. Rizky Putra" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Rizky Putra, SpA</div>
+                    <div class="text-xs text-gray-500 flex items-center space-x-1">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctor</span>
+                    </div>
+                    <button type="submit" name="dokter" value="Dr. Rizky Putra, SpA" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
+                        Pilih
+                    </button>
+                </div>
+                <div class="flex items-center bg-white rounded shadow px-4 py-3">
+                    <img alt="Avatar icon of Dr. Tania Putri" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Tania Putri, SpM</div>
+                    <div class="text-xs text-gray-500 flex items-center space-x-1">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctor</span>
+                    </div>
+                    <button type="submit" name="dokter" value="Dr. Tania Putri, SpM" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
+                        Pilih
+                    </button>
+                </div>
+                <div class="flex items-center bg-white rounded shadow px-4 py-3">
+                    <img alt="Avatar icon of Dr. Muhammad Firdaus" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Muhammad Firdaus, SpKJ</div>
+                    <div class="text-xs text-gray-500 flex items-center space-x-1">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctor</span>
+                    </div>
+                    <button type="submit" name="dokter" value="Dr. Muhammad Firdaus, SpKJ" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
+                        Pilih
+                    </button>
+                </div>
+            </section>
+        </form>
     </main>
 </body>
 </html>

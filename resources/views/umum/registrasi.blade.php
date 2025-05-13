@@ -55,104 +55,82 @@
     <div class="grid grid-cols-4 gap-3">
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 1 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/22570a02-842b-42d0-6843-2fbeed40ffc0.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI ANAK" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 2 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/55c4509a-e6a9-4aa0-03fc-ea92f2eea4fe.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI JANTUNG" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 3 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/c0e3b8e6-ac6a-4b32-f1e1-ab5c0514190f.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI UMUM" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 4 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/b33b96ea-3a2e-447d-4b7f-1c7580ec92f4.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI GIGI" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 5 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/6e83a70e-4873-47d5-a34d-a19fab55c58e.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="FARMASI" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 6 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/a128ebe6-ed8f-4988-ea24-c4d34e232bf6.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI KULIT" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 7 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/2baafebf-fb21-498b-718a-ddb053c49af2.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI SARAF" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 8 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/43bc941a-6161-4306-16c7-edb7d9d16599.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI MATA" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 9 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/41047c5e-a266-4a01-f8b0-6183c486b7a9.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI THT" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 10 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/b582d06c-08f6-4e2d-1385-e1dc682665df.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
+       <input type="text" value="POLI ORTOPEDI" name="poli" class="text-xs text-center text-gray-700 border-none"/>
        <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>
       </div>
       <div class="bg-white border border-gray-300 rounded-md flex flex-col items-center justify-center p-4 cursor-pointer hover:shadow-md">
        <img alt="Icon representing service 11 with blue and white colors" class="mb-2" height="60" src="https://storage.googleapis.com/a1aa/image/7102cd27-10b1-491b-61a8-c4c0808c4bf6.jpg" width="60"/>
-       <span class="text-xs text-center text-gray-700">
-        PENGAJUAN PERMOHONAN
-       </span>
-       <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+       <input type="text" value="POLI UROLOGI" name="poli" class="text-xs text-center text-gray-700 border-none"/>
+<button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Ajukan
        </button>   
-       </div>
-   </form>
+      </div>
+       </form>
    
   </main>
  </body>
