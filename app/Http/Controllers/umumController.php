@@ -101,14 +101,60 @@ public function registrasi()
     // Ambil data pasien dari session
     $pasien = session('pasien');
 
-    if (!$pasien) {
+    if (!$pasien || !isset($pasien['nama_lengkap'])) {
         return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
     }
 
     return view('umum.registrasi', ['pasien' => $pasien]);
 }
 
-public function printAntrian(Request $request)
+public function dokter(){
+    $pasien = session('pasien');
+
+    if (!$pasien || !isset($pasien['nama_lengkap'])) {
+        return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
+    }
+
+    return view('umum.dokter', ['pasien' => $pasien]);
+}
+
+public function cari_pasien(Request $request)
+{
+    $request->validate([
+        'nomor' => 'required',
+    ]);
+
+    $nomor = $request->input('nomor');
+
+    $pasien = DB::table('pasien_umum')->where(function ($query) use ($nomor) {
+        $query->where('nik', $nomor)
+            ->orWhere('no_rm', $nomor);
+    })->first();
+
+    if ($pasien) {
+        $data = [
+            'nama_lengkap' => $pasien->nama_lengkap,
+            'no_rm' => $pasien->no_rm,
+            'nik' => $pasien->nik,
+            'jenis_kelamin' => $pasien->jenis_kelamin,
+            'tempat_lahir' => $pasien->tempat_lahir,
+            'tanggal_lahir' => $pasien->tanggal_lahir,
+            'alamat' => $pasien->alamat,
+            'no_hp' => $pasien->no_hp,
+            'email' => $pasien->email,
+            'tanggal_daftar' => $pasien->tanggal_daftar,
+        ];
+
+        // Simpan data pasien ke dalam session
+        session(['pasien' => $data]);
+
+        return view('umum.rekap', compact('data'));
+    } else {
+        return redirect('/umum/lama')->with('error', 'Data pasien tidak ditemukan.');
+    }
+}
+
+    public function printAntrian(Request $request)
 {
     $request->validate([
         'tujuan' => 'required',
@@ -119,11 +165,16 @@ public function printAntrian(Request $request)
         return redirect('/umum/registrasi')->with('error', 'Data pasien tidak ditemukan.');
     }
 
+    // Jika $pasien adalah objek, ubah menjadi array
+    if (is_object($pasien)) {
+        $pasien = (array) $pasien;
+    }
+
     $data = [
         'no_rm' => $pasien['no_rm'],
         'no_antrian' => 'A' . (DB::table('riwayat_antrians')
             ->whereRaw('DATE(tanggal_antrian) = CURDATE()')
-            ->max('no_antrian') + 1), // Generate nomor antrian seqential
+            ->count() + 1), // Generate nomor antrian sequential
         'tujuan' => $request->tujuan,
         'tanggal_antrian' => now(),
     ];
@@ -134,34 +185,4 @@ public function printAntrian(Request $request)
     return view('umum.print', ['data' => $data, 'pasien' => $pasien]);
 }
 
-    public function cari_pasien(Request $request){
-        $request->validate([
-            'nomor' => 'required',
-        ]);
-
-        $nomor = $request->input('nomor');
-
-        $pasien = DB::table('pasien_umum')->where(function($query) use ($nomor){
-            $query->where('nik', $nomor)
-            ->orWhere('no_rm', $nomor);
-        })->first();
-
-        if($pasien){
-            $data = [
-                'nama_lengkap' => $pasien->nama_lengkap,
-                'no_rm' => $pasien->no_rm,
-                'nik' => $pasien->nik,
-                'jenis_kelamin' => $pasien->jenis_kelamin,
-                'tempat_lahir' => $pasien->tempat_lahir,
-                'tanggal_lahir' => $pasien->tanggal_lahir,
-                'alamat' => $pasien->alamat,
-                'no_hp' => $pasien->no_hp,
-                'email' => $pasien->email,
-                'tanggal_daftar' => $pasien->tanggal_daftar,
-            ];
-            return view('umum.rekap', compact('data'));
-        }else{
-            return redirect('/umum/lama')->with('error', 'Data pasien tidak ditemukan.');
-        }
-    }
 }
