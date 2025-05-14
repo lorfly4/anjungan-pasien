@@ -35,6 +35,7 @@ Route::prefix('umum')->group(function () {
     Route::post('/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum_input']);
     Route::post('/buatPasienBaru', [App\Http\Controllers\umumController::class, 'store']);
     Route::get('/registrasi', [App\Http\Controllers\umumController::class, 'registrasi']);
+    Route::post('/registrasi', [App\Http\Controllers\umumController::class, 'registrasi']);
     Route::post('/print', [App\Http\Controllers\umumController::class, 'printAntrian']);
     Route::get('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
     Route::post('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);

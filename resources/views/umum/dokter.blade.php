@@ -31,43 +31,41 @@
         &nbsp;
 
         <form action="/umum/print" method="POST">
-            @csrf
-            <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="flex items-center bg-white rounded shadow px-4 py-3">
-                    <img alt="Avatar icon of Dr. Rizky Putra" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
-                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Rizky Putra, SpA</div>
-                    <div class="text-xs text-gray-500 flex items-center space-x-1">
-                        <i class="fas fa-user-md"></i>
-                        <span>Doctor</span>
-                    </div>
-                    <button type="submit" name="dokter" value="Dr. Rizky Putra, SpA" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
-                        Pilih
-                    </button>
-                </div>
-                <div class="flex items-center bg-white rounded shadow px-4 py-3">
-                    <img alt="Avatar icon of Dr. Tania Putri" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
-                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Tania Putri, SpM</div>
-                    <div class="text-xs text-gray-500 flex items-center space-x-1">
-                        <i class="fas fa-user-md"></i>
-                        <span>Doctor</span>
-                    </div>
-                    <button type="submit" name="dokter" value="Dr. Tania Putri, SpM" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
-                        Pilih
-                    </button>
-                </div>
-                <div class="flex items-center bg-white rounded shadow px-4 py-3">
-                    <img alt="Avatar icon of Dr. Muhammad Firdaus" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
-                    <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Muhammad Firdaus, SpKJ</div>
-                    <div class="text-xs text-gray-500 flex items-center space-x-1">
-                        <i class="fas fa-user-md"></i>
-                        <span>Doctor</span>
-                    </div>
-                    <button type="submit" name="dokter" value="Dr. Muhammad Firdaus, SpKJ" class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-4 py-2">
-                        Pilih
-                    </button>
-                </div>
-            </section>
-        </form>
+    @csrf
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex items-center bg-white rounded shadow px-4 py-3 cursor-pointer" onclick="submitForm('Dr. Rizky Putra, SpA')">
+            <img alt="Avatar icon of Dr. Rizky Putra" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+            <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Rizky Putra, SpA</div>
+            <div class="text-xs text-gray-500 flex items-center space-x-1">
+                <i class="fas fa-user-md"></i>
+                <span>Doctor</span>
+            </div>
+        </div>
+        <div class="flex items-center bg-white rounded shadow px-4 py-3 cursor-pointer" onclick="submitForm('Dr. Tania Putri, SpM')">
+            <img alt="Avatar icon of Dr. Tania Putri" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+            <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Tania Putri, SpM</div>
+            <div class="text-xs text-gray-500 flex items-center space-x-1">
+                <i class="fas fa-user-md"></i>
+                <span>Doctor</span>
+            </div>
+        </div>
+        <div class="flex items-center bg-white rounded shadow px-4 py-3 cursor-pointer" onclick="submitForm('Dr. Muhammad Firdaus, SpKJ')">
+            <img alt="Avatar icon of Dr. Muhammad Firdaus" class="w-8 h-8 rounded-full mr-3" height="32" src="https://via.placeholder.com/40" width="32"/>
+            <div class="flex-1 text-sm font-semibold text-gray-700">Dr. Muhammad Firdaus, SpKJ</div>
+            <div class="text-xs text-gray-500 flex items-center space-x-1">
+                <i class="fas fa-user-md"></i>
+                <span>Doctor</span>
+            </div>
+        </div>
+    </section>
+    <input type="hidden" name="dokter" id="dokter-input">
+</form>
+        <script>
+            function submitForm(dokter) {
+                document.getElementById('dokter-input').value = dokter;
+                document.querySelector('form').submit();
+            }
+        </script>
     </main>
 </body>
 </html>
