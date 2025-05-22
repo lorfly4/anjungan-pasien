@@ -1,29 +1,29 @@
 @extends('cms.layout.main')
-
 @section('contentadmin')
     <div class="container mt-4">
         {{-- Header --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Tabel Create Dokter</h1>
+                <h1 class="m-0">Tabel Create Kategori</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Tabel Create Dokter</li>
+                    <li class="breadcrumb-item active">Tabel Create Kategori</li>
                 </ol>
             </div>
         </div>
 
         {{-- Tombol dan Search --}}
         <div class="d-flex justify-content-between mb-2">
-            <a href="{{ route('tablecreatedokter.showcreatedokter') }}" class="btn btn-sm btn-success">Create</a>
-            <form action="{{ route('tablecreatedokter.index') }}" method="GET" class="d-flex">
+            <a href="{{ route('kategori.showcreatekategori')}}" class="btn btn-sm btn-success">Create</a>
+            <form action="#" method="GET" class="d-flex">
                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari user..."
                     value="{{ request('search') }}">
                 <button type="submit" class="btn btn-sm btn-primary ml-2">Cari</button>
             </form>
         </div>
+
 
         {{-- Flash message --}}
         @if (session('success'))
@@ -41,34 +41,23 @@
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr class="text-center align-middle">
-                    <th>No</th>
-                    <th>Foto Dokter</th>
-                    <th>Nama Dokter</th>
-                    <th>Kategori Poli</th>
-                    <th>Tanggal Create</th>
+                    <th class="text-center" style="width: 3em;">No</th>
+                    <th>Kategori</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($dokters as $dokter)
-                    <tr class="text-center align-middle">
-                        <td class="text-center align-middle">
-                            {{ ($dokters->currentPage() - 1) * $dokters->perPage() + $loop->iteration }}</td>
+                @forelse($kategoris as $kategori)
+                    <tr>
+                        <td class="text-center">{{ ($kategoris->currentPage() - 1) * $kategoris->perPage() + $loop->iteration }}</td>
+                        <td class="text-center">{{ $kategori->kategoris }}</td>
                         <td class="text-center">
-                            <img src="{{ asset('storage/images/' . $dokter->foto_dokter) }}" alt="Foto User"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-                        </td>
-                        <td class="text-center py-5">{{ $dokter->nama_dokter }}</td>
-                        <td class="text-center py-5">{{ $dokter->poli?->nama_poli ?? '-' }}</td>
-                        <td class="text-center py-5">{{ $dokter->created_at->format('d-m-Y H:i:s') }}</td>
-                        <td class="text-center py-5">
-                            <a href=" {{ route('tablecreatedokter.showeditdokter', $dokter->id_dokter) }}"
-                                class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('tablecreatedokter.deletedokter', $dokter->id_dokter) }}" method="POST"
-                                class="d-inline" onsubmit="return confirmSweetAlert(event, this)">
+                            <a href="{{ route('kategori.showeditkategori', $kategori->id_kategoris) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{  route('kategori.deletekategori', $kategori->id_kategoris) }}" method="POST" class="d-inline"
+                                onsubmit="return confirmSweetAlert(event, this)">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                                <button class="btn btn-sm btn-danger">Hapus</button>
                             </form>
                             <script>
                                 function confirmSweetAlert(event, form) {
@@ -92,16 +81,17 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">Tidak ada data Dokter.</td>
+                        <td class="text-center" colspan="3">Tidak ada data</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
 
         {{-- Pagination --}}
-        <div class="d-flex justify-content-end">
-            {{ $dokters->onEachSide(1)->links('pagination::bootstrap-4') }}
-        </div>
+    <div class="d-flex justify-content-end">
+        {{ $kategoris->onEachSide(1)->links('pagination::bootstrap-4') }}
+    </div>
+
     </div>
     <script>
         $(document).ready(function() {

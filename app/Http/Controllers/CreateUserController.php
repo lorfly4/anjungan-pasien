@@ -16,7 +16,7 @@ class CreateUserController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%')->orWhere('email', 'like', '%' . $request->search . '%');
         }
 
-        $users = $query->orderBy('created_at', 'desc')->paginate(5);
+        $users = $query->orderBy('created_at', 'desc')->paginate(10000);
 
         return view('cms.table.tablecreateuser', compact('users'));
     }

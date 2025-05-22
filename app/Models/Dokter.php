@@ -15,14 +15,8 @@ class Dokter extends Model
 
     protected $primaryKey = 'id_dokter'; // <-- tambahkan ini jika bukan 'id'
 
+    protected $keyType = 'string'; // Sesuaikan dengan tipe data primary key tabel poli
 
-    // protected $hidden = [
-    //     'password',
-    // ];
-
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
 
 
     public function poli()

@@ -1,29 +1,30 @@
 @extends('cms.layout.main')
-
 @section('contentadmin')
+
     <div class="container mt-4">
         {{-- Header --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Tabel Create Dokter</h1>
+                <h1 class="m-0">Tabel Create Loket</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Tabel Create Dokter</li>
+                    <li class="breadcrumb-item active">Tabel Create Loket</li>
                 </ol>
             </div>
         </div>
 
         {{-- Tombol dan Search --}}
         <div class="d-flex justify-content-between mb-2">
-            <a href="{{ route('tablecreatedokter.showcreatedokter') }}" class="btn btn-sm btn-success">Create</a>
-            <form action="{{ route('tablecreatedokter.index') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari user..."
-                    value="{{ request('search') }}">
+            <a href="{{ route('loket.showcreateloket')}}" class="btn btn-sm btn-success">Create</a>
+            <form action="{{ route('loket.index')}}" method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari loket..."
+                    value="{{ request('search')}}">
                 <button type="submit" class="btn btn-sm btn-primary ml-2">Cari</button>
             </form>
         </div>
+
 
         {{-- Flash message --}}
         @if (session('success'))
@@ -41,34 +42,37 @@
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr class="text-center align-middle">
-                    <th>No</th>
-                    <th>Foto Dokter</th>
-                    <th>Nama Dokter</th>
-                    <th>Kategori Poli</th>
-                    <th>Tanggal Create</th>
+                    <th class="text-center" style="width: 3em;">No</th>
+                    <th>Nama Loket</th>
+                    <th>Jenis Berobat</th>
+                    <th>Keterangan</th>
+                    <th>Dokter</th>
+                    <th>Poli</th>
+                    <th>Kategori</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($dokters as $dokter)
-                    <tr class="text-center align-middle">
-                        <td class="text-center align-middle">
-                            {{ ($dokters->currentPage() - 1) * $dokters->perPage() + $loop->iteration }}</td>
-                        <td class="text-center">
-                            <img src="{{ asset('storage/images/' . $dokter->foto_dokter) }}" alt="Foto User"
-                                style="width: 100px; height: 100px; object-fit: cover;">
+                @forelse ($lokets as $loket)
+                    <tr>
+                        <td class="text-center">{{ ($lokets->currentPage() - 1) * $lokets->perPage() + $loop->iteration }}
                         </td>
-                        <td class="text-center py-5">{{ $dokter->nama_dokter }}</td>
-                        <td class="text-center py-5">{{ $dokter->poli?->nama_poli ?? '-' }}</td>
-                        <td class="text-center py-5">{{ $dokter->created_at->format('d-m-Y H:i:s') }}</td>
-                        <td class="text-center py-5">
-                            <a href=" {{ route('tablecreatedokter.showeditdokter', $dokter->id_dokter) }}"
+                        <td>{{ $loket->nama_lokets }}</td>
+                        <td>{{ $loket->jenis_berobat}}</td>
+                        <td>{{ $loket->keterangan }}</td>
+                        <td>{{ $loket->id_dokter}}</td>
+                        <td>{{ $loket->id_poli}}</td>
+                        <td>{{ $loket->id_kategoris}}</td>
+                        <td>{{ $loket->status}}</td>
+                        <td class="text-center">
+                            <a href="{{ route('loket.showeditloket', $loket->id_lokets) }}"
                                 class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('tablecreatedokter.deletedokter', $dokter->id_dokter) }}" method="POST"
-                                class="d-inline" onsubmit="return confirmSweetAlert(event, this)">
+                            <form action="{{ route('loket.prosesdeleteloket', $loket->id_lokets) }}" method="POST" class="d-inline"
+                                onsubmit="return confirmSweetAlert(event, this)">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                                <button class="btn btn-sm btn-danger">Hapus</button>
                             </form>
                             <script>
                                 function confirmSweetAlert(event, form) {
@@ -92,7 +96,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">Tidak ada data Dokter.</td>
+                        <td class="text-center" colspan="9">Tidak ada data</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -100,8 +104,9 @@
 
         {{-- Pagination --}}
         <div class="d-flex justify-content-end">
-            {{ $dokters->onEachSide(1)->links('pagination::bootstrap-4') }}
+            {{ $lokets->onEachSide(1)->links('pagination::bootstrap-4') }}
         </div>
+
     </div>
     <script>
         $(document).ready(function() {
@@ -112,4 +117,6 @@
             });
         });
     </script>
+
+
 @endsection

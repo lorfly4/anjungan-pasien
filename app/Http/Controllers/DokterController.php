@@ -56,28 +56,32 @@ class DokterController extends Controller
         return view('cms.backend.editcreatepolidokter', compact('poli', 'dokter'));
     }
 
-    public function proseseditdokter(){
+    public function proseseditdokter(Request $request, $id_dokter)
+    {
+        $dokter = \App\Models\Dokter::findOrFail($id_dokter);
+        $poli = \App\Models\Poli::all();
         $request->validate([
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'nullable|string|max:255',
             'poli_id' => 'nullable|exists:poli,id_poli', // pakai id_poli
         ]);
 
-        $file = $request->file('foto');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('images', $filename, 'public');
+        if ($request->file('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('images', $filename, 'public');
+            $dokter->foto_dokter = $filename;
+        }
 
-        // Simpan data dokter
-        \App\Models\Dokter::create([
-            'nama_dokter' => $request->input('name'),
-            'id_poli' => $request->input('poli_id'),
-            'foto_dokter' => $filename,
-        ]);
+        $dokter->nama_dokter = $request->input('name') ?? $dokter->nama_dokter;
+        $dokter->id_poli = $request->input('poli_id') ?? $dokter->id_poli;
+        $dokter->save();
 
         return redirect()->route('tablecreatedokter.index')->with('success', 'Dokter berhasil diupdate');
     }
 
-        public function deletedokter($id_dokter) {
+
+    public function deletedokter($id_dokter) {
         $dokter = \App\Models\Dokter::findOrFail($id_dokter);
         $dokter->delete();
 

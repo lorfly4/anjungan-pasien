@@ -7,11 +7,16 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\UserserversideController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
 
@@ -46,11 +51,39 @@ Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\P
     Route::get('admin/tablecreatedokter', [App\Http\Controllers\DokterController::class, 'index'])->name('tablecreatedokter.index');
     Route::get('admin/createdokter', [App\Http\Controllers\DokterController::class, 'showcreatedokter'])->name('tablecreatedokter.showcreatedokter');
     Route::post('admin/prosescreatedokter', [App\Http\Controllers\DokterController::class, 'prosescreatedokter'])->name('tablecreatedokter.prosescreatedokter');
-    
+
     Route::get('admin/editdokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'showeditdokter'])->name('tablecreatedokter.showeditdokter');
     Route::post('admin/proseseditdokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'proseseditdokter'])->name('tablecreatedokter.proseseditdokter');
 
     Route::delete('admin/prosesdeletedokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'deletedokter'])->name('tablecreatedokter.deletedokter');
+
+
+    Route::get('admin/tablekategori', [\App\Http\Controllers\KategoriController::class, 'index'])->name('tablecreatekategori.index');
+
+    Route::get('admin/showcreatekategori', [\App\Http\Controllers\KategoriController::class, 'showcreatekategori'])->name('kategori.showcreatekategori');
+
+    Route::post('admin/prosescreatekategori', [\App\Http\Controllers\KategoriController::class, 'prosescreatekategori'])->name('kategori.prosescreatekategori');
+
+    Route::get('admin/showeditkategori/{id_kategoris}', [App\Http\Controllers\KategoriController::class, 'showeditkategori'])->name('kategori.showeditkategori');
+
+    Route::post('admin/proseseditkategori/{id_kategoris}', [App\Http\Controllers\KategoriController::class, 'proseseditkategori'])->name('kategori.proseseditkategori');
+
+    Route::delete('admin/deletekategori/{id_kategoris}',[App\Http\Controllers\KategoriController::class, 'deletekategori'])->name('kategori.deletekategori');
+
+    Route::get('admin/tableloket', [App\Http\Controllers\LoketController::class, 'index'])->name('loket.index');
+
+    Route::get('admin/showcreateloket', [App\Http\Controllers\LoketController::class, 'showcreateloket'])->name('loket.showcreateloket');
+
+    Route::post('admin/prosescreateloket', [App\Http\Controllers\LoketController::class, 'prosescreateloket'])->name('loket.prosescreateloket');
+
+    Route::get('admin/showeditloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'showeditloket'])->name('loket.showeditloket');
+
+    Route::put('admin/proseseditloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'proseseditloket'])->name('loket.proseseditloket');
+
+    Route::delete('admin/prosesdeleteloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'prosesdeleteloket'])->name('loket.prosesdeleteloket');
+
+    // Serverside    
+    Route::get('admin/tabeluserserverside', [App\Http\Controllers\UserserversideController::class, 'index'])->name('userserverside.index');
 
 });
 

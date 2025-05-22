@@ -19,7 +19,7 @@ class Poli extends Model
 
     protected $primaryKey = 'id_poli'; // <-- tambahkan ini jika bukan 'id'
 
-    
+
     public function dokter()
     {
         return $this->hasMany(Dokter::class, 'id_poli', 'id_poli');

@@ -23,7 +23,8 @@
                     <div class="container mt-4">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="{{ route('tablecreatedokter.prosescreatedokter') }}" method="POST"
+                                <input type="hidden" name="id_dokter" value="{{ $dokter->id_dokter }}">
+                                <form action="{{ route('tablecreatedokter.proseseditdokter', $dokter->id_dokter) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -43,7 +44,7 @@
                                                 };
                                                 reader.readAsDataURL(event.target.files[0]);
                                             }
-                                        </script>                                    
+                                        </script>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nama Dokter</label>

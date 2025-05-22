@@ -14,18 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'image' => 'gps.jpg',
-        //     'name' => 'Test User',
-        //     'email' => 'adellana@example.com',
-        //     'role' => 'admin',
-        //     'password' => Hash::make('123456'),
-        // ]);
+        User::factory()->create([
+            'image' => 'gps.jpg',
+            'name' => 'Test User',
+            'email' => 'adellana@example.com',
+            'role' => 'admin',
+            'password' => Hash::make('123456'),
+        ]);
 
-        // \App\Models\Poli::factory()->create([
-        //     'nama_poli' => 'Poli Gigi',
-        // ]);
     }
 }

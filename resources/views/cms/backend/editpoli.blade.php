@@ -27,11 +27,6 @@
                             <label for="poli">Nama Poli</label>
                             <input type="text" class="form-control" id="nama_poli" name="nama_poli" aria-describedby="emailHelp" placeholder="Masukkan Nama Poli" value="{{$poli->nama_poli}}" required>
                         </div>
-
-                        {{-- <div class="form-group">
-                            <label for="kode_poli">Kode Poli</label>
-                            <input type="text" class="form-control" id="kode_poli" name="kode_poli" aria-describedby="emailHelp" placeholder="Masukkan Kode Poli">
-                        </div> --}}
                         <button type="submit" class="btn btn-primary" onclick="if(document.getElementById('nama_poli').value != '') { Swal.fire('Saved!', 'Your data has been saved.', 'success'); } else { Swal.fire('Error!', 'Please enter a valid Poli name.', 'error'); return false; }">Simpan</button>
                     </form>
                 </div>
