@@ -87,4 +87,27 @@ class DokterController extends Controller
 
         return redirect()->route('tablecreatedokter.index')->with('success', 'User berhasil dihapus.');
     }
+
+    public function tablecreatejadwaldokter(Request $request) {
+        $search = $request->get('search');
+        $dokters = \App\Models\Dokter::all();
+        $jadwaldokters = \App\Models\JadwalDokter::where(function ($query) use ($search) {
+            if ($search) {
+                $query->whereHas('dokter', function ($query) use ($search) {
+                    $query->where('nama_dokter', 'LIKE', "%{$search}%");
+                })
+                    ->orWhere('hari', 'LIKE', "%{$search}%")
+                    ->orWhere('jam_mulai', 'LIKE', "%{$search}%")
+                    ->orWhere('jam_selesai', 'LIKE', "%{$search}%");
+            }
+        })->paginate(5);
+
+        return view('cms.table.tablecreatejadwaldokter', compact('dokters', 'jadwaldokters', 'search'));
+    }
+
+    public function showcreatejadwaldokter(Request $request) {
+
+        $dokters = \App\Models\Dokter::all();
+        return view ('cms.backend.createjadwaldokter', compact('dokters'));
+    }
 }

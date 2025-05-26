@@ -108,12 +108,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tablecreatedokter.index') }}" class="nav-link ">
+                            <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#dokterMenu" aria-expanded="false" aria-controls="dokterMenu">
                                 <i class="nav-icon fas fa-user-md"></i>
                                 <p>
-                                    Create Dokter
+                                    Master Create Dokter
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview collapse" id="dokterMenu">
+                                <li class="nav-item">
+                                    <a href="{{ route('tablecreatedokter.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create Dokter</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('dokter.tablecreatejadwaldokter')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Jadwal Dokter</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('tablecreatekategori.index') }}" class="nav-link ">
