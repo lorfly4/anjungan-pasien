@@ -8,6 +8,12 @@
 </head>
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col items-center pt-8">
     <header class="flex items-center space-x-2 mb-12">
+        <a href="{{ url()->previous() }}" class="absolute left-8 top-8 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Kembali
+        </a>
         <img src="https://storage.googleapis.com/a1aa/image/8229eb58-f391-42a9-79c0-8b72bb0b1225.jpg" class="w-10 h-10" alt="Logo">
         <h1 class="text-lg font-semibold text-gray-700">Metro CNRPA</h1>
     </header>

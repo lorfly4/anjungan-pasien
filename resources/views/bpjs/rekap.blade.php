@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="text-right">
-            <a href="/umum/registrasi" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-sm">
+            <a href="/bpjs/registrasi" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-sm">
                 NEXT
             </a>
         </div>

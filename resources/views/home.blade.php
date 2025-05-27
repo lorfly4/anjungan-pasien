@@ -42,12 +42,12 @@
  <div class="grid grid-cols-2 gap-8 w-full max-w-5xl px-10 mt-6">
     
   <!-- Tombol Pasien Lama -->
-  <a href="/umum/lama" class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10">
+  <a href="/bpjs" class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10">
     <div class="flex items-center space-x-4 z-10">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
-      <span>Pasien Lama</span>
+      <span>Pasien BPJS</span>
     </div>
     <!-- Dekorasi garis -->
     <div class="absolute top-0 right-0 w-24 h-full flex items-start justify-end pr-2 pt-4 opacity-50">
@@ -58,12 +58,12 @@
   </a>
 
   <!-- Tombol Pasien Baru -->
-  <a href="umum/baru" class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10">
+  <a href="/umum" class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10">
     <div class="flex items-center space-x-4 z-10">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
       </svg>
-      <span>Pasien Baru</span>
+      <span>Pasien Umum</span>
     </div>
     <!-- Dekorasi garis -->
     <div class="absolute top-0 left-0 w-24 h-full flex items-start justify-start pl-2 pt-4 opacity-50">

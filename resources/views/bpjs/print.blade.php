@@ -81,18 +81,19 @@
 
 
         <script>
-    function handlePrintAndRedirect() {
-        window.print();
-        // Redirect to the home page after printing
-        window.onafterprint = function () {
-            window.location.href = "/";
-        };
-    }
-</script>
+            function handlePrintAndRedirect() {
+                window.print();
+                // Redirect to the home page after printing
+                window.onafterprint = function () {
+                    window.location.href = "/";
+                };
+            }
+        </script>
 
 
 
     </form>
+
 
 </body>
 

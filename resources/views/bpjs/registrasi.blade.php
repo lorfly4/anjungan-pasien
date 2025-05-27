@@ -40,7 +40,7 @@
      Submit
     </button>
    </form>
-   <form action="/umum/dokter" method="POST">
+   <form action="/bpjs/dokter" method="POST">
     @csrf
     <div class="grid grid-cols-4 gap-3">
         @foreach($poli as $p)

@@ -45,13 +45,7 @@
         });
     </script>
 
-    <div class="border-t border-b py-3 mb-4 text-sm text-gray-700">
-        <p><span class="font-semibold">Nama:</span> {{ $pasien['nama_lengkap'] ?? '-' }}</p>
-        <p><span class="font-semibold">NIK:</span> {{ $pasien['nik'] ?? '-' }}</p>
-        <p><span class="font-semibold">No. RM:</span> {{ $pasien['no_rm'] ?? '-' }}</p>
-        <p><span class="font-semibold">Poli:</span> {{ $poli ?? '-' }}</p>
-        <p><span class="font-semibold">Dokter:</span> {{ $dokter ?? '-' }}</p>
-        <br>
+    <div class="border-t border-b py-3 mb-4 text-sm text-gray-700">     
         <p class="text-2xl font-bold text-gray-800 mb-2 text-center"><span>Nomor Antrian: </span></p>
         <h1 class="text-3xl font-bold text-black-600 text-center">{{ $data['no_antrian'] }}</h1>
     </div>
@@ -68,31 +62,6 @@
         <p>Terima kasih telah menggunakan layanan kami.</p>
         <p>Call Center: (0725) 123456</p>
     </div>
-
-    <form method="POST" action="/umum/print/simpan">
-        @csrf
-        @foreach($data as $key => $value)
-            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-        @endforeach
-        <button type="submit" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onclick="handlePrintAndRedirect()">
-            Konfirmasi Selesai Print
-        </button>
-
-
-        <script>
-    function handlePrintAndRedirect() {
-        window.print();
-        // Redirect to the home page after printing
-        window.onafterprint = function () {
-            window.location.href = "/";
-        };
-    }
-</script>
-
-
-
-    </form>
 
 </body>
 

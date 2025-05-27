@@ -36,7 +36,7 @@
         </section>
         &nbsp;
 
-        <form action="/umum/print" method="POST">
+        <form action="/bpjs/print" method="POST">
             @csrf
             <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @foreach ($dokter as $d)
