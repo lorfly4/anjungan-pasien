@@ -90,7 +90,14 @@ Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\P
 
     Route::get('admin/showcreatejadwaldokter', [App\Http\Controllers\DokterController::class, 'showcreatejadwaldokter'])->name('dokter.showcreatejadwaldokter');
 
-    // Route::post('admin/prosescreatejadwaldokter', [App\Http\Controllers\DokterController::Class, 'prosescreatejadwaldokter'])->name('dokter.prosescreatejadwaldokter');
+    Route::post('admin/prosescreatejadwaldokter', [App\Http\Controllers\DokterController::class, 'prosescreatejadwaldokter'])->name('dokter.prosescreatejadwaldokter');
+
+    Route::get('admin/showeditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'showeditjadwaldokter'])->name('dokter.showeditjadwaldokter');
+
+    Route::put('admin/proseseditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'proseseditjadwaldokter'])->name('dokter.proseseditjadwaldokter');
+    
+    Route::delete('admin/deletejadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'deletejadwaldokter'])->name('dokter.deletejadwaldokter');
+
 });
 
 

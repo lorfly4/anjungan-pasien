@@ -8,6 +8,8 @@ class JadwalDokter extends Model
 {
     protected $table = 'jadwal_dokters';
 
+    protected $primaryKey = 'id_jadwal_dokter';
+
     protected $fillable = [
         'id_dokter',
         'jam_mulai',
@@ -20,3 +22,4 @@ class JadwalDokter extends Model
         return $this->belongsTo(Dokter::class, 'id_dokter');
     }
 }
+

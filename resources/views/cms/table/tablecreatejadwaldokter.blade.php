@@ -60,8 +60,8 @@
                             <td class="text-center py-5">{{ $jadwaldokter->jam_mulai }}</td>
                             <td class="text-center py-5">{{ $jadwaldokter->jam_selesai }}</td>
                         <td class="text-center py-5">
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="#" method="POST" class="d-inline"
+                            <a href="{{route ('dokter.showeditjadwaldokter', $jadwaldokter->id_jadwal_dokter)}}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{route ('dokter.deletejadwaldokter', $jadwaldokter->id_jadwal_dokter)}}" method="POST" class="d-inline"
                                 onsubmit="return confirmSweetAlert(event, this)">
                                 @csrf
                                 @method('DELETE')
@@ -89,7 +89,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">Tidak ada data Dokter.</td>
+                        <td class="text-center" colspan="6">Tidak ada Jadwal Dokter.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -97,7 +97,7 @@
 
         {{-- Pagination --}}
         <div class="d-flex justify-content-end">
-            {{-- {{ $dokters->onEachSide(1)->links('pagination::bootstrap-4') }} --}}
+            {{ $jadwaldokters->onEachSide(1)->links('pagination::bootstrap-4') }}
         </div>
     </div>
     <script>

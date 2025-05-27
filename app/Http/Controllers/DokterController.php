@@ -50,7 +50,8 @@ class DokterController extends Controller
         return redirect()->route('tablecreatedokter.index')->with('success', 'Dokter berhasil ditambahkan');
     }
 
-    public function showeditdokter($id_dokter) {
+    public function showeditdokter($id_dokter)
+    {
         $dokter = \App\Models\Dokter::findOrFail($id_dokter);
         $poli = \App\Models\Poli::all()->unique('nama_poli');
         return view('cms.backend.editcreatepolidokter', compact('poli', 'dokter'));
@@ -81,14 +82,16 @@ class DokterController extends Controller
     }
 
 
-    public function deletedokter($id_dokter) {
+    public function deletedokter($id_dokter)
+    {
         $dokter = \App\Models\Dokter::findOrFail($id_dokter);
         $dokter->delete();
 
         return redirect()->route('tablecreatedokter.index')->with('success', 'User berhasil dihapus.');
     }
 
-    public function tablecreatejadwaldokter(Request $request) {
+    public function tablecreatejadwaldokter(Request $request)
+    {
         $search = $request->get('search');
         $dokters = \App\Models\Dokter::all();
         $jadwaldokters = \App\Models\JadwalDokter::where(function ($query) use ($search) {
@@ -105,9 +108,68 @@ class DokterController extends Controller
         return view('cms.table.tablecreatejadwaldokter', compact('dokters', 'jadwaldokters', 'search'));
     }
 
-    public function showcreatejadwaldokter(Request $request) {
+    public function showcreatejadwaldokter(Request $request)
+    {
 
-        $dokters = \App\Models\Dokter::all();
-        return view ('cms.backend.createjadwaldokter', compact('dokters'));
+        $dokters = \App\Models\Dokter::all()->unique('nama_dokter');
+        return view('cms.backend.createjadwaldokter', compact('dokters'));
+    }
+
+    public function prosescreatejadwaldokter(Request $request)
+    {
+        $request->validate([
+            'id_dokter' => 'required', // sebaiknya wajib diisi
+            'hari' => 'required',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
+        ]);
+
+        $jadwaldokter = new \App\Models\JadwalDokter();
+        $jadwaldokter->id_dokter = $request->input('id_dokter');
+        $jadwaldokter->hari = $request->input('hari');
+        $jadwaldokter->jam_mulai = $request->input('jam_mulai');
+        $jadwaldokter->jam_selesai = $request->input('jam_selesai');
+        $jadwaldokter->save();
+
+        // Redirect ke halaman tabel jadwal dokter, bukan ke form input lagi
+        return redirect()->route('dokter.tablecreatejadwaldokter')->with('success', 'Jadwal Dokter berhasil di tambahkan');
+    }
+
+
+    public function showeditjadwaldokter($id_jadwal_dokter) {
+        $jadwaldokter = \App\Models\JadwalDokter::findOrFail($id_jadwal_dokter);
+        $dokters = \App\Models\Dokter::all()->unique('nama_dokter');
+
+        return view('cms.backend.editjadwaldokter', compact('jadwaldokter', 'dokters'));
+    }
+
+    public function proseseditjadwaldokter(Request $request, $id_jadwal_dokter)
+    {
+        $request->validate([
+            'id_dokter' => 'required', // sebaiknya wajib diisi
+            'hari' => 'required',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
+        ]);
+
+        $dokters = \App\Models\Dokter::all()->unique('nama_dokter');
+        $jadwaldokter = \App\Models\JadwalDokter::findOrFail($request->id_jadwal_dokter);
+        $jadwaldokter->id_dokter = $request->input('id_dokter');
+        $jadwaldokter->hari = $request->input('hari');
+        $jadwaldokter->jam_mulai = $request->input('jam_mulai');
+        $jadwaldokter->jam_selesai = $request->input('jam_selesai');
+        $jadwaldokter->save();
+
+        // Redirect ke halaman tabel jadwal dokter, bukan ke form input lagi
+        return redirect()->route('dokter.tablecreatejadwaldokter')->with('success', 'Jadwal Dokter berhasil diupdate');
+    }
+
+    
+    public function deletejadwaldokter($id_jadwal_dokter)
+    {
+        $jadwaldokter = \App\Models\JadwalDokter::findOrFail($id_jadwal_dokter);
+        $jadwaldokter->delete();
+
+        return redirect()->route('dokter.tablecreatejadwaldokter')->with('success', 'Jadwal Dokter berhasil dihapus');
     }
 }
