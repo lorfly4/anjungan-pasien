@@ -45,6 +45,7 @@
                     <th>Foto</th>
                     <th>Nama</th>
                     <th>Email</th>
+                    <th>Loket</th>
                     <th>Role</th>
                     <th>Tanggal Daftar</th>
                     <th>Aksi</th>
@@ -60,6 +61,7 @@
                         </td>
                         <td class="text-start py-5">{{ $user->name }}</td>
                         <td class="text-start py-5">{{ $user->email }}</td>
+                        <td class="text-start py-5">{{ $user->loket?->nama_lokets ?? '-' }}</td>
                         <td class="text-start py-5">{{ $user->role }}</td>
                         <td class="text-start py-5">{{ $user->created_at->format('d-m-Y') }}</td>
                         <td class="text-start py-5">

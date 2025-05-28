@@ -13,4 +13,8 @@ class DashboardController extends Controller
     public static function userdashboard() {
         return view ('cms.dashboard.userdashboard');
     }
+
+    public static function plasmaantrian() {
+        return view ('cms.layout.plasmaantrian');
+    }
 }

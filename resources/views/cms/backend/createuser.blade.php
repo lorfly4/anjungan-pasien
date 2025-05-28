@@ -69,6 +69,17 @@
                                             <option value="user">User</option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="loket">Loket</label>
+                                        <select class="form-control" name="id_loket" id="id_loket">
+                                            <option disabled>Pilih...</option>
+                                            @foreach ($lokets as $item)
+                                                <option value="{{ $item->id_lokets }}">{{ $item->nama_lokets }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" name="password" id="password"

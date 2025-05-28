@@ -24,6 +24,9 @@ Route::post('/login/proseslogin', [App\Http\Controllers\LoginController::class, 
 
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
+//Tampilan depan
+Route::get('/plasmaantrian', [App\Http\Controllers\PlasmaantrianController::class, 'index'])->name('plasmaantrian.index');
+
 
 //ini admin
 Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\PreventBack'])->group(function () {
@@ -82,7 +85,7 @@ Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\P
 
     Route::delete('admin/prosesdeleteloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'prosesdeleteloket'])->name('loket.prosesdeleteloket');
 
-    // Serverside    
+    // Serverside
     Route::get('admin/tabeluserserverside', [App\Http\Controllers\UserserversideController::class, 'index'])->name('userserverside.index');
 
 
@@ -95,7 +98,7 @@ Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\P
     Route::get('admin/showeditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'showeditjadwaldokter'])->name('dokter.showeditjadwaldokter');
 
     Route::put('admin/proseseditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'proseseditjadwaldokter'])->name('dokter.proseseditjadwaldokter');
-    
+
     Route::delete('admin/deletejadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'deletejadwaldokter'])->name('dokter.deletejadwaldokter');
 
 });
@@ -106,6 +109,7 @@ Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\P
 //ini user
 Route::middleware(['auth', 'App\Http\Middleware\IsUser', 'App\Http\Middleware\PreventBack'])->group(function () {
     Route::get('/user/dashboard', [App\Http\Controllers\DashboardController::class, 'userdashboard'])->name('dashboard.userdashboard');
+
 });
 
 

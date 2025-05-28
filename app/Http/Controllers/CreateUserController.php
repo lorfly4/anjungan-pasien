@@ -24,7 +24,8 @@ class CreateUserController extends Controller
     public function showcreateuser()
     {
         $users = \App\Models\User::all();
-        return view('cms.backend.createuser', compact('users'));
+        $lokets = \App\Models\Loket::all()->unique('id_lokets');
+        return view('cms.backend.createuser', compact('users', 'lokets'));
     }
 
     public function prosescreateuser(Request $request)
@@ -35,6 +36,7 @@ class CreateUserController extends Controller
             'email' => 'required|email',
             'role' => 'required',
             'password' => 'required',
+            'id_loket' => 'required',
         ]);
 
         $file = $request->file('foto');
@@ -47,6 +49,7 @@ class CreateUserController extends Controller
         $user->email = $request->input('email');
         $user->role = $request->input('role');
         $user->password = bcrypt($request->input('password'));
+        $user->id_lokets = $request->input('id_loket'); // pastikan ini nama kolom di database
         $user->save();
 
         return redirect()->route('createuser.index')->with('success', 'User berhasil ditambahkan.');
@@ -55,7 +58,8 @@ class CreateUserController extends Controller
     public function edituser($id)
     {
         $users = \App\Models\User::findOrFail($id);
-        return view('cms.backend.edituser', compact('users'));
+        $lokets = \App\Models\Loket::all();
+        return view('cms.backend.edituser', compact('users', 'lokets'));
     }
 
     public function updateuser(Request $request, $id)
@@ -66,6 +70,7 @@ class CreateUserController extends Controller
             'email' => 'required|email',
             'role' => 'required',
             'password' => 'nullable',
+            'id_loket' => 'required',
         ]);
 
         $users = \App\Models\User::findOrFail($id); // <-- pindah ke atas
@@ -80,6 +85,7 @@ class CreateUserController extends Controller
         $users->name = $request->input('name');
         $users->email = $request->input('email');
         $users->role = $request->input('role');
+        $users->id_lokets = $request->input('id_loket'); // pastikan ini nama kolom di database
 
         if ($request->filled('password')) {
             $users->password = bcrypt($request->input('password'));

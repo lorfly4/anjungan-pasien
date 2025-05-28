@@ -19,8 +19,18 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'image' => 'gps.jpg',
             'name' => 'Test User',
+            'id_lokets' => '1',
             'email' => 'adellana@example.com',
             'role' => 'admin',
+            'password' => Hash::make('123456'),
+        ]);
+
+        User::factory()->create([
+            'image' => 'rara.jpg',
+            'name' => 'Rara',
+            'id_lokets' => 1,
+            'email' => 'rara@example.com',
+            'role' => 'user',
             'password' => Hash::make('123456'),
         ]);
 

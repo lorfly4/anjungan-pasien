@@ -62,6 +62,26 @@
                                         <input type="email" class="form-control" name="email" id="email"
                                             aria-describedby="email" value="{{ $users->email }}">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="role">Loket</label>
+                                        <select name="id_loket" id="id_loket"
+                                            class="form-control @error('role') is-invalid @enderror">
+                                            <option disabled selected>Pilih...</option>
+                                            @foreach ($lokets as $item)
+                                                <option value="{{ $item->id_lokets }}"
+                                                    {{ old('id_loket', $users->id_lokets) == $item->id_lokets ? 'selected' : '' }}>
+                                                    {{ $item->nama_lokets }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('role')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+
                                     <div class="form-group">
                                         <label for="role">Role</label>
                                         <select name="role" id="role"

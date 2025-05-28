@@ -6,7 +6,7 @@
         {{-- Untuk menampilkan pengumuman atas --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Dashboard User</h1>
+                <h1 class="m-0">Dashboard Admin</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">

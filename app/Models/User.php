@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'id_lokets',
         'password',
         'role',
         'image',
@@ -47,6 +48,12 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => 'string',
             'id_users' => 'string',
+            'id_lokets' => 'string',
         ];
     }
+
+    public function loket(){
+        return $this->belongsTo(\App\Models\Loket::class, 'id_lokets', 'id_lokets');
+    }
+
 }

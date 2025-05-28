@@ -15,4 +15,21 @@ class Loket extends Model
     protected $keyType = 'string'; // Sesuaikan dengan tipe data primary key tabel poli
 
     protected $primaryKey = 'id_lokets'; // <-- tambahkan ini jika bukan 'id'
+
+    public function dokter()
+    {
+        return $this->belongsTo(\App\Models\Dokter::class, 'id_dokter', 'id_dokter');
+    }
+
+    public function poli()
+    {
+        return $this->belongsTo(\App\Models\Poli::class, 'id_poli', 'id_poli');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(\App\Models\Kategori::class, 'id_kategoris', 'id_kategoris');
+    }
+
 }
+
