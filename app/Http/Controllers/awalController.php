@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use App\Models\riwayat_antrian;
+use App\Models\Loket;
+use Carbon\Carbon;
 
 class awalController extends Controller
 {
@@ -13,32 +17,37 @@ class awalController extends Controller
     }
 
     public function print(){
-    $lastAntrian = DB::table('riwayat_antrians')
-        ->select('no_antrian')
-        ->whereRaw('DATE(tanggal_antrian) = CURRENT_DATE')
-        ->orderBy('id', 'desc')
-        ->first();
+        $loket = Loket::with('kategori')->where('jenis_berobat', 'UMUM')->firstOrFail();
+        $prefix = $loket->kategori->kategoris ?? 'X';
+        $id_loket = $loket->id_lokets;
+        $today = Carbon::today();
+        $jumlahAntrianHariIni = riwayat_antrian::where('id_lokets', $id_loket)
+            ->whereDate('tanggal_antrian', $today)
+            ->count();
+        $nomorAntrian = $prefix . ($jumlahAntrianHariIni + 1);
 
-    $nextNumber = 1;
-    if ($lastAntrian) {
-        // Extract the sequential number from the last antrian
-        $lastNumber = (int) substr($lastAntrian->no_antrian, 1);
-        $nextNumber = $lastNumber + 1;
+        return view("umum.printAntrian", [
+            'data' => [
+                'id_lokets' => $id_loket,
+                'no_antrian' => $nomorAntrian,
+                'tujuan' => '-',
+                'dokter' => '-',
+                'no_rm' => '-',
+                'nama_pasien' => '-',
+                'tanggal_antrian' => now(),
+                'jam' => '-',
+            ],
+        ]);
     }
 
-    // Generate a unique code, e.g., a random letter combination
-    $uniqueCode = 'A';
-
-    $data = $uniqueCode . $nextNumber;
-
-return view("umum.printAntrian", [
-    'data' => [
-        'no_antrian' => $data
-    ],
-    'pasien' => null,
-    'poli' => null,
-    'dokter' => null
-]);
+    public function simpanAntrian(Request $request){
+        $data = $request->except('_token');
+        DB::table('riwayat_antrians')->insert($data);
+        Log::info('Antrian disimpan:', $data);
+        session()->forget('pasien');
+        session()->forget('poli');
+        return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
     }
 
 }
+

@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', action: [App\Http\Controllers\awalController::class, 'index']);
 Route::get('/print', action: [App\Http\Controllers\awalController::class, 'print']);
+Route::post('/print/simpan', action: [App\Http\Controllers\awalController::class, 'simpanAntrian']);
 
-// BPJS Routes
+// BPJS Routes      
 Route::prefix('bpjs')->group(function () {
     Route::get('/', [App\Http\Controllers\bpjsController::class, 'index']);
     Route::post('/', [App\Http\Controllers\bpjsController::class, 'validasiUser']);
@@ -52,4 +53,5 @@ Route::prefix('umum')->group(function () {
     Route::post('/print/simpan', [App\Http\Controllers\umumController::class, 'simpanAntrian']);
     Route::get('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
     Route::post('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
+    Route::post('/pilih-jadwal', [App\Http\Controllers\umumController::class, 'pilihJadwal']);
 });

@@ -7,7 +7,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use App\Models\Loket;
 use App\Models\riwayat_antrian; // asumsi kamu punya model ini
+use App\Models\Dokter;
+use App\Models\Poli;
+use App\Models\JadwalDokter;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class umumController extends Controller
 {
@@ -160,6 +164,72 @@ class umumController extends Controller
         ]);
     }
 
+    public function pilihJadwal(Request $request)
+    {
+        $request->validate([
+            'dokter' => 'required',
+        ]);
+        // Ambil dokter berdasarkan ID, bukan nama!
+        $dokter_id = $request->input('dokter');
+        $dokter = \App\Models\dokter::where('nama_dokter', $dokter_id)->first();
+
+        // Ambil semua jadwal dokter
+        $jadwal = \App\Models\JadwalDokter::where('id_dokter', $dokter->id_dokter)->get();
+
+        $hari_ini = now()->locale('id');
+        $nama_hari_ini = $hari_ini->isoFormat('dddd'); // "Senin", "Selasa", dst
+
+        $jadwal_tersedia = [];
+
+        // Ambil jadwal hanya untuk hari ini
+        $jadwal_hari = $jadwal->where('hari', $nama_hari_ini);
+        foreach ($jadwal_hari as $slot) {
+            $mulai = Carbon::parse($slot->jam_mulai);
+            $akhir = Carbon::parse($slot->jam_selesai);
+
+            while ($mulai->lt($akhir)) {
+                $jam = $mulai->format('H:i');
+                $sudah_dipakai = \App\Models\riwayat_antrian::where('dokter', $dokter->nama_dokter)
+                    ->whereDate('tanggal_antrian', $hari_ini->toDateString())
+                    ->where('jam', $jam)
+                    ->exists();
+                $jadwal_tersedia[] = [
+                    'tanggal' => $hari_ini->toDateString(),
+                    'hari' => $nama_hari_ini,
+                    'jam' => $jam,
+                    'disable' => $sudah_dipakai,
+                ];
+                                $mulai->addMinutes(30); // tambah 30 menit
+            }
+        }
+
+        $pasien = session('pasien');
+        $poli = session('poli');
+        $poliObj = \App\Models\poli::find($poli);
+
+        return view('umum.pilih_jadwal', [
+            'jadwal' => $jadwal_tersedia,
+            'dokter' => $dokter,
+            'pasien' => $pasien,
+            'poli' => $poliObj,
+        ]);
+    }
+
+    // Helper untuk konversi nama hari ke index (0=Senin, dst)
+    private function getDayIndex($hari)
+    {
+        $days = [
+            'Senin' => 0,
+            'Selasa' => 1,
+            'Rabu' => 2,
+            'Kamis' => 3,
+            'Jumat' => 4,
+            'Sabtu' => 5,
+            'Minggu' => 6,
+        ];
+        return $days[$hari] ?? 0;
+    }
+
     public function cari_pasien(Request $request)
     {
         $request->validate([
@@ -197,9 +267,12 @@ class umumController extends Controller
     {
         $request->validate([
             'dokter' => 'required',
+            'jadwal' => 'required',
         ]);
 
         $dokter = $request->input('dokter');
+        $dokterObj = dokter::findOrFail($dokter);
+        $nama_dokter = $dokterObj->nama_dokter;
         $poli_id = session('poli');
         $pasien = session('pasien');
         if (!$pasien) {
@@ -224,18 +297,21 @@ class umumController extends Controller
             'id_lokets' => $id_loket,
             'no_antrian' => $nomorAntrian,
             'tujuan' => $poli_id,
-            'dokter' => $dokter,
+            'dokter' => $nama_dokter,
             'no_rm' => $pasien['no_rm'] ?? null,
             'nama_pasien' => $pasien['nama_lengkap'] ?? null,
             'tanggal_antrian' => now(),
+            'jam' => $request->input('jadwal'),
         ];
-
-        // TAMPILKAN HALAMAN PRINT, TAPI BELUM INSERT KE DB
+        // echo "<pre>";
+        // echo dd($data);
+        // echo "</pre>";
+        // // TAMPILKAN HALAMAN PRINT, TAPI BELUM INSERT KE DB
         return view('umum.print', [
             'data' => $data,
             'pasien' => $pasien,
             'poli' => $nama_poli,
-            'dokter' => $dokter
+            'dokter' => $nama_dokter
         ]);
     }
 
@@ -244,7 +320,13 @@ class umumController extends Controller
     {
         $data = $request->except('_token');
         DB::table('riwayat_antrians')->insert($data);
-
+        Alert::success('Sukses', 'Antrian berhasil dicetak dan disimpan!');
+        Log::info('Antrian disimpan:', $data);
+        // Hapus data pasien dari session setelah berhasil menyimpan antrian
+        session()->forget('pasien');
+        session()->forget('poli');
+        // Redirect ke halaman utama atau halaman lain sesuai
         return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
     }
 }
+    

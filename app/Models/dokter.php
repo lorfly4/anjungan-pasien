@@ -28,7 +28,11 @@ class dokter extends Model
 
 
 public function poli() {
-    return $this->belongsTo(\App\Models\poli::class, 'id_poli', 'id_poli');
+    return $this->belongsTo(Poli::class, 'id_poli', 'id_poli');
+}
+// Model Dokter.php
+public function jadwal() {
+    return $this->hasMany(\App\Models\JadwalDokter::class, 'id_dokter');
 }
 
 }

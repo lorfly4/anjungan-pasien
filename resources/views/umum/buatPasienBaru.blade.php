@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-md-6">
-                <form action="/umum/buatPasienBaru" method="POST">
+                <form action="/umum/buatPasienBaru" method="POST" autocomplete="off">
                     @csrf
                     <div class="mb-3">
                         <input type="text" name="no_rm" class="form-control" id="no_rm" hidden>
@@ -31,8 +31,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Silahkan isi NIK anda" required>
-                    </div>
+                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Silahkan isi NIK anda (14 digit)" required maxlength="14" minlength="14" pattern="^\d{14}$">
                     <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>

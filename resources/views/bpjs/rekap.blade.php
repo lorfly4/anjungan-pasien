@@ -36,8 +36,11 @@
     <main class="w-full max-w-5xl bg-white shadow-md rounded-md p-6 flex flex-col gap-6">
         <div class="flex gap-6">
             <div class="flex-shrink-0">
+            @if ($data['jenis_kelamin'] === 'Laki-Laki')
                 <img alt="Cartoon style avatar of a person with short brown hair and green shirt" class="rounded" height="120" src="https://storage.googleapis.com/a1aa/image/30dec544-4b34-4dd5-ad22-29c79a0dba74.jpg" width="120"/>
-            </div>
+            @else
+                <img alt="Cartoon style avatar of a person with short brown hair and pink shirt" class="rounded" height="120" src="https://storage.googleapis.com/a1aa/image/3b9c7d0e-9b16-4e3c-5ed6-0f5e6d7f90c0.jpg" width="120"/>
+            @endif
             <div class="flex-grow flex flex-col justify-between text-gray-700 text-sm space-y-1">
                 <p>
                     <span class="font-semibold">

@@ -45,15 +45,19 @@
         });
     </script>
 
-    <div class="border-t border-b py-3 mb-4 text-sm text-gray-700">     
+
+    <div class="border-t border-b py-3 mb-4 text-sm text-gray-700">
         <p class="text-2xl font-bold text-gray-800 mb-2 text-center"><span>Nomor Antrian: </span></p>
         <h1 class="text-3xl font-bold text-black-600 text-center">{{ $data['no_antrian'] }}</h1>
+        <p class="hidden"><span class="font-semibold">Nama:</span> {{ $data['nama_lengkap'] ?? '-' }}</p>
+        <p class="hidden"><span class="font-semibold">NIK:</span> {{ $data['nik'] ?? '-' }}</p>
+        <p class="hidden"><span class="font-semibold">No. RM:</span> {{ $data['no_rm'] ?? '-' }}</p>
+        <p class="hidden"><span class="font-semibold">Poli:</span> {{ $data['dokter'] ?? '-' }}</p>
+        <p class="hidden"><span class="font-semibold">Dokter:</span> {{ $data['poli'] ?? '-' }}</p>
+
     </div>
 
     <div class="flex justify-center mb-3">
-        @php
-            use SimpleSoftwareIO\QrCode\Facades\QrCode;
-        @endphp
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{ $data['no_antrian'] }}"
             alt="QR Code">
     </div>
@@ -63,6 +67,30 @@
         <p>Call Center: (0725) 123456</p>
     </div>
 
+        <form method="POST" action="/print/simpan">
+        @csrf
+        @foreach($data as $key => $value)
+            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+        @endforeach
+        <button type="submit" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onclick="handlePrintAndRedirect()">
+            Konfirmasi Selesai Print
+        </button>
+
+
+        <script>
+    function handlePrintAndRedirect() {
+        window.print();
+        // Redirect to the home page after printing
+        window.onafterprint = function () {
+            window.location.href = "/";
+        };
+    }
+</script>
+
+
+
+    </form>
 </body>
 
 </html>

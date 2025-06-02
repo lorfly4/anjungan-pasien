@@ -36,35 +36,26 @@
         </section>
         &nbsp;
 
-        <form action="/umum/pilih-jadwal" method="POST">
-            @csrf
-            <input type="hidden" name="dokter" id="id_dokter" value="">
-            <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                @foreach ($dokter as $d)
-                    <button type="button" onclick="setDokter('{{ $d->id_dokter }}')" class="flex items-center bg-white rounded shadow px-4 py-3 cursor-pointer w-full mb-2">
-                        @php
-                            $foto = $d->foto_dokter;
-                            if (is_resource($foto)) {
-                                $foto = stream_get_contents($foto);
-                            }
-                        @endphp
-                        <img src="data:image/jpeg;base64,{{ base64_encode($foto) }}" />
-                        <div class="flex-1 text-sm font-semibold text-gray-700">{{ $d->nama_dokter }}</div>
-                        <div class="text-xs text-gray-500 flex items-center space-x-1">
-                            <i class="fas fa-user-md"></i>
-                            <span>Doctor</span>
-                        </div>
-                    </button>
-                @endforeach
-            </section>
-        </form>
-        <script>
-            function setDokter(id) {
-                document.getElementById('id_dokter').value = id;
-                document.querySelector('form').submit();
-            }
-        </script>
-    </main>
-</body>
-
-</html>
+<div class="max-w-xl mx-auto mt-8 bg-white p-6 rounded shadow">
+    <h2 class="text-lg font-bold mb-4">Pilih Jadwal Dokter: {{ $dokter->nama_dokter }}</h2>
+    <form action="/umum/print" method="POST">
+        @csrf
+        <input type="hidden" name="dokter" value="{{ $dokter->id_dokter }}">
+        <div class="grid grid-cols-1 gap-4">
+            @foreach($jadwal as $j)
+                <div>
+                    <label>
+                        <input type="radio" name="jadwal" value="{{ $j['hari'] }}|{{ $j['jam'] }}" {{ $j['disable'] ? 'disabled' : '' }}>
+                        {{ $j['hari'] }} - {{ $j['jam'] }}
+                        @if($j['disable'])
+                            <span class="text-red-500">(Sudah diambil)</span>
+                        @endif
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" {{ count(array_filter($jadwal, fn($j) => !$j['disable'])) == 0 ? 'disabled' : '' }}>
+            Lanjutkan
+        </button>
+    </form>
+</div>
