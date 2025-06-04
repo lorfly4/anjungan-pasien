@@ -26,6 +26,10 @@
                             <label for="poli">Nama Poli</label>
                             <input type="text" class="form-control" id="nama_poli" name="nama_poli" aria-describedby="emailHelp" placeholder="Masukkan Nama Poli" required>
                         </div>
+                        <div class="form-group">
+                            <label for="status-poli">Status Poli</label>
+                            <input type="text" class="form-control" id="status_poli" name="status_poli" aria-describedby="emailHelp" placeholder="Masukkan Status Poli" required>
+                        </div>
 
                         {{-- <div class="form-group">
                             <label for="kode_poli">Kode Poli</label>

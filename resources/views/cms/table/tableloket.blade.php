@@ -62,7 +62,7 @@
                         <td>{{ $loket->jenis_berobat}}</td>
                         <td>{{ $loket->keterangan }}</td>
                         <td>{{ $loket->dokter->nama_dokter ?? '-' }}</td>
-                        <td>{{ $loket->poli->nama_poli ?? '-' }}</td>
+                        <td>{{ $loket->poli->nama_poli ?? '-' }} ({{ $loket->poli->status_opc_ipc}})</td>
                         <td>{{ $loket->kategori->kategoris ?? '-' }}</td>
                         <td>{{ $loket->status}}</td>
                         <td class="text-center">

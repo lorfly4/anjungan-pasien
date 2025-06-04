@@ -43,6 +43,7 @@
                 <tr class="text-center align-middle">
                     <th class="text-center" style="width: 3em;">No</th>
                     <th>Poli</th>
+                    <th>Status Poli</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -52,6 +53,7 @@
                         <td class="text-center">{{ ($polis->currentPage() - 1) * $polis->perPage() + $loop->iteration }}
                         </td>
                         <td>{{ $poli->nama_poli }}</td>
+                        <td>{{ $poli->status_opc_ipc }}</td>
                         <td class="text-center">
                             <a href="{{ route('poli.showeditpoli', $poli->id_poli) }}"
                                 class="btn btn-sm btn-warning">Edit</a>
