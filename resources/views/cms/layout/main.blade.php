@@ -108,7 +108,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#dokterMenu" aria-expanded="false" aria-controls="dokterMenu">
+                            <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#dokterMenu"
+                                aria-expanded="false" aria-controls="dokterMenu">
                                 <i class="nav-icon fas fa-user-md"></i>
                                 <p>
                                     Master Create Dokter
@@ -123,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dokter.tablecreatejadwaldokter')}}" class="nav-link">
+                                    <a href="{{ route('dokter.tablecreatejadwaldokter') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add Jadwal Dokter</p>
                                     </a>
@@ -146,6 +147,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pasienumum.showtablepasienumum') }}" class="nav-link ">
+                                <i class="nav-icon fas fa-ticket-alt"></i>
+                                <p>
+                                    Buat Pasien Umum
+                                </p>
+                            </a>
+                        </li>
+                        {{-- Logout --}}
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -216,11 +226,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    
+
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 
 </body>
 @stack('scripts')
+
 </html>
