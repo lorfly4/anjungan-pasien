@@ -66,7 +66,8 @@
                             <label for="status-poli">Status Pasien</label>
                             <input type="text" class="form-control" id="status_pasien" name="status_pasien" aria-describedby="emailHelp" placeholder="Masukkan Status Pasien" required>
                         </div>
-                        
+                            <button type="submit" class="btn btn-primary" onclick="Swal.fire({ title: 'Data Berhasil Disimpan!', text: 'Data pasien berhasil disimpan.', icon: 'success', confirmButtonText: 'OK' });">Simpan</button>
+
                     </form>
             </div>
     </div>
