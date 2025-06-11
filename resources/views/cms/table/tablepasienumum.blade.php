@@ -55,7 +55,6 @@
                         <td>{{ $patient->no_rm }}</td>
                         <td>{{ $patient->nama_lengkap }}</td>
                         <td>{{ $patient->status_aktif }}</td>
-                            <!-- Add action buttons or links here -->
                         <td class="text-center">
                             <a href="{{route('pasienumum.showeditpasienumum', $patient->id_pasien)}}"
                                 class="btn btn-sm btn-warning">Edit</a>
@@ -152,7 +151,11 @@
                     </tr>
                 @endforeach
 
-
+                @if($pasienumum->isEmpty())
+                    <tr>
+                        <td colspan="7" class="text-center">Tidak ada data pengguna.</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
 

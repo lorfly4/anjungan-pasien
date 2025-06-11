@@ -31,5 +31,7 @@ class Loket extends Model
         return $this->belongsTo(\App\Models\Kategori::class, 'id_kategoris', 'id_kategoris');
     }
 
+    
+
 }
 

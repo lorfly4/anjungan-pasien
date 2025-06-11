@@ -113,6 +113,7 @@
         
         Route::delete('admin/deletepasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'deletepasienumum'])->name('pasienumum.deletepasienumum');
 
+        Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatAntriansController::class, 'showtableriwayatantrian'])->name('riwayatantrian.showtableriwayatantrian');
 
     });
 

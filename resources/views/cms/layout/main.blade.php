@@ -155,6 +155,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('riwayatantrian.showtableriwayatantrian') }}" class="nav-link ">
+                                <i class="nav-icon fas fa-history"></i>
+                                <p>
+                                    Riwayat Antrian Pasien
+                                </p>
+                            </a>
+                        </li>
                         {{-- Logout --}}
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="POST">
