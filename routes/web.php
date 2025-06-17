@@ -25,7 +25,16 @@
     Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
     //Tampilan depan
-    Route::get('/plasmaantrian', [App\Http\Controllers\PlasmaantrianController::class, 'index'])->name('plasmaantrian.index');
+
+    Route::get('/plasmaantrian', [\App\Http\Controllers\PlasmaController::class, 'index'])->name('plasma.index');
+    Route::post('/plasmaantrian/panggil', [\App\Http\Controllers\PlasmaController::class, 'panggil'])->name('plasma.panggil');
+    Route::post('/plasmaantrian/reset', [\App\Http\Controllers\PlasmaController::class, 'reset'])->name('plasma.reset');
+
+
+    Route::get('/data', [\App\Http\Controllers\RiwayatantriansController::class, 'index'])->name('riwayatantrians.index');
+    Route::post('/data/panggil', [\App\Http\Controllers\RiwayatantriansController::class, 'panggil'])->name('riwayatantrians.panggil');
+    Route::post('/antrian/reset', [\App\Http\Controllers\RiwayatantriansController::class, 'reset'])->name('riwayatantrians.reset');
+
 
 
     //ini admin
@@ -110,7 +119,7 @@
         Route::get('admin/showeditpasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'showeditpasienumum'])->name('pasienumum.showeditpasienumum');
 
         Route::put('admin/proseseditpasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'proseseditpasienumum'])->name('pasienumum.proseseditpasienumum');
-        
+
         Route::delete('admin/deletepasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'deletepasienumum'])->name('pasienumum.deletepasienumum');
 
         Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatAntriansController::class, 'showtableriwayatantrian'])->name('riwayatantrian.showtableriwayatantrian');

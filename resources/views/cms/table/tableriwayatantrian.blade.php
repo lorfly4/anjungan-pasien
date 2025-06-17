@@ -66,7 +66,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">Tidak ada data</td>
+                        <td class="text-center" colspan="8">Tidak ada data</td>
                     </tr>
                 @endforelse
             </tbody>

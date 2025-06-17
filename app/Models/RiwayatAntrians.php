@@ -18,7 +18,9 @@ class RiwayatAntrians extends Model
         'nama_pasien',
         'jam',
         'dokter',
+        'dipanggil',
     ];
+    
     public $timestamps = true;
 
     public function loket()
