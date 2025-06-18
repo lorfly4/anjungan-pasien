@@ -18,11 +18,25 @@ class RiwayatantriansController extends Controller
 
     public function index()
     {
-        $antriansDipanggil = \App\Models\RiwayatAntrians::where('dipanggil', false)->orderBy('updated_at', 'desc')->get();
-        $antrianBelumDipanggil = \App\Models\RiwayatAntrians::where('dipanggil', true)->orderBy('id')->get();
-        $riwayat = \App\Models\RiwayatAntrians::orderBy('created_at', 'desc')->get();
+        // Ambil antrian yang baru saja dipanggil (jika ada)
+        $antrianDipanggil = session('antrianDipanggil'); // atau dari logic panggil
 
-        return view('fe.panggil', compact('antriansDipanggil', 'antrianBelumDipanggil')); // menampilkan halaman dengan tombol
+        // Antrian belum dipanggil
+        $antriansDipanggil = \App\Models\RiwayatAntrians::with('loket')
+            ->where('dipanggil', 0)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Riwayat antrian yang sudah dipanggil
+        $riwayatSudahDipanggil = \App\Models\RiwayatAntrians::with('loket')
+            ->where('dipanggil', 1)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+
+
+
+        return view('fe.panggil', compact('antrianDipanggil', 'antriansDipanggil', 'riwayatSudahDipanggil'));
     }
 
     public function panggil(Request $request)
@@ -48,8 +62,6 @@ class RiwayatantriansController extends Controller
 
         return view('fe.panggil', compact('antrian', 'antriansDipanggil'));
     }
-
-
 
 
     public function reset()

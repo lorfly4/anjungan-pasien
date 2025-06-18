@@ -20,11 +20,13 @@ class RiwayatAntrians extends Model
         'dokter',
         'dipanggil',
     ];
-    
+
     public $timestamps = true;
 
     public function loket()
     {
         return $this->belongsTo(\App\Models\Loket::class, 'id_lokets', 'id_lokets');
     }
+
+
 }

@@ -1,84 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+    <meta charset="UTF-8">
     <title>Panggil Antrian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-    <h1>Panggilan Antrian</h1>
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
 
-    <form action="{{ route('riwayatantrians.panggil') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-primary">Panggil Baru</button>
-    </form>
+        <h1 class="text-3xl font-bold mb-6 text-center text-green-600">Panggilan Antrian</h1>
 
-    <form action="{{ route('riwayatantrians.panggil') }}" method="POST">
-        @csrf
-        <input type="hidden" name="ulang" value="1">
-        <button type="submit" class="btn btn-warning">Panggil Ulang</button>
-    </form>
+        <div class="flex gap-4 mb-6 justify-center">
+            <form action="{{ route('riwayatantrians.panggil') }}" method="POST">
+                @csrf
+                <button type="submit"
+                    class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition">Panggil Baru</button>
+            </form>
 
+            <form action="{{ route('riwayatantrians.panggil') }}" method="POST">
+                @csrf
+                <input type="hidden" name="ulang" value="1">
+                <button type="submit"
+                    class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition">Panggil Ulang</button>
+            </form>
 
-    {{-- Tombol Reset --}}
-    <form method="POST" action="{{ route('riwayatantrians.reset') }}" style="margin-top: 10px;">
-        @csrf
-        <button type="submit">Reset Antrian</button>
-    </form>
+            <form method="POST" action="{{ route('riwayatantrians.reset') }}">
+                @csrf
+                <button type="submit"
+                    class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">Reset Antrian</button>
+            </form>
+        </div>
 
-    {{-- Pesan Flash --}}
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+        {{-- Flash Message --}}
+        @if (session('success'))
+            <p class="text-green-600 font-semibold text-center">{{ session('success') }}</p>
+        @endif
 
-    {{-- Tampilan Data yang Dipanggil --}}
-    @if (isset($antrian))
-        <h3>Dipanggil: <span id="nama-antrian">{{ $antrian->no_antrian }}</span> - Loket: <span
-                id="loket-antrian">{{ $antrian->loket->nama_lokets }}</span></h3>
+        {{-- Data Antrian yang Sedang Dipanggil --}}
+        @if (isset($antrian))
+            <div class="mt-6 bg-green-100 p-4 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">
+                    Dipanggil: <span id="nama-antrian" class="text-green-800">{{ $antrian->no_antrian }}</span> -
+                    Loket: <span id="loket-antrian" class="text-green-800">{{ $antrian->loket->nama_lokets }}</span>
+                </h3>
+            </div>
 
-        <script>
-            // Fungsi Text-to-Speech
-            const loket = document.getElementById("loket-antrian").innerText;
-            const nama = document.getElementById("nama-antrian").innerText;
-            const msg = new SpeechSynthesisUtterance(`Nomor antrian ${nama}, silakan menuju ${loket}`);
-            msg.lang = "id-ID";
-            msg.rate = 0.8;
-            msg.pitch = 1;
-            msg.voice = window.speechSynthesis.getVoices().find(voice => voice.lang === "id-ID" && voice.name ===
-                "Google Indonesian Female");
-            window.speechSynthesis.speak(msg);
-        </script>
-    @endif
+<script>
+    window.speechSynthesis.onvoiceschanged = function () {
+        const nama = document.getElementById("nama-antrian").innerText;
+        const loket = document.getElementById("loket-antrian").innerText;
+        const msg = new SpeechSynthesisUtterance(`Nomor antrian ${nama}, silakan menuju ${loket}`);
+        msg.lang = "id-ID";
+        msg.rate = 0.9;
+        msg.pitch = 1.1;
 
-    <h2>Daftar Antrian Belum Dipanggil</h2>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>No Antrian</th>
-                <th>Loket</th>
-                <th>Waktu Dibuat</th>
-                <th>Dipanggil</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($antriansDipanggil ?? [] as $index => $antrian)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $antrian->no_antrian }}</td>
-                    <td>{{ $antrian->loket->nama_lokets ?? '-' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($antrian->created_at)->format('d-m-Y H:i') }}</td>
-                    <td>{{ $antrian->dipanggil }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">Tidak ada antrian yang belum dipanggil.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        const voices = window.speechSynthesis.getVoices();
+        const indoVoice = voices.find(voice => voice.lang === "id-ID") || voices.find(voice => voice.lang.includes("id"));
+        if (indoVoice) {
+            msg.voice = indoVoice;
+        }
 
+        window.speechSynthesis.speak(msg);
+    };
+</script>
+        @endif
+
+        <h2 class="text-2xl font-bold mt-10 mb-4">Daftar Antrian Belum Dipanggil</h2>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+                <thead>
+                    <tr class="bg-green-600 text-white text-left">
+                        <th class="py-2 px-4">No</th>
+                        <th class="py-2 px-4">No Antrian</th>
+                        <th class="py-2 px-4">Loket</th>
+                        <th class="py-2 px-4">Waktu Dibuat</th>
+                        <th class="py-2 px-4">Dipanggil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($antriansDipanggil ?? [] as $index => $antrian)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2 px-4">{{ $index + 1 }}</td>
+                            <td class="py-2 px-4">{{ $antrian->no_antrian }}</td>
+                            <td class="py-2 px-4">{{ $antrian->loket->nama_lokets ?? '-' }}</td>
+                            <td class="py-2 px-4">{{ \Carbon\Carbon::parse($antrian->created_at)->format('d-m-Y H:i') }}</td>
+                            <td class="py-2 px-4">{{ $antrian->dipanggil }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="py-4 px-4 text-center text-gray-500">Tidak ada antrian yang belum dipanggil.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 
 </body>
 

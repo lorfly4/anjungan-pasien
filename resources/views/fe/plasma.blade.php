@@ -8,6 +8,7 @@
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
         // Script to update date/time every second
         function updateDateTime() {
@@ -75,22 +76,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tbody>
-                    @forelse($antriansDipanggil ?? [] as $index => $antrian)
+                    @forelse($antrianBelumDipanggil as $index => $antrianItem)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $antrian->no_antrian }}</td>
-                            <td>{{ $antrian->loket->nama_lokets ?? '-' }}</td>
-                            <td>{{ $antrian->nama_pasien }}</td>
-                            <td>{{ \Carbon\Carbon::parse($antrian->created_at)->format('d-m-Y H:i') }}</td>
-                            <td>{{ $antrian->dipanggil }}</td>
+                            <td>{{ $antrianItem->no_antrian }}</td>
+                            <td>{{ $antrianItem->loket->nama_lokets ?? '-' }}</td>
+                            <td>{{ $antrianItem->nama_pasien }}</td>
+                            <td>{{ \Carbon\Carbon::parse($antrianItem->created_at)->format('d-m-Y H:i') }}</td>
+                            <td>{{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">Tidak ada antrian yang belum dipanggil.</td>
+                            <td colspan="6">Tidak ada antrian yang belum dipanggil.</td>
                         </tr>
                     @endforelse
-                </tbody>
                 </tbody>
             </table>
         </section>
@@ -101,28 +100,26 @@
                 Videotron
             </div>
             <!-- Carousel nomor antrian selanjutnya -->
-            <div class="border border-black h-20 flex items-center justify-center space-x-4 overflow-x-auto px-2">
-                <div
-                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
-                    8
+            <div id="loketCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach ($id_lokets as $index => $loket)
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                            <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                                <h3>ID Loket: {{ $loket->id_lokets }}</h3>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div
-                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
-                    9
-                </div>
-                <div
-                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
-                    10
-                </div>
-                <div
-                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
-                    11
-                </div>
-                <div
-                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
-                    12
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#loketCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#loketCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
             </div>
+
 
 
 
@@ -130,14 +127,18 @@
             <div class="border border-black h-16 flex items-center justify-center text-base font-normal px-4">
                 {{-- Pesan Flash --}}
                 @if (session('success'))
-                    <p style="color: green;">{{ session('success') }}</p>
+                    <p style="color: green;" id="flash-success">{{ session('success') }}</p>
+                    <script>
+                        setTimeout(() => {
+                            document.getElementById("flash-success").remove();
+                        }, 3000);
+                    </script>
                 @endif
 
                 {{-- Tampilan Data yang Dipanggil --}}
                 @if (isset($antrian))
                     <h3>Dipanggil: <span id="nama-antrian">{{ $antrian->no_antrian }}</span> - Loket: <span
                             id="loket-antrian">{{ $antrian->loket->nama_lokets }}</span></h3>
-
                     <script>
                         // Fungsi Text-to-Speech
                         const loket = document.getElementById("loket-antrian").innerText;
@@ -150,6 +151,9 @@
                             "Google Indonesian Female");
                         window.speechSynthesis.speak(msg);
                     </script>
+                @elseif (isset($nextAntrian))
+                    <h3>Dipanggil: <span id="nama-antrian">{{ $nextAntrian->no_antrian }}</span> - Loket: <span
+                            id="loket-antrian">{{ $nextAntrian->loket->nama_lokets }}</span></h3>
                 @endif
             </div>
 
@@ -161,30 +165,8 @@
         Catatan kaki saja
     </footer>
 
-        <h1>Panggilan Antrian</h1>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <form action="{{ route('plasma.panggil') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-primary">Panggil Baru</button>
-    </form>
-
-    <form action="{{ route('plasma.panggil') }}" method="POST">
-        @csrf
-        <input type="hidden" name="ulang" value="1">
-        <button type="submit" class="btn btn-warning">Panggil Ulang</button>
-    </form>
-
-
-    {{-- Tombol Reset --}}
-    <form method="POST" action="{{ route('plasma.reset') }}" style="margin-top: 10px;">
-        @csrf
-        <button type="submit">Reset Antrian</button>
-    </form>
-
-    {{-- Pesan Flash --}}
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
 </body>
 
 </html>

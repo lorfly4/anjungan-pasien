@@ -3,48 +3,57 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RiwayatAntrians;
 
 class PlasmaController extends Controller
 {
     public function index()
     {
-        $antriansDipanggil = \App\Models\RiwayatAntrians::where('dipanggil', true)->orderBy('updated_at', 'desc')->get();
-        $antrianBelumDipanggil = \App\Models\RiwayatAntrians::where('dipanggil', false)->orderBy('updated_at', 'desc')->get();
-        $riwayat = \App\Models\RiwayatAntrians::orderBy('created_at', 'desc')->get();
+        // Ambil semua antrian yang belum dipanggil, urut dari terkecil
+        $antrianBelumDipanggil = RiwayatAntrians::where('dipanggil', false)
+            ->orderBy('id')
+            ->get();
 
-        return view('fe.plasma', compact('antriansDipanggil', 'antrianBelumDipanggil')); // menampilkan halaman dengan tombol
+        // Ambil antrian yang sedang dipanggil (jika ada)
+        $antrian = null;
+        if (session()->has('terakhir_dipanggil_id')) {
+            $antrian = RiwayatAntrians::find(session('terakhir_dipanggil_id'));
+        }
+
+
+        $id_lokets = \App\Models\RiwayatAntrians::select('id_lokets')->distinct()->get();
+        
+        return view('fe.plasma', compact('antrianBelumDipanggil', 'antrian', 'id_lokets'));
     }
 
     public function panggil(Request $request)
     {
         if ($request->has('ulang') && session()->has('terakhir_dipanggil_id')) {
-            // Ambil ulang data yang terakhir dipanggil dari session
-            $antrian = \App\Models\RiwayatAntrians::find(session('terakhir_dipanggil_id'));
+            // Panggil ulang antrian terakhir
+            $antrian = RiwayatAntrians::find(session('terakhir_dipanggil_id'));
         } else {
             // Ambil antrian baru yang belum dipanggil
-            $antrian = \App\Models\RiwayatAntrians::where('dipanggil', false)->orderBy('id')->first();
-
+            $antrian = RiwayatAntrians::where('dipanggil', false)->orderBy('id')->first();
             if ($antrian) {
                 $antrian->dipanggil = true;
                 $antrian->save();
-
-                // Simpan ID ke session untuk panggil ulang
                 session(['terakhir_dipanggil_id' => $antrian->id]);
             }
         }
 
-        // Ambil daftar yang belum dipanggil (untuk info di tampilan)
-        $antriansDipanggil = \App\Models\RiwayatAntrians::where('dipanggil', false)->orderBy('updated_at', 'desc')->get();
+        // Ambil ulang daftar antrian belum dipanggil
+        $antrianBelumDipanggil = RiwayatAntrians::where('dipanggil', false)
+            ->orderBy('id')
+            ->get();
 
-        return view('fe.plasma', compact('antrian', 'antriansDipanggil'));
+        return view('fe.plasma', compact('antrianBelumDipanggil', 'antrian'));
     }
-
-
 
     public function reset()
     {
-        \App\Models\RiwayatAntrians::where('dipanggil', true)->update(['dipanggil' => false]);
-
+        RiwayatAntrians::where('dipanggil', true)->update(['dipanggil' => false]);
+        session()->forget('terakhir_dipanggil_id');
         return redirect()->route('plasma.index')->with('success', 'Antrian telah direset!');
     }
+
 }

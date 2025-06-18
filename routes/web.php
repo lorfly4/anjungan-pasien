@@ -26,13 +26,17 @@
 
     //Tampilan depan
 
+
+    // Tampilan plasma
     Route::get('/plasmaantrian', [\App\Http\Controllers\PlasmaController::class, 'index'])->name('plasma.index');
     Route::post('/plasmaantrian/panggil', [\App\Http\Controllers\PlasmaController::class, 'panggil'])->name('plasma.panggil');
     Route::post('/plasmaantrian/reset', [\App\Http\Controllers\PlasmaController::class, 'reset'])->name('plasma.reset');
 
 
+    // Data
     Route::get('/data', [\App\Http\Controllers\RiwayatantriansController::class, 'index'])->name('riwayatantrians.index');
     Route::post('/data/panggil', [\App\Http\Controllers\RiwayatantriansController::class, 'panggil'])->name('riwayatantrians.panggil');
+    
     Route::post('/antrian/reset', [\App\Http\Controllers\RiwayatantriansController::class, 'reset'])->name('riwayatantrians.reset');
 
 
