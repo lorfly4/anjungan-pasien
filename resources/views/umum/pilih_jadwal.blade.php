@@ -19,12 +19,12 @@
     </header>
     <main class="max-w-4xl mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
-            <a href="{{ url()->previous() }}"
-                class=" flex items-center bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Back
-            </a>
-        </div>
+                <a href="{{ url()->previous() }}"
+                    class=" flex items-center bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back
+                </a>
+            </div>
         <section class="bg-white rounded shadow p-6">
             <h1 class="text-xl font-bold text-gray-700 mb-4">Registrasi Pasien</h1>
             <p class="text-sm text-gray-600 mb-2">Nama: <span class="font-semibold">{{ $pasien['nama_lengkap'] }}</span>
@@ -36,26 +36,20 @@
         </section>
         &nbsp;
 
-<div class="max-w-xl mx-auto mt-8 bg-white p-6 rounded shadow">
+<div class="max-w-3xl mx-auto mt-8 bg-white p-6 rounded shadow">
     <h2 class="text-lg font-bold mb-4">Pilih Jadwal Dokter: {{ $dokter->nama_dokter }}</h2>
     <form action="/umum/print" method="POST">
         @csrf
         <input type="hidden" name="dokter" value="{{ $dokter->id_dokter }}">
         <div class="grid grid-cols-1 gap-4">
             @foreach($jadwal as $j)
-                <div>
-                    <label>
-                        <input type="radio" name="jadwal" value="{{ $j['hari'] }}|{{ $j['jam'] }}" {{ $j['disable'] ? 'disabled' : '' }}>
-                        {{ $j['hari'] }} - {{ $j['jam'] }}
-                        @if($j['disable'])
-                            <span class="text-red-500">(Sudah diambil)</span>
-                        @endif
-                    </label>
-                </div>
+                <button type="submit" name="jadwal" value="{{ $j['hari'] }}|{{ $j['jam'] }}" class="w-full px-4 py-2 rounded h-12 {{ $j['disable'] ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700' }}">
+                    {{ $j['hari'] }} - {{ $j['jam'] }}
+                    @if($j['disable'])
+                        <span class="text-red-500">(Sudah diambil)</span>
+                    @endif
+                </button>
             @endforeach
         </div>
-        <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" {{ count(array_filter($jadwal, fn($j) => !$j['disable'])) == 0 ? 'disabled' : '' }}>
-            Lanjutkan
-        </button>
     </form>
 </div>

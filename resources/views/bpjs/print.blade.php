@@ -74,21 +74,26 @@
         @foreach($data as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onclick="handlePrintAndRedirect()">
-            Konfirmasi Selesai Print
+        <button type="submit" onclick="handlePrint()"
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="btnPrint">
+            Cetak Karcis
         </button>
+    </form>
 
+    <script>
+        function handlePrint() {
+            // Sembunyikan tombol print agar tidak ikut tercetak
+            document.getElementById('btnPrint').style.display = 'none';
 
-        <script>
-            function handlePrintAndRedirect() {
-                window.print();
-                // Redirect to the home page after printing
-                window.onafterprint = function () {
-                    window.location.href = "/";
-                };
-            }
-        </script>
+            // Jalankan print
+            window.print();
+
+            // Setelah selesai print, kirim form
+            window.onafterprint = function () {
+                document.getElementById('formPrint').submit();
+            };
+        }
+    </script>
 
 
 

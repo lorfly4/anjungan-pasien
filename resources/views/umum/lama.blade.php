@@ -21,7 +21,7 @@
     <main class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 w-full max-w-4xl px-4">
         <form method="POST" action="/umum/lama" class="flex flex-col space-y-4 flex-grow max-w-lg w-full">
             @csrf
-            <input type="text" name="nomor" id="input-nik" placeholder="Masukkan NIK Anda" class="bg-white border border-gray-300 rounded-md py-2 px-4 text-center text-lg font-mono text-gray-700" readonly>
+            <input type="text" name="nomor" id="input-nik" placeholder="Masukkan NIK Anda" class="bg-white border border-gray-300 rounded-md py-2 px-4 text-center text-lg font-mono text-gray-700" required>
             <input type="date" name="tanggal" id="input-tanggal" class="bg-white border border-gray-300 rounded-md py-2 px-4 text-center text-lg font-mono text-gray-700" required>
             <div class="bg-blue-100 border border-blue-300 text-blue-700 py-2 px-4 text-center rounded-md text-sm">
                 Please enter your details using the keypad on the right.

@@ -170,8 +170,8 @@ class umumController extends Controller
             'dokter' => 'required',
         ]);
         // Ambil dokter berdasarkan ID, bukan nama!
-        $dokter_id = $request->input('dokter');
-        $dokter = \App\Models\dokter::where('nama_dokter', $dokter_id)->first();
+        $dokter_tarik = $request->input('dokter');
+        $dokter = \App\Models\dokter::where('id_dokter', $dokter_tarik)->first();
 
         // Ambil semua jadwal dokter
         $jadwal = \App\Models\JadwalDokter::where('id_dokter', $dokter->id_dokter)->get();
@@ -284,12 +284,17 @@ class umumController extends Controller
         $nama_poli = $poliObj ? $poliObj->nama_poli : '-';
 
         // Generate nomor antrian SEMENTARA (belum masuk DB)
-        $loket = Loket::with('kategori')->where('jenis_berobat', 'UMUM')->firstOrFail();
+        $lokets = Loket::with('kategori')->where('jenis_berobat', 'UMUM')->get();
+        if ($lokets->count() > 1) {
+            $loket = $lokets->random();
+        } else {
+            $loket = $lokets->firstOrFail();
+        }
+        $antrian = riwayat_antrian::pluck('no_antrian');
         $prefix = $loket->kategori->kategoris ?? 'X';
         $id_loket = $loket->id_lokets;
         $today = Carbon::today();
-        $jumlahAntrianHariIni = riwayat_antrian::where('id_lokets', $id_loket)
-            ->whereDate('tanggal_antrian', $today)
+        $jumlahAntrianHariIni = riwayat_antrian::whereDate('tanggal_antrian', $today)
             ->count();
         $nomorAntrian = $prefix . ($jumlahAntrianHariIni + 1);
 
@@ -317,16 +322,16 @@ class umumController extends Controller
 
 
     public function simpanAntrian(Request $request)
-    {
-        $data = $request->except('_token');
-        DB::table('riwayat_antrians')->insert($data);
-        Alert::success('Sukses', 'Antrian berhasil dicetak dan disimpan!');
-        Log::info('Antrian disimpan:', $data);
-        // Hapus data pasien dari session setelah berhasil menyimpan antrian
-        session()->forget('pasien');
-        session()->forget('poli');
-        // Redirect ke halaman utama atau halaman lain sesuai
-        return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
-    }
+{
+    $data = $request->except('_token');
+
+    DB::table('riwayat_antrians')->insert($data);
+
+    session()->forget('pasien');
+    session()->forget('poli');
+
+    return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
+}
+
 }
     

@@ -69,30 +69,34 @@
         <p>Call Center: (0725) 123456</p>
     </div>
 
-    <form method="POST" action="/umum/print/simpan">
+    <form id="formPrint" method="POST" action="/umum/print/simpan">
         @csrf
         @foreach($data as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
         @endforeach
-        <button type="submit" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onclick="handlePrintAndRedirect()">
-            Konfirmasi Selesai Print
-        </button>
+    <!-- Tombol Gabungan: Cetak + Submit -->
+    <button type="submit" onclick="handlePrint()"
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="btnPrint">
+        Cetak Karcis
+    </button>
+</form>
 
+<script>
+    function handlePrint() {
+        // Sembunyikan tombol print agar tidak ikut tercetak
+        document.getElementById('btnPrint').style.display = 'none';
 
-        <script>
-    function handlePrintAndRedirect() {
+        // Jalankan print
         window.print();
-        // Redirect to the home page after printing
+
+        // Setelah selesai print, kirim form
         window.onafterprint = function () {
-            window.location.href = "/";
+            document.getElementById('formPrint').submit();
         };
     }
 </script>
 
-
-
-    </form>
+</form>
 
 </body>
 

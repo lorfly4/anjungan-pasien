@@ -12,6 +12,9 @@
 <body>
 
     <div class="container mt-5">
+         <a href="/umum" class="text-blue-600 hover:text-blue-800 flex items-center mr-4">
+      <i class="fas fa-arrow-left mr-2"></i> Kembali
+    </a>
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
                 <h1 class="text-black font-extrabold text-[64px] leading-[72px] font-sans mb-20">

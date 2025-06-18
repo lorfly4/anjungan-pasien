@@ -53,5 +53,6 @@ Route::prefix('umum')->group(function () {
     Route::post('/print/simpan', [App\Http\Controllers\umumController::class, 'simpanAntrian']);
     Route::get('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
     Route::post('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
+    Route::get('/pilih-jadwal', [App\Http\Controllers\umumController::class, 'pilihJadwal']);
     Route::post('/pilih-jadwal', [App\Http\Controllers\umumController::class, 'pilihJadwal']);
 });
