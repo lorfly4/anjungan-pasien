@@ -73,6 +73,7 @@ class umumController extends Controller
             'nama_lengkap' => 'required',
             'nik' => ['required', 'digits_between:14,20'],
             'jenis_kelamin' => 'required',
+            'status_menikah' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required',
@@ -93,9 +94,26 @@ class umumController extends Controller
         // Generate no_rm
         $no_rm = "A" . $kode_sekuensial . $tanggal . $bulan . $tahun;
 
+        $status_menikah = $request->status_menikah;
+        if ($status_menikah == 'sudah') {
+            if ($request->jenis_kelamin == 'laki-laki') {
+                $panggilan = 'MR';
+            } else {
+                $panggilan = 'MRS';
+            }
+        } else {
+            if ($request->jenis_kelamin == 'laki-laki') {
+                $panggilan = 'MR';
+            } else {
+                $panggilan = 'MS';
+            }
+        }
+
+        $nama_lengkap = $panggilan . ' ' . $request->nama_lengkap;
+         
         $data = [
             'no_rm' => $no_rm,
-            'nama_lengkap' => $request->nama_lengkap,
+            'nama_lengkap' => $nama_lengkap,
             'nik' => $request->nik,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
@@ -104,6 +122,7 @@ class umumController extends Controller
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
             'email' => $request->email ?? null,
+            'status_menikah' => $request->status_menikah,
         ];
 
         $insert = DB::table('pasien_umum')->insert($data);

@@ -63,6 +63,14 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" placeholder="Optional" id="email">
                     </div>
+                    <div class="mb-3">
+                        <label for="status_menikah" class="form-label">Status Menikah</label>
+                        <select name="status_menikah" id="status_menikah" class="form-select" required>
+                            <option value="">Pilih status menikah</option>
+                            <option value="sudah">Menikah</option>
+                            <option value="belum">Belum Menikah</option>
+                        </select>
+                    </div>
                     <button type="button" class="btn btn-primary" id="previewBtn">Simpan</button>
                 </form>
 
@@ -94,6 +102,8 @@
                                     </li>
                                     <li class="list-group-item"><strong>Email:</strong> <span id="preview_email"></span>
                                     </li>
+                                    <li class="list-group-item"><strong>Status Menikah:</strong> <span
+                                            id="preview_status"></span></li>
                                 </ul>
                             </div>
                             <div class="modal-footer">
@@ -117,6 +127,7 @@
                         document.getElementById('preview_alamat').textContent = document.getElementById('alamat').value;
                         document.getElementById('preview_hp').textContent = document.getElementById('no_hp').value;
                         document.getElementById('preview_email').textContent = document.getElementById('email').value;
+                        document.getElementById('preview_status').textContent = document.getElementById('status_menikah').value;
 
                         // Tampilkan modal
                         var previewModal = new bootstrap.Modal(document.getElementById('previewModal'));

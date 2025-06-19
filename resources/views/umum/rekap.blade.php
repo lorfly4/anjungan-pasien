@@ -31,10 +31,10 @@
                 </span>
             </div>
             <p class="text-gray-600 text-sm">
-                Data Pelapor
+                Data Pasien
             </p>
             <p class="text-gray-500 text-xs">
-                Pastikan data pelapor sudah benar
+                Pastikan data pasien sudah benar
             </p>
         </div>
     </header>

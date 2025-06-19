@@ -27,11 +27,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" placeholder="Silahkan isi nama lengkap anda" required>
+                        <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap"
+                            placeholder="Silahkan isi nama lengkap anda" required>
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Silahkan isi NIK anda" required>
+                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Silahkan isi NIK anda"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
@@ -42,8 +44,17 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="menikah" class="form-label">Status Menikah</label>
+                        <select name="menikah" id="menikah" class="form-select" required>
+                            <option value="">Pilih status menikah</option>
+                            <option value="sudah">Sudah</option>
+                            <option value="belum">Belum</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Silahkan isi tempat lahir anda" required>
+                        <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir"
+                            placeholder="Silahkan isi tempat lahir anda" required>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
@@ -51,11 +62,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea name="alamat" class="form-control" id="alamat" placeholder="Silahkan isi alamat lengkap anda" required></textarea>
+                        <textarea name="alamat" class="form-control" id="alamat"
+                            placeholder="Silahkan isi alamat lengkap anda" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="no_hp" class="form-label">No. HP</label>
-                        <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Silahkan isi no hp anda" required>
+                        <input type="text" name="no_hp" class="form-control" id="no_hp"
+                            placeholder="Silahkan isi no hp anda" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -82,6 +95,8 @@
                                     </li>
                                     <li class="list-group-item"><strong>Jenis Kelamin:</strong> <span
                                             id="preview_jk"></span></li>
+                                    <li class="list-group-item"><strong>Status Menikah:</strong> <span
+                                            id="preview_menikah"></span></li>
                                     <li class="list-group-item"><strong>Tempat Lahir:</strong> <span
                                             id="preview_tempat"></span></li>
                                     <li class="list-group-item"><strong>Tanggal Lahir:</strong> <span
@@ -110,6 +125,7 @@
                         document.getElementById('preview_nama').textContent = document.getElementById('nama_lengkap').value;
                         document.getElementById('preview_nik').textContent = document.getElementById('nik').value;
                         document.getElementById('preview_jk').textContent = document.getElementById('jenis_kelamin').value;
+                        document.getElementById('preview_menikah').textContent = document.getElementById('menikah').value;
                         document.getElementById('preview_tempat').textContent = document.getElementById('tempat_lahir').value;
                         document.getElementById('preview_tanggal').textContent = document.getElementById('tanggal_lahir').value;
                         document.getElementById('preview_alamat').textContent = document.getElementById('alamat').value;
@@ -135,11 +151,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Gagal',
-        text: '{{ session('error') }}'
-    });
-</script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: '{{ session('error') }}'
+        });
+    </script>
 @endif
