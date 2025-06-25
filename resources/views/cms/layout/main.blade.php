@@ -21,6 +21,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
+    {{-- Select2 JavaScript --}}
+    <!-- Tambahkan di bagian <head> -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -31,8 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
@@ -156,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('riwayatantrian.showtableriwayatantrian') }}" class="nav-link ">
+                            <a href="{{ route('riwayatantrians.showtableriwayatantrian') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-history"></i>
                                 <p>
                                     Riwayat Antrian Pasien
@@ -237,6 +240,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- jQuery & Select2 JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#poli').select2({
+      placeholder: "Pilih Poli"
+    });
+  });
+</script>
 
 
 </body>

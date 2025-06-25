@@ -23,8 +23,10 @@
                     <div class="container mt-4">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="{{ route('loket.prosescreateloket')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('loket.prosescreateloket')}}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
+                                    
                                     <div class="form-group">
                                         <label for="name">Nama Loket</label>
                                         <input type="text" class="form-control" name="nama_loket" id="nama_loket"
@@ -62,15 +64,22 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="poli">Poli</label>
-                                        <select name="poli" id="poli" class="form-control">
-                                            <option value="" selected disabled>Pilih Poli</option>
-                                            @foreach ( $polis as $poli)
-                                                <option value="{{ $poli->id_poli}}" id="poli" class="form-control">
-                                                    {{ $poli->nama_poli }}
-                                                </option>
+                                        <select name="poli[]" id="poli" multiple class="form-control">
+                                            @foreach ($polis as $poli)
+                                                <option value="{{ $poli->id_poli }}">{{ $poli->nama_poli }}</option>
                                             @endforeach
                                         </select>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#poli').select2({
+                                                    placeholder: "Pilih Poli",
+                                                    allowClear: true
+                                                });
+                                            });
+                                        </script>
                                     </div>
+
+                                    
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-control">
@@ -79,8 +88,7 @@
                                             <option value="inactive">Tidak Aktif</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary"
-                                        onclick="showSweetAlert()">Submit</button>
+                                    <button type="submit" class="btn btn-primary" onclick="showSweetAlert()">Submit</button>
                                     <script>
                                         function showSweetAlert() {
                                             Swal.fire({

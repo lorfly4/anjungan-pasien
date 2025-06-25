@@ -4,12 +4,12 @@
         {{-- Header --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Tabel Create Poli</h1>
+                <h1 class="m-0">Tabel Buat Poli</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Tabel Create Poli</li>
+                    <li class="breadcrumb-item"><a href="#">Halaman Utama</a></li>
+                    <li class="breadcrumb-item active">Tabel Buat Poli</li>
                 </ol>
             </div>
         </div>

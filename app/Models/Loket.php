@@ -10,7 +10,7 @@ class Loket extends Model
 
     protected $table = 'lokets'; // Sesuaikan dengan nama tabel sebenarnya
 
-    public $incrementing = false; // Sesuaikan dengan primary key tabel poli
+    public $incrementing = true; // Sesuaikan dengan primary key tabel poli
 
     protected $keyType = 'string'; // Sesuaikan dengan tipe data primary key tabel poli
 
@@ -30,6 +30,18 @@ class Loket extends Model
     {
         return $this->belongsTo(\App\Models\Kategori::class, 'id_kategoris', 'id_kategoris');
     }
+
+    
+    public function polis()
+    {
+        return $this->belongsToMany(Poli::class, 'loket_poli', 'loket_id', 'poli_id');
+    }
+
+    public function loketPoli()
+    {
+        return $this->hasMany(\App\Models\LoketPoli::class, 'loket_id', 'id_lokets');
+    }
+
 
     
 

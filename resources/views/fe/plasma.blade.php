@@ -8,7 +8,6 @@
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
         // Script to update date/time every second
         function updateDateTime() {
@@ -100,26 +99,28 @@
                 Videotron
             </div>
             <!-- Carousel nomor antrian selanjutnya -->
-            <div id="loketCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($id_lokets as $index => $loket)
-                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                            <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                                <h3>ID Loket: {{ $loket->id_lokets }}</h3>
-                            </div>
-                        </div>
-                    @endforeach
+            <div class="border border-black h-20 flex items-center justify-center space-x-4 overflow-x-auto px-2">
+                <div
+                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
+                    8
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#loketCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#loketCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
+                <div
+                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
+                    9
+                </div>
+                <div
+                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
+                    10
+                </div>
+                <div
+                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
+                    11
+                </div>
+                <div
+                    class="w-16 h-16 border border-black flex items-center justify-center text-base font-normal flex-shrink-0">
+                    12
+                </div>
             </div>
-
 
 
 
@@ -135,26 +136,28 @@
                     </script>
                 @endif
 
-                {{-- Tampilan Data yang Dipanggil --}}
-                @if (isset($antrian))
-                    <h3>Dipanggil: <span id="nama-antrian">{{ $antrian->no_antrian }}</span> - Loket: <span
-                            id="loket-antrian">{{ $antrian->loket->nama_lokets }}</span></h3>
-                    <script>
-                        // Fungsi Text-to-Speech
-                        const loket = document.getElementById("loket-antrian").innerText;
-                        const nama = document.getElementById("nama-antrian").innerText;
-                        const msg = new SpeechSynthesisUtterance(`Nomor antrian ${nama}, silakan menuju ${loket}`);
-                        msg.lang = "id-ID";
-                        msg.rate = 0.8;
-                        msg.pitch = 1;
-                        msg.voice = window.speechSynthesis.getVoices().find(voice => voice.lang === "id-ID" && voice.name ===
-                            "Google Indonesian Female");
-                        window.speechSynthesis.speak(msg);
-                    </script>
-                @elseif (isset($nextAntrian))
-                    <h3>Dipanggil: <span id="nama-antrian">{{ $nextAntrian->no_antrian }}</span> - Loket: <span
-                            id="loket-antrian">{{ $nextAntrian->loket->nama_lokets }}</span></h3>
-                @endif
+@php
+    use App\Models\RiwayatAntrians;
+
+    $antriansDipanggil = RiwayatAntrians::where('dipanggil', 1)->get();
+@endphp
+
+<div class="border border-black h-16 flex items-center justify-center text-base font-normal px-4">
+    @if ($antriansDipanggil->isNotEmpty())
+        @foreach ($antriansDipanggil as $antrian)
+            <div class="mt-6 bg-green-100 p-4 rounded-lg text-center">
+                <h3 class="text-xl font-semibold">
+                    Dipanggil: <span id="nama-antrian" class="text-green-800">{{ $antrian->no_antrian }}</span> -
+                    Loket: <span id="loket-antrian" class="text-green-800">{{ $antrian->loket->nama_lokets }}</span>
+                </h3>
+            </div>
+        @endforeach
+    @else
+        <p>Tidak ada antrian yang sudah dipanggil.</p>
+    @endif
+</div>
+
+
             </div>
 
 
@@ -165,7 +168,6 @@
         Catatan kaki saja
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

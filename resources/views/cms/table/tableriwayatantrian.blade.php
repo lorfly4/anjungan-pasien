@@ -8,7 +8,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Halaman Utama</a></li>
                     <li class="breadcrumb-item active">Tabel Riwayat Antrian</li>
                 </ol>
             </div>
@@ -57,7 +57,8 @@
                         <td>{{ $item->no_rm ?? '-' }}</td>
                         <td>{{ $item->no_antrian ?? '-' }}</td>
                         <td>{{ $item->tanggal_antrian ?? '-' }}</td>
-                        <td>{{ $item->loket->nama_lokets ?? '-' }}</td>                        <td>{{ $item->nama_pasien ?? '-' }}</td>
+                        <td>{{ $item->loket->nama_lokets ?? '-' }}</td>                        
+                        <td>{{ $item->nama_pasien ?? '-' }}</td>
                         <td>{{ $item->jam ?? '-' }}</td>
                         <td>{{ $item->dokter ?? '-' }}</td>
                         {{-- <td>

@@ -8,7 +8,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Halaman Utama</a></li>
                     <li class="breadcrumb-item active">Tabel Buat Pasien Umum</li>
                 </ol>
             </div>

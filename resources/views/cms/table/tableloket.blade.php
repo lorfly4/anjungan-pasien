@@ -5,12 +5,12 @@
         {{-- Header --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Tabel Create Loket</h1>
+                <h1 class="m-0">Tabel Buat Loket</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Tabel Create Loket</li>
+                    <li class="breadcrumb-item"><a href="#">Halaman Utama</a></li>
+                    <li class="breadcrumb-item active">Tabel Buat Loket</li>
                 </ol>
             </div>
         </div>
@@ -62,7 +62,17 @@
                         <td>{{ $loket->jenis_berobat}}</td>
                         <td>{{ $loket->keterangan }}</td>
                         <td>{{ $loket->dokter->nama_dokter ?? '-' }}</td>
-                        <td>{{ $loket->poli->nama_poli ?? '-' }} ({{ $loket->poli->status_opc_ipc}})</td>
+
+                        <td>
+                            @if ($loket->loketPoli->isNotEmpty())
+                                @foreach ($loket->loketPoli as $lp)
+                                    <div>{{ $lp->poli->nama_poli ?? $lp->poli_id }}</div>
+                                @endforeach
+                            @else
+                                <div>-</div>
+                            @endif
+                        </td>
+
                         <td>{{ $loket->kategori->kategoris ?? '-' }}</td>
                         <td>{{ $loket->status}}</td>
                         <td class="text-center">

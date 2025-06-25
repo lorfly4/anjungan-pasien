@@ -27,28 +27,35 @@ class LoketController extends Controller
 
     public function prosescreateloket(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nama_loket' => 'required',
             'jenis_berobat' => 'required',
             'keterangan' => 'required',
             'kategori' => 'required',
             'dokter' => 'required',
-            'poli' => 'required',
+            'poli' => 'required|array',
             'status' => 'required',
         ]);
 
-        \App\Models\Loket::create([
-            'nama_lokets' => $request->input('nama_loket'),
-            'jenis_berobat' => $request->input('jenis_berobat'),
-            'keterangan' => $request->input('keterangan'),
-            'id_kategoris' => $request->input('kategori'),
-            'id_dokter' => $request->input('dokter'),
-            'id_poli' => $request->input('poli'),
-            'status' => $request->input('status'),
+        // Debugging with dd (dump and die)
+        // dd($validatedData);
+
+        $loket = \App\Models\Loket::create([
+            'nama_lokets' => $validatedData['nama_loket'],
+            'jenis_berobat' => $validatedData['jenis_berobat'],
+            'keterangan' => $validatedData['keterangan'],
+            'id_kategoris' => $validatedData['kategori'],
+            'id_dokter' => $validatedData['dokter'],
+            'status' => $validatedData['status'],
+            
         ]);
 
+        $loket->polis()->sync($request->input('poli'));
+        
         return redirect()->route('loket.index')->with('success', 'Data loket berhasil ditambahkan!');
     }
+
+
 
     public function showeditloket($id_lokets)
     {

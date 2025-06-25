@@ -20,10 +20,7 @@ class PlasmaController extends Controller
             $antrian = RiwayatAntrians::find(session('terakhir_dipanggil_id'));
         }
 
-
-        $id_lokets = \App\Models\RiwayatAntrians::select('id_lokets')->distinct()->get();
-        
-        return view('fe.plasma', compact('antrianBelumDipanggil', 'antrian', 'id_lokets'));
+        return view('fe.plasma', compact('antrianBelumDipanggil', 'antrian'));
     }
 
     public function panggil(Request $request)
@@ -46,7 +43,7 @@ class PlasmaController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('fe.plasma', compact('antrianBelumDipanggil', 'antrian'));
+        return view('fe.menupanggil', compact('antrianBelumDipanggil', 'antrian'));
     }
 
     public function reset()

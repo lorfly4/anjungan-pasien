@@ -92,12 +92,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route ('plasmaantrian.index')}}" class="nav-link">
+                            <a href="{{route ('plasma.index')}}" class="nav-link" target="_blank">
                                 <i class="nav-icon fas fa-syringe"></i>
                                 <p>
                                     Plasma Antrian
                                 </p>
                             </a>
+                        </li>
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf

@@ -36,7 +36,7 @@
     // Data
     Route::get('/data', [\App\Http\Controllers\RiwayatantriansController::class, 'index'])->name('riwayatantrians.index');
     Route::post('/data/panggil', [\App\Http\Controllers\RiwayatantriansController::class, 'panggil'])->name('riwayatantrians.panggil');
-    
+
     Route::post('/antrian/reset', [\App\Http\Controllers\RiwayatantriansController::class, 'reset'])->name('riwayatantrians.reset');
 
 
@@ -126,7 +126,7 @@
 
         Route::delete('admin/deletepasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'deletepasienumum'])->name('pasienumum.deletepasienumum');
 
-        Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatAntriansController::class, 'showtableriwayatantrian'])->name('riwayatantrian.showtableriwayatantrian');
+        Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatantriansController::class, 'showtableriwayatantrian'])->name('riwayatantrians.showtableriwayatantrian');
 
     });
 

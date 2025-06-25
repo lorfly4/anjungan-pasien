@@ -24,5 +24,10 @@ class Poli extends Model
     {
         return $this->hasMany(Dokter::class, 'id_poli', 'id_poli');
     }
+
+    public function lokets()
+    {
+        return $this->belongsToMany(Loket::class, 'loket_poli', 'poli_id', 'loket_id');
+    }
 }
 
