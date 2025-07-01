@@ -82,7 +82,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($antriansDipanggil ?? [] as $index => $antrian)
+                    @forelse($antrianBelumDipanggil ?? [] as $index => $antrian)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-2 px-4">{{ $index + 1 }}</td>
                             <td class="py-2 px-4">{{ $antrian->no_antrian }}</td>

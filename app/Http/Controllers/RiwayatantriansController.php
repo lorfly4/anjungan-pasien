@@ -18,25 +18,19 @@ class RiwayatantriansController extends Controller
 
     public function index()
     {
-        // Ambil antrian yang baru saja dipanggil (jika ada)
-        $antrianDipanggil = session('antrianDipanggil'); // atau dari logic panggil
-
-        // Antrian belum dipanggil
-        $antriansDipanggil = \App\Models\RiwayatAntrians::with('loket')
-            ->where('dipanggil', 0)
-            ->orderBy('created_at', 'asc')
+        // Ambil semua antrian yang belum dipanggil, urut dari terkecil
+        $antrianBelumDipanggil = RiwayatAntrians::where('dipanggil', false)
+            ->orderBy('id')
             ->get();
 
-        // Riwayat antrian yang sudah dipanggil
-        $riwayatSudahDipanggil = \App\Models\RiwayatAntrians::with('loket')
-            ->where('dipanggil', 1)
-            ->orderBy('updated_at', 'desc')
-            ->get();
+        // Ambil antrian yang sedang dipanggil (jika ada)
+        $antrian = null;
+        if (session()->has('terakhir_dipanggil_id')) {
+            $antrian = RiwayatAntrians::find(session('terakhir_dipanggil_id'));
+        }
 
 
-
-
-        return view('fe.panggil', compact('antrianDipanggil', 'antriansDipanggil', 'riwayatSudahDipanggil'));
+        return view('fe.panggil', compact('antrianBelumDipanggil', 'antrian'));
     }
 
     public function panggil(Request $request)
@@ -58,16 +52,21 @@ class RiwayatantriansController extends Controller
         }
 
         // Ambil daftar yang belum dipanggil (untuk info di tampilan)
-        $antriansDipanggil = RiwayatAntrians::where('dipanggil', false)->orderBy('updated_at', 'desc')->get();
+        $antrianBelumDipanggil = RiwayatAntrians::where('dipanggil', false)->orderBy('updated_at', 'desc')->get();
 
-        return view('fe.panggil', compact('antrian', 'antriansDipanggil'));
+        return view('fe.panggil', compact('antrian', 'antrianBelumDipanggil'));
     }
 
 
-    public function reset()
-    {
-        \App\Models\RiwayatAntrians::where('dipanggil', true)->update(['dipanggil' => false]);
+public function reset()
+{
+    // Reset semua status dipanggil
+    \App\Models\RiwayatAntrians::where('dipanggil', true)->update(['dipanggil' => false]);
 
-        return redirect()->route('riwayatantrians.index')->with('success', 'Antrian telah direset!');
-    }
+    // Hapus session terakhir dipanggil
+    session()->forget('terakhir_dipanggil_id');
+
+    return redirect()->route('riwayatantrians.index')->with('success', 'Antrian telah direset!');
+}
+
 }

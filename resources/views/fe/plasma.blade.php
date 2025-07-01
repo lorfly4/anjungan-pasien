@@ -136,26 +136,21 @@
                     </script>
                 @endif
 
-@php
-    use App\Models\RiwayatAntrians;
+                <div class="border border-black h-16 flex items-center justify-center text-base font-normal px-4">
+                    @if (isset($antrian))
+                        <div class="mt-6 bg-green-100 p-4 rounded-lg text-center">
+                            <h3 class="text-xl font-semibold">
+                                Dipanggil: <span id="nama-antrian"
+                                    class="text-green-800">{{ $antrian->no_antrian }}</span> -
+                                Loket: <span id="loket-antrian"
+                                    class="text-green-800">{{ $antrian->loket->nama_lokets }}</span>
+                            </h3>
+                        </div>
+                    @else
+                        <p class="text-gray-600">Tidak ada antrian yang sudah dipanggil.</p>
+                    @endif
+                </div>
 
-    $antriansDipanggil = RiwayatAntrians::where('dipanggil', 1)->get();
-@endphp
-
-<div class="border border-black h-16 flex items-center justify-center text-base font-normal px-4">
-    @if ($antriansDipanggil->isNotEmpty())
-        @foreach ($antriansDipanggil as $antrian)
-            <div class="mt-6 bg-green-100 p-4 rounded-lg text-center">
-                <h3 class="text-xl font-semibold">
-                    Dipanggil: <span id="nama-antrian" class="text-green-800">{{ $antrian->no_antrian }}</span> -
-                    Loket: <span id="loket-antrian" class="text-green-800">{{ $antrian->loket->nama_lokets }}</span>
-                </h3>
-            </div>
-        @endforeach
-    @else
-        <p>Tidak ada antrian yang sudah dipanggil.</p>
-    @endif
-</div>
 
 
             </div>
