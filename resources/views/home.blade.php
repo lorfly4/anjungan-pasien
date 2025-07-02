@@ -14,7 +14,7 @@
     body {
        font-family: "Roboto", sans-serif;
      }
-    .pattern-stripe {
+    /* .pattern-stripe {
       background-image: radial-gradient(circle at top right, white 0%, transparent 60%);
       background-repeat: no-repeat;
       background-position: top right;
@@ -24,52 +24,71 @@
       background-image: radial-gradient(circle at top left, white 0%, transparent 60%);
       background-repeat: no-repeat;
       background-position: top left;
-    }
+    } */
   </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center">
-  <header class="w-full bg-gray-200 py-3 px-4 flex items-center justify-between">
-  <div class="flex items-center justify-between w-full">
-    <img src={{ asset('/img/rumah-sakit.png') }} alt="Logo Rumah Sakit" class="h-13">
-    <h1 class="text-gray-600 text-xl" style="font-size: 120%;">
-      Daftar layanan
-    </h1>
-    <img src={{ asset('/img/bpjs.png') }} alt="Logo BPJS Kesehatan" class="h-13">
-  </div>
-</header>
-<main class="w-full max-w-6xl px-4 py-6">
+<body class="rounded-none"> 
+      <!-- MAIN HERO-->
+      <main
+        class="flex flex-col items-end pb-12 w-full min-h-[753px]  max-md:px-5 max-md:pt-20 max-md:max-w-full "
+        role="main"
+        aria-label="Medical and Healthcare homepage hero section"
+      >
+        <img
+          src="{{ asset('/img/Main.png') }}" 
+          alt="Medical facility background"
+          class="absolute top-0.1 left-0 w-full h-[600px] object-cover rounded-b-[40px] z-[-1]"
+          role="img"
+        />
+
+        <header class="relative w-full max-md:max-w-full ">
+          <div class="flex gap-5 max-md:flex-col justify-between mx-10 mt-2">
+            <div class="max-md:ml-0 max-md:w-full">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/ef9d652622c15dcd44c48faa5866c65a5ae01275?placeholderIfAbsent=true"
+                alt="Company logo"
+                class="object-contain shrink-0 mt-2.5 max-w-full aspect-[3.41] w-[239px] max-md:mt-10 ml-[-10px]"
+              />
+            </div>
+            <h1 class='text-white font-medium text-3xl mt-5'>Daftar Pelayanan</h1>
+            <div class="ml-5 w-max-md:ml-0 max-md:w-full ">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/37b8072c7fcb0d31139cb33103e19b2e0aad1249?placeholderIfAbsent=true"
+                alt="Healthcare icon"
+                class="object-contain shrink-0 max-w-full aspect-square w-[105px] max-md:mt-10 "
+              />
+            </div>
+          </div>
+        </header>
+        <section class="relative mt-48 text-8xl font-bold text-right text-white max-md:mt-10 max-md:mr-2.5 max-md:max-w-full max-md:text-4xl pt-15 pr-8 ">
+          <h1 class="leading-tight text-6xl md:text-7xl max-md:text-4xl ">
+            Medical & <br /> Healthcare
+            <br />
+          </h1>
+          <h6 class='text-[20px] font-normal'>"Kesehatan adalah harta paling berharga yang sering dilupakan sampai <br /> tubuh memberi peringatan. Jagalah sebelum terlambat."</h6>
+        </section>
+      </main>
+
+  
+{{-- <div class="w-full max-w-6xl px-4 py-6"> --}}
  <!-- Konten Tombol -->
- <div class="grid grid-cols-2 gap-8 w-full max-w-5xl px-10 mt-6">
+<div class='grid grid-cols-2 w-full h-auto mt-[-100px] place-items-center overflow-hidden'>
     
   <!-- Tombol Pasien Lama -->
-  <a href="/bpjs" class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10">
-    <div class="flex items-center space-x-4 z-10">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-      <span>Pasien BPJS</span>
-    </div>
-    <!-- Dekorasi garis -->
-    <div class="absolute top-0 right-0 w-24 h-full flex items-start justify-end pr-2 pt-4 opacity-50">
-      <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-      <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-      <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-    </div>
-  </a>
+     <a href="/bpjs" class="shadow-sm bg-[#687DA0] h-[285px] rounded-[38px] w-[643px] max-md:rounded-3xl max-md:h-[200px] max-md:w-[90%] max-sm:rounded-3xl max-sm:h-[150px] max-sm:w-[85%] px-10 py-5">
+       <h1 class="text-6xl text-white h-[55px] p-[15px] max-md:h-auto max-md:text-4xl max-md:w-[70%] max-sm:w-4/5 max-sm:h-auto max-sm:text-3xl">
+          Pasien BPJS
+       </h1>
+       <img src="{{ asset('/img/Medical1.png')}}" class='mt-[-195px] ml-[-5px] max-w-500'/> 
+     </a>
 
-  <!-- Tombol Pasien Baru -->
-  <a href="/umum" class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10">
-    <div class="flex items-center space-x-4 z-10">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
-      </svg>
-      <span>Pasien Umum</span>
-    </div>
-    <!-- Dekorasi garis -->
-    <div class="absolute top-0 left-0 w-24 h-full flex items-start justify-start pl-2 pt-4 opacity-50">
-      <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-      <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-      <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
+  <!-- Tombol Pasien Umun/Baru -->
+  <a href="/umum">
+    <div class="shadow-sm bg-[#6795b4] h-[285px] rounded-[38px] w-[643px] max-md:rounded-3xl max-md:h-[200px] max-md:w-[90%] max-sm:rounded-3xl max-sm:h-[150px] max-sm:w-[85%] px-10 py-5 ">
+      <h1 class="text-6xl text-white h-[55px] p-[15px] max-md:h-auto max-md:text-4xl max-md:w-[70%] max-sm:w-4/5 max-sm:h-auto max-sm:text-3xl">
+        Pasien Umum
+      </h1>
+      <img src="{{ asset('/img/Medical2.png') }}" class='mt-[-195px] ml-[-5px] max-w-500'/> 
     </div>
   </a>
 </div>
@@ -95,6 +114,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @endif
 </div>
-</main>
 </body>
 </html>
+
