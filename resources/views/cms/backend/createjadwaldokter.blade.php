@@ -4,12 +4,12 @@
         {{-- Header --}}
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Create Jadwal Dokter</h1>
+                <h1 class="m-0">Buat Jadwal Dokter</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right" style="background-color:#f4f6f9;">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Create Jadwal Dokter</li>
+                    <li class="breadcrumb-item active">Buat Jadwal Dokter</li>
                 </ol>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Create Jadwal Dokter</h3>
+                        <h3 class="card-title">Buat Jadwal Dokter</h3>
                     </div>
                     <div class="container mt-4">
                         <div class="row">

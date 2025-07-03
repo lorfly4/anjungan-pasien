@@ -43,6 +43,7 @@
                 <tr class="text-center align-middle">
                     <th class="text-center" style="width: 3em;">No</th>
                     <th>Poli</th>
+                    <th>Status OPC IPC</th>
                     <th>Status Poli</th>
                     <th>Aksi</th>
                 </tr>
@@ -54,6 +55,11 @@
                         </td>
                         <td>{{ $poli->nama_poli }}</td>
                         <td>{{ $poli->status_opc_ipc }}</td>
+                        <td class="text-center">
+                            <span class="badge badge-{{ $poli->status == 1 ? 'success' : 'secondary' }}">
+                                {{ $poli->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                            </span>
+                        </td>
                         <td class="text-center">
                             <a href="{{ route('poli.showeditpoli', $poli->id_poli) }}"
                                 class="btn btn-sm btn-warning">Edit</a>
@@ -81,7 +87,42 @@
                                     })
                                 }
                             </script>
+                            <button type="button" class="btn btn-sm btn-{{ $poli->status == 'active' ? 'success' : 'secondary' }}"
+                                data-toggle="modal" data-target="#modalStatus{{ $poli->id_poli }}">
+                                {{ $poli->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalStatus{{ $poli->id_poli }}" tabindex="-1" aria-labelledby="modalStatusLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalStatusLabel">Ubah Status</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('poli.updatestatuspoli', $poli->id_poli) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="form-group">
+                                                    <label for="status_poli">Status Poli</label>
+                                                    <select name="status" id="status" class="form-control">
+                                                        <option value="" disabled>Pilih Status Poli</option>
+                                                        <option value="true" {{ $poli->status == 'active' ? 'selected' : '' }}>Aktif</option>
+                                                        <option value="false" {{ $poli->status == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
+
                     </tr>
                 @empty
                     <tr>

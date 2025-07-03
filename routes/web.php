@@ -10,6 +10,7 @@
     use App\Http\Controllers\DokterController;
     use App\Http\Controllers\KategoriController;
     use App\Http\Controllers\UserserversideController;
+    use App\Http\Controllers\VideoController;
 
 
     Route::get('/', function () {
@@ -58,6 +59,8 @@
         Route::get('admin/createpoli', [App\Http\Controllers\PoliController::class, 'index'])->name('poli.index');
         Route::get('admin/showpoli', [App\Http\Controllers\PoliController::class, 'showpoli'])->name('poli.showpoli');
         Route::post('admin/prosescreatepoli', [App\Http\Controllers\PoliController::class, 'prosescreatepoli'])->name('poli.prosescreatepoli');
+
+        Route::put('admin/statuspoli/{id}', [App\Http\Controllers\PoliController::class, 'updatestatuspoli'])->name('poli.updatestatuspoli');
 
         Route::get('admin/editpoli/{id_poli}', [App\Http\Controllers\PoliController::class, 'showeditpoli'])->name('poli.showeditpoli');
         Route::post('admin/proseseditpoli/{id_poli}', [App\Http\Controllers\PoliController::class, 'proseseditpoli'])->name('poli.proseseditpoli');
@@ -127,6 +130,14 @@
         Route::delete('admin/deletepasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'deletepasienumum'])->name('pasienumum.deletepasienumum');
 
         Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatantriansController::class, 'showtableriwayatantrian'])->name('riwayatantrians.showtableriwayatantrian');
+
+        // Antarmuka Video
+
+
+        Route::get('admin/videos', [VideoController::class, 'index'])->name('video.index');
+        Route::get('admin/videos/create', [VideoController::class, 'create'])->name('video.create');
+        Route::post('admin/videos', [VideoController::class, 'store'])->name('videos.store');
+
 
     });
 

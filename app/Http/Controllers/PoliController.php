@@ -33,12 +33,12 @@ class PoliController extends Controller
 
         $request->validate([
             'nama_poli' => 'required',
-            'status_poli' => 'required',
+            'status' => 'required',
         ]);
 
         $poli = new \App\Models\Poli();
         $poli->nama_poli = $request->input('nama_poli');
-        $poli->status_opc_ipc = $request->input('status_poli');
+        $poli->status_opc_ipc = $request->input('status');
         $poli->save();
 
 
@@ -65,6 +65,25 @@ class PoliController extends Controller
 
         return redirect()->route('poli.index')->with('success', 'Poli berhasil diupdate.');
     }
+
+
+public function updatestatuspoli(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:true,false',
+    ]);
+
+    $poli = Poli::findOrFail($id);
+
+    // Ubah status menjadi 1 (true) atau 0 (false)
+    $poli->status = $request->status === 'true' ? 1 : 0;
+    $poli->save();
+
+    return redirect()->back()->with('success', 'Status poli berhasil diperbarui.');
+}
+
+
+
 
     public function deletepoli($id_poli)
     {

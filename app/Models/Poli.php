@@ -9,7 +9,7 @@ class Poli extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_poli', 'nama_poli'];
+    protected $fillable = ['id_poli', 'nama_poli', 'status'];
 
     protected $table = 'poli'; // Sesuaikan dengan nama tabel sebenarnya
 
