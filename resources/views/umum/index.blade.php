@@ -41,7 +41,7 @@
       <div>
         <a href="/" class="items-start">
           <div class='bg-[#5e7291] hover:bg-[#4e617a] text-white px-4 py-2 relative rounded-xl shadow-md flex flex-col items-center space-y-2 w-[200px] mx-5'>
-            <span class='text-4xl font-semibold mr-10'> <span class='absolute left-6 bottom-3 text-4xl'> ‹ </span>Kembali</span>
+            <span class='text-4xl font-semibold mr-10'> <span class='absolute left-6 bottom-3 text-4xl ml-[140px]'> ‹ </span>Kembali</span>
           </div>
         </a>
       </div>
