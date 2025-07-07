@@ -41,7 +41,7 @@
     <main class="w-full max-w-5xl bg-white shadow-md rounded-md p-6 flex flex-col gap-6">
         <div class="flex gap-6">
             <div class="flex-shrink-0">
-                @if ($data['jenis_kelamin'] === 'laki-laki')
+                @if ($data['jenis_kelamin'] === 'laki-laki' || $data['jenis_kelamin'] === 'Laki-Laki' || $data['jenis_kelamin'] === 'pria' || $data['jenis_kelamin'] === 'Pria')
                     <img alt="Cartoon style avatar of a person with short brown hair and green shirt" class="rounded"
                         height="120"
                         src="https://www.w3schools.com/w3images/avatar2.png"

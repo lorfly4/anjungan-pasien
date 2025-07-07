@@ -12,113 +12,71 @@
     body {
       font-family: "Roboto", sans-serif;
     }
-
-    .pattern-stripe {
-      background-image: radial-gradient(circle at top right, white 0%, transparent 60%);
-      background-repeat: no-repeat;
-      background-position: top right;
-    }
-
-    .pattern-stripe-reverse {
-      background-image: radial-gradient(circle at top left, white 0%, transparent 60%);
-      background-repeat: no-repeat;
-      background-position: top left;
-    }
   </style>
   @if (session('success') || session('error'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @endif
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col items-center">
-  <header class="w-full bg-gray-200 py-3 px-4 flex items-center justify-between">
-    <div class="flex items-center justify-between w-full">
-      <img src="{{ asset('img/rumah-sakit.png') }}" alt="Logo Rumah Sakit" class="h-13">
-      <h1 class="text-gray-600 text-xl" style="font-size: 120%;">
-        Daftar layanan
-      </h1>
-      <img src="{{ asset('img/bpjs.png') }}" alt="Logo BPJS Kesehatan" class="h-13">
+<body class="bg-gradient-to-b from-sky-100 to-white min-h-screen p-0 m-0 w-full">
+
+  {{-- Logo --}}
+  <div class='w-full flex-col '>
+
+    <div class="flex justify-between mt-[-25px]">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/002dd8f3dbbb902ec73724109be5d3ada5aba01f?placeholderIfAbsent=true"
+        alt="Company logo" class="object-contain max-w-full aspect-[5.41] w-[140px] max-md:mt-10  " />
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/37b8072c7fcb0d31139cb33103e19b2e0aad1249?placeholderIfAbsent=true"
+        alt="Healthcare icon" class="object-contain mt-10 max-w-full aspect-[1.41] w-[200px] max-md:mt-10  " />
     </div>
-  </header>
-  <main class="w-full max-w-6xl px-4 py-6">
+  </div>
+  <!-- Tombol Kembali- -->
+  <div>
+    <a href="/" class="items-start">
+      <div
+        class='bg-[#5e7291] hover:bg-[#4e617a] text-white px-4 py-2 relative rounded-xl shadow-md flex flex-col items-center space-y-2 w-[200px] mx-5'>
+        <span class='text-4xl font-semibold mr-10'> <span class='absolute left-6 bottom-3 text-4xl'> ‹
+          </span>Kembali</span>
+      </div>
+    </a>
+  </div>
+  <main class="">
     <form action="/umum" method="POST">
       @csrf
-      <div class="grid grid-cols-2 gap-8 w-full max-w-5xl px-10 mt-6">
+      <div class="grid grid-cols-3 sm:grid-cols-3 p-6 gap-6">
         <!-- Tombol Pasien Lama -->
         <button type="submit" name="validasi" value="lama"
-          class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10 w-full">
-          <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>Pasien Lama</span>
-          </div>
-          <!-- Dekorasi garis -->
-          <div class="absolute top-0 right-0 w-24 h-full flex items-start justify-end pr-2 pt-4 opacity-50">
-            <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-            <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-            <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-          </div>
+          class="bg-[#5e7291] hover:bg-[#4e617a] text-white px-10 py-12 rounded-3xl shadow-lg flex flex-col items-center space-y-4 ">
+          <img src="{{ asset('/img/Image1.png') }}" />
+          <span class="text-4xl font-bold">Pasien Lama</span>
         </button>
         <!-- Tombol Pasien Baru -->
         <button type="submit" name="validasi" value="baru"
-          class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10 w-full">
-          <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
-            </svg>
-            <span>Pasien Baru</span>
-          </div>
-          <!-- Dekorasi garis -->
-          <div class="absolute top-0 left-0 w-24 h-full flex items-start justify-start pl-2 pt-4 opacity-50">
-            <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-            <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-            <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-          </div>
+          class="bg-[#6e88a1] hover:bg-[#5e758d] text-white px-10 py-12 rounded-3xl shadow-lg flex flex-col items-center space-y-4">
+          <img src="{{ asset('/img/Image2.png') }}" />
+          <span class="text-4xl font-semibold">Pasien Baru</span>
         </button>
         <!-- Tombol Print -->
         <a href="/print"
-          class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10">
-          <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
-            </svg>
-            <span>Print</span>
-          </div>
-          <!-- Dekorasi garis -->
-          <div class="absolute top-0 left-0 w-24 h-full flex items-start justify-start pl-2 pt-4 opacity-50">
-            <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-            <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-            <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-          </div>
+          class="bg-[#5e7291] hover:bg-[#4e617a] text-white px-10 py-12 rounded-3xl shadow-lg flex flex-col items-center space-y-4">
+          <img src="{{ asset('/img/Print.png') }}" />
+          <span class="text-4xl font-semibold ">Cetak Tiket Antrian</span>
         </a>
       </div>
     </form>
   </main>
-  @if (session('success'))
-    <script>
-    Swal.fire({
-      icon: 'success',
-      title: 'Berhasil',
-      text: '{{ session("success") }}',
-    });
-    </script>
+  <script type="module">
+    @if(session('success'))
+    toastr.success("{{ session('success') }}");
   @endif
-  @if (session('error'))
-    <script>
-    Swal.fire({
-      icon: 'error',
-      title: 'Gagal',
-      text: '{{ session("error") }}',
-    });
-    </script>
+
+    @if(session('error'))
+    toastr.error("{{ session('error') }}");
   @endif
+  </script>
+
 </body>
 
 </html>

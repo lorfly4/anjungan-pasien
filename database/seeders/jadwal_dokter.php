@@ -13,7 +13,7 @@ class jadwal_dokter extends Seeder
     public function run(): void
     {
         \App\Models\Jadwaldokter::insert([
-            ...collect(range(1, 4))
+            ...collect(range(25, 27))
                 ->flatMap(function ($id) {
                     return [
                         [

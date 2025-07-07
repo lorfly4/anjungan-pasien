@@ -12,9 +12,9 @@
 <body>
 
     <div class="container mt-5">
-         <a href="/umum" class="text-blue-600 hover:text-blue-800 flex items-center mr-4">
-      <i class="fas fa-arrow-left mr-2"></i> Kembali
-    </a>
+        <a href="/umum" class="text-blue-600 hover:text-blue-800 flex items-center mr-4">
+            <i class="fas fa-arrow-left mr-2"></i> Kembali
+        </a>
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
                 <h1 class="text-black font-extrabold text-[64px] leading-[72px] font-sans mb-20">
@@ -30,48 +30,54 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" placeholder="Silahkan isi nama lengkap anda" required>
+                        <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap"
+                            placeholder="Silahkan isi nama lengkap anda" required>
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Silahkan isi NIK anda (14 digit)" required maxlength="14" minlength="14" pattern="^\d{14}$">
-                    <div class="mb-3">
-                        <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
-                            <option value="">Pilih jenis kelamin</option>
-                            <option value="laki-laki">Laki-laki</option>
-                            <option value="perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Silahkan isi tempat lahir anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <textarea name="alamat" class="form-control" id="alamat" placeholder="Silahkan isi alamat lengkap anda" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="no_hp" class="form-label">No. HP</label>
-                        <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Silahkan isi no hp anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Optional" id="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="status_menikah" class="form-label">Status Menikah</label>
-                        <select name="status_menikah" id="status_menikah" class="form-select" required>
-                            <option value="">Pilih status menikah</option>
-                            <option value="sudah">Menikah</option>
-                            <option value="belum">Belum Menikah</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="previewBtn">Simpan</button>
+                        <input type="text" name="nik" class="form-control" id="nik"
+                            placeholder="Silahkan isi NIK anda (14 digit)" required maxlength="14" minlength="14"
+                            pattern="^\d{14}$">
+                        <div class="mb-3">
+                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
+                                <option value="">Pilih jenis kelamin</option>
+                                <option value="laki-laki">Laki-laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir"
+                                placeholder="Silahkan isi tempat lahir anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                            <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label">Alamat</label>
+                            <textarea name="alamat" class="form-control" id="alamat"
+                                placeholder="Silahkan isi alamat lengkap anda" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_hp" class="form-label">No. HP</label>
+                            <input type="text" name="no_hp" class="form-control" id="no_hp"
+                                placeholder="Silahkan isi no hp anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Optional" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_menikah" class="form-label">Status Menikah</label>
+                            <select name="status_menikah" id="status_menikah" class="form-select" required>
+                                <option value="">Pilih status menikah</option>
+                                <option value="sudah">Menikah</option>
+                                <option value="belum">Belum Menikah</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="previewBtn">Simpan</button>
                 </form>
 
                 <!-- Modal Preview -->
@@ -147,12 +153,12 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Gagal',
-        text: '{{ session('error') }}'
-    });
+<script type="module">
+    @if(session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
+    @if(session('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
 </script>
-@endif

@@ -2,22 +2,25 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Metro Cikupa</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: "Roboto", sans-serif;
     }
+
     .pattern-stripe {
       background-image: radial-gradient(circle at top right, white 0%, transparent 60%);
       background-repeat: no-repeat;
       background-position: top right;
     }
+
     .pattern-stripe-reverse {
       background-image: radial-gradient(circle at top left, white 0%, transparent 60%);
       background-repeat: no-repeat;
@@ -28,6 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @endif
 </head>
+
 <body class="bg-gray-100 min-h-screen flex flex-col items-center">
   <header class="w-full bg-gray-200 py-3 px-4 flex items-center justify-between">
     <a href="/umum" class="text-blue-600 hover:text-blue-800 flex items-center mr-4">
@@ -49,11 +53,13 @@
         <button type="submit" name="validasi" value="Rujukan Rumah Sakit"
           class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10 w-full">
           <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span>Rujukan Rumah 
-              Sakit</span>  
+            <span>Rujukan Rumah
+              Sakit</span>
           </div>
           <!-- Dekorasi garis -->
           <div class="absolute top-0 right-0 w-24 h-full flex items-start justify-end pr-2 pt-4 opacity-50">
@@ -66,8 +72,10 @@
         <button type="submit" name="validasi" value="daftar"
           class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10 w-full">
           <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
             </svg>
             <span>Daftar Baru</span>
           </div>
@@ -83,23 +91,16 @@
   </main>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@if(session('error'))
-<script>
+  <script>
+    @if (session('error'))
     Swal.fire({
-        icon: 'error',
-        title: 'Gagal',
-        text: '{{ session('error') }}'
+      icon: 'error',
+      title: 'Oops...',
+      text: "{{ session('error') }}"
     });
-</script>
-@endif
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Gagal',
-        text: '{{ session('success') }}'
-    });
-</script>
-@endif
+  @endif
+  </script>
+
 </body>
+
 </html>

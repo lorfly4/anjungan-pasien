@@ -12,6 +12,7 @@ use App\Models\Poli;
 use App\Models\JadwalDokter;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\LoketPoli;
 
 class umumController extends Controller
 {
@@ -110,7 +111,7 @@ class umumController extends Controller
         }
 
         $nama_lengkap = $panggilan . ' ' . $request->nama_lengkap;
-         
+
         $data = [
             'no_rm' => $no_rm,
             'nama_lengkap' => $nama_lengkap,
@@ -134,18 +135,6 @@ class umumController extends Controller
         } else {
             return redirect('/umum/baru')->with('error', 'Data gagal disimpan!');
         }
-    }
-
-    public function registrasi()
-    {
-        // Ambil data pasien dari session
-        $pasien = session('pasien');
-        $poli = \App\Models\poli::with('dokter')->get();
-        if (!$pasien || !isset($pasien['nama_lengkap'])) {
-            return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
-        }
-
-        return view('umum.registrasi', ['pasien' => $pasien, 'poli' => $poli]);
     }
 
     public function dokter(Request $request)
@@ -218,7 +207,7 @@ class umumController extends Controller
                     'jam' => $jam,
                     'disable' => $sudah_dipakai,
                 ];
-                                $mulai->addMinutes(30); // tambah 30 menit
+                $mulai->addMinutes(30); // tambah 30 menit
             }
         }
 
@@ -260,7 +249,7 @@ class umumController extends Controller
 
         $pasien = DB::table('pasien_umum')->where('nik', $nik)->first();
 
-        if ($pasien) {
+        if ($pasien && $pasien->status_aktif) {
             $data = [
                 'nama_lengkap'   => $pasien->nama_lengkap,
                 'no_rm'          => $pasien->no_rm,
@@ -276,10 +265,77 @@ class umumController extends Controller
 
             session(['pasien' => $data]);
 
-            return view('umum.rekap', compact('data'));
+            session(['pasien' => $data]);
+            return redirect('/umum/rekap');
+        } else if ($pasien && !$pasien->status_aktif) {
+            return redirect('/umum/lama')->with('error', 'Pasien sudah tidak aktif.');
         } else {
             return redirect('/umum/lama')->with('error', 'Data pasien tidak ditemukan.');
         }
+    }
+
+    public function rekap()
+    {
+        $data = session('pasien');
+        if (!$data) {
+            return redirect('/umum/lama')->with('error', 'Data pasien tidak ditemukan.');
+        }
+        return view('umum.rekap', compact('data'));
+    }
+
+    public function registrasi()
+    {
+        // Ambil data pasien dari session
+        $pasien = session('pasien');
+        $loket = \App\Models\Loket::with('kategori')->where('jenis_berobat', 'UMUM')->get();
+        if (!$pasien || !isset($pasien['nama_lengkap'])) {
+            return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
+        }
+
+        return view('umum.registrasi', ['pasien' => $pasien, 'loket' => $loket]);
+    }
+
+    public function pilihLoket(Request $request)
+    {
+        $request->validate([
+            'loket' => 'required',
+        ]);
+
+        $loket_id = $request->input('loket');
+        $loket = Loket::findOrFail($loket_id);
+        session(['loket' => $loket_id]);
+
+        // Simpan data pasien ke dalam session
+        $pasien = session('pasien');
+        if (!$pasien) {
+            return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
+        }
+
+        return redirect('/umum/poli');
+    }
+
+    public function poli()
+    {
+        $loket_id = session('loket');
+        if (!$loket_id) {
+            return redirect('/umum/registrasi')->with('error', 'Loket tidak ditemukan.');
+        }
+
+        $loket = Loket::findOrFail($loket_id);
+        $poli = LoketPoli::where('loket_id', $loket_id)->pluck('poli_id');
+        $poli = Poli::whereIn('id_poli', $poli)->get();
+
+        // Ambil data pasien dari session
+        $pasien = session('pasien');
+        if (!$pasien || !isset($pasien['nama_lengkap'])) {
+            return redirect('/umum/baru')->with('error', 'Data pasien tidak ditemukan.');
+        }
+
+        return view('umum.poli', [
+            'loket' => $loket,
+            'poli' => $poli,
+            'pasien' => $pasien,
+        ]);
     }
 
     public function previewAntrian(Request $request)
@@ -341,16 +397,14 @@ class umumController extends Controller
 
 
     public function simpanAntrian(Request $request)
-{
-    $data = $request->except('_token');
+    {
+        $data = $request->except('_token');
 
-    DB::table('riwayat_antrians')->insert($data);
+        DB::table('riwayat_antrians')->insert($data);
 
-    session()->forget('pasien');
-    session()->forget('poli');
+        session()->forget('pasien');
+        session()->forget('poli');
 
-    return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
+        return redirect('/')->with('success', 'Antrian berhasil dicetak dan disimpan!');
+    }
 }
-
-}
-    
