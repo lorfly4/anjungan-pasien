@@ -96,7 +96,17 @@
         <section class="flex flex-col w-1/2 space-y-4">
             <!-- Videotron 1/4 screen height -->
             <div class="border border-black h-[25vh] flex items-center justify-center text-lg font-normal">
-                Videotron
+
+                <div class="w-full h-full flex items-center justify-center">
+                    @if (count($video) > 0)
+                        <video class="w-full h-full object-cover" controls>
+                            <source src="{{ asset('storage/' . $video[0]->path) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    @else
+                        <p class="text-gray-600">Tidak ada video yang tersedia.</p>
+                    @endif
+                </div>
             </div>
             <!-- Carousel nomor antrian selanjutnya -->
             <div class="border border-black h-20 flex items-center justify-center space-x-4 overflow-x-auto px-2">

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    protected $fillable = ['id','title', 'type', 'path'];
+    protected $fillable = ['title', 'type', 'path', 'status'];
 
     // protected $timestamps = true;
 }

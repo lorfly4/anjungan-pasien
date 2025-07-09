@@ -136,8 +136,13 @@
 
         Route::get('admin/videos', [VideoController::class, 'index'])->name('video.index');
         Route::get('admin/videos/create', [VideoController::class, 'create'])->name('video.create');
-        Route::post('admin/videos', [VideoController::class, 'store'])->name('videos.store');
+        Route::post('admin/videos', [VideoController::class, 'store'])->name('video.store');
 
+        Route::get('admin/editvideo/{id}', [VideoController::class, 'editvideo'])->name('video.editvideo');
+
+        route::put('admin/proseseditvideo/{id}', [VideoController::class, 'update'])->name('video.update');
+
+        route::delete('admin/deletevideo/{id}', [VideoController::class, 'deletevideo'])->name('video.deletevideo');
 
     });
 
