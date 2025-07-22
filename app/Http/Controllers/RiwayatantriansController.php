@@ -66,7 +66,10 @@ public function reset()
     // Hapus session terakhir dipanggil
     session()->forget('terakhir_dipanggil_id');
 
-    return redirect()->route('riwayatantrians.index')->with('success', 'Antrian telah direset!');
+    return redirect()->route('riwayatantrians.index')->with([
+        'success' => 'Antrian telah direset!',
+        'success_timer' => 3000 // buat agar 3 detik
+    ]);
 }
 
 }

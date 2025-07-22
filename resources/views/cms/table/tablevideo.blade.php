@@ -75,7 +75,8 @@
                             </td>
                             <td>
                                 <a href="{{ route('video.editvideo', $video->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form action="{{ route('video.deletevideo', $video->id)}}" method="POST" style="display:inline;">
+                                <form action="{{ route('video.deletevideo', $video->id) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger"
@@ -94,6 +95,15 @@
                                                 return false;
                                             }
                                         })">Hapus</button>
+                                </form>
+
+                                <form action="{{ route('video.setActive', $video->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-sm {{ $video->status == 1 ? 'btn-success' : 'btn-secondary' }}">
+                                        {{ $video->status == 1 ? 'Aktif' : 'Jadikan Aktif' }}
+                                    </button>
                                 </form>
                             </td>
                         </tr>

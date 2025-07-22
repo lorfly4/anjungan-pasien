@@ -125,4 +125,18 @@ class VideoController extends Controller
         $video->delete();
         return redirect()->route('video.index')->with('success', 'Video berhasil dihapus.');
     }
+
+
+    public function setActive($id)
+    {
+        // Set semua data jadi 0 dulu
+        Video::query()->update(['status' => 0]);
+
+        // Ubah yang diklik jadi 1
+        $video = Video::findOrFail($id);
+        $video->status = 1;
+        $video->save();
+
+        return back()->with('success', 'Menu berhasil diaktifkan!');
+    }
 }

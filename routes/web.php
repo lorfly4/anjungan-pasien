@@ -144,6 +144,10 @@
 
         route::delete('admin/deletevideo/{id}', [VideoController::class, 'deletevideo'])->name('video.deletevideo');
 
+        //untuk merubah status aktif video
+
+        Route::post('admin/set-active/{id}', [VideoController::class, 'setActive'])->name('video.setActive');
+
     });
 
 
