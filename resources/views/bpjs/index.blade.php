@@ -27,13 +27,15 @@
       <div class='w-full flex-col '>
 
         <div class="flex justify-between">
+          <!-- placeholder -->
             <img
-               src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/002dd8f3dbbb902ec73724109be5d3ada5aba01f?placeholderIfAbsent=true"
+               src=""
                alt="Company logo"
                class="object-contain max-w-full aspect-[4.41] w-[190px] max-md:mt-10 "
              />
+             <!-- placeholder -->
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/37b8072c7fcb0d31139cb33103e19b2e0aad1249?placeholderIfAbsent=true"
+              src=""
               alt="Healthcare icon"
               class="object-contain mt-10 max-w-full aspect-[1.41] w-[250px] max-md:mt-10 ml-[-10px]0 "
             />

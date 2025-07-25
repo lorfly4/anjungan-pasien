@@ -45,16 +45,16 @@
           <div class="flex gap-5 max-md:flex-col justify-between mx-10 mt-2">
             <div class="max-md:ml-0 max-md:w-full">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/ef9d652622c15dcd44c48faa5866c65a5ae01275?placeholderIfAbsent=true"
-                alt="Company logo"
-                class="object-contain shrink-0 mt-2.5 max-w-full aspect-[3.41] w-[239px] max-md:mt-10 ml-[-10px]"
+                src=""
+                alt="Logo"
+                class="object-contain shrink-0 mt-2.5 max-w-full aspect-[3.41] w-[239px] max-md:mt-10 ml-[-10px] bg-red-600"
               />
             </div>
             <h1 class='text-white font-medium text-3xl mt-5'>Daftar Pelayanan</h1>
             <div class="ml-5 w-max-md:ml-0 max-md:w-full ">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/37b8072c7fcb0d31139cb33103e19b2e0aad1249?placeholderIfAbsent=true"
-                alt="Healthcare icon"
+                src=""
+                alt="logo"
                 class="object-contain shrink-0 max-w-full aspect-square w-[105px] max-md:mt-10 "
               />
             </div>

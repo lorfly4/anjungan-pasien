@@ -24,12 +24,14 @@
   <div class='w-full flex-col '>
 
     <div class="flex justify-between mt-[-25px]">
+      <!-- placeholder -->
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/002dd8f3dbbb902ec73724109be5d3ada5aba01f?placeholderIfAbsent=true"
-        alt="Company logo" class="object-contain max-w-full aspect-[5.41] w-[140px] max-md:mt-10  " />
+        src=""
+        alt="icon" class="object-contain max-w-full aspect-[4.41] w-[190px] max-md:mt-10 bg-red-500" />
+        <!-- placeholder -->
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/be69b2afbbb64a02ad678735c20641c6/37b8072c7fcb0d31139cb33103e19b2e0aad1249?placeholderIfAbsent=true"
-        alt="Healthcare icon" class="object-contain mt-10 max-w-full aspect-[1.41] w-[200px] max-md:mt-10  " />
+        src=""
+        alt="icon" class="object-contain mt-10 max-w-full aspect-[1.41] w-[200px] max-md:mt-10  " />
     </div>
   </div>
   <!-- Tombol Kembali- -->
