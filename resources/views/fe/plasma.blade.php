@@ -111,8 +111,8 @@
     <!-- Header -->
     <header class="flex justify-between items-center p-3 bg-[#323949] font-bold">
         <div class="flex items-center space-x-3">
-            <img alt="Hospital logo placeholder" class="w-10 h-10" height="40"
-                src="https://storage.googleapis.com/a1aa/image/5a75602b-8737-4946-7dec-48d7ef4960ed.jpg"
+            <img alt="Hospital logo placeholder" class="w-10 h-10 bg-[#323949]" height="40"
+                src=""
                 width="40" />
             <span class="text-lg font-semibold text-white">
                 Rumah Jiwa Sehat
@@ -142,44 +142,52 @@
             </div>
 
 
-            {{-- content-table --}}
-            @forelse ($antrianBelumDipanggil as $index => $antrianItem)
-                <div class="grid grid-cols-3 auto-rows-[124px]">
-                    <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between border-t-2">
-                        <p class="text-3xl text-white font-bold">{{ $antrianItem->nama_pasien }}</p>
-                        <div class='justify-between flex'>
-                            <p class="text-2xl  text-white font-bold ">
-                                {{ \Carbon\Carbon::parse(time: $antrianItem->created_at)->format(format: 'd-m-Y H:i') }}
-                            </p>
-                            <p class='text-2xl font-bold text-[#323949]'>
-                                {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p>
-                        </div>
-                    </div>
-                    <div class="bg-[#323949] flex items-center justify-center border-t-2 ">
-                        <h1 class="text-6xl font-bold text-white">{{ $antrianItem->no_antrian }}</h1>
-                    </div>
-                </div>
-            @empty
-                <div class="grid grid-cols-3 auto-rows-[124px]">
-                    <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between border-t-2">
-                        <p class="text-3xl text-white font-bold">-</p>
-                        <div class='justify-between flex'>
-                            <p class="text-xl font-bold text-white">-</p>
-                            <p class='text-2xl font-bold text-[#323949]'>-</p>
-                        </div>
-                    </div>
-                    <div class="bg-[#323949] flex items-center justify-center border-t-2 ">
-                        <h1 class="text-6xl font-bold text-white">-</h1>
+    {{-- content-table --}}
+    @forelse ($antrianBelumDipanggil as $index => $antrianItem)
+            @php
+                $isEven = $index % 2 === 0;
+                $bgContent = $isEven ? 'bg-[#6796B4]' : 'bg-[#4C6E84]';
+                $bgStatus = $isEven ? 'text-[#323949]' : 'text-[#fff]';
+                $bgNumber = $isEven ? 'bg-[#323949]' : 'bg-[#455863]';
+            @endphp
+            <div class="grid grid-cols-3 auto-rows-[124px]">
+                <div class="col-span-2 {{ $bgContent }} p-3 px-5 flex flex-col justify-between "> 
+                    <p class="text-3xl text-white font-bold">{{ $antrianItem->nama_pasien }}</p>
+                    <div class='justify-between flex'>
+                        <p class="text-2xl text-white font-bold">
+                            {{ \Carbon\Carbon::parse($antrianItem->created_at)->format('d-m-Y H:i') }}
+                        </p>
+                        <p class='{{ $bgStatus }} text-2xl font-bold text-[#323949]'>
+                            {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p>
                     </div>
                 </div>
-            @endforelse
+                <div class="{{ $bgNumber }} flex items-center justify-center  ">
+                    <h1 class="text-6xl font-bold text-white">{{ $antrianItem->no_antrian }}</h1>
+                </div>
+            </div>
+        @empty
+            <div class="grid grid-cols-3 auto-rows-[124px]">
+                <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between ">
+                    <p class="text-3xl text-white font-bold">-</p>
+                    <div class='justify-between flex'>
+                        <p class="text-xl font-bold text-white">-</p>
+                        <p class='text-2xl font-bold text-[#323949]'>-</p>
+                    </div>
+                </div>
+                <div class="bg-[#323949] flex items-center justify-center ">
+                    <h1 class="text-6xl font-bold text-white">-</h1>
+                </div>
+            </div>
+        @endforelse
+
         </section>
     </div>
+
         <!-- Right side: Videotron and below it carousel and field -->
         <section class="grid grid-rows-[1fr_190px_1fr] gap-5 ">
             <!-- Videotron 1/4 screen height -->
             <!-- Videotron 1/4 screen height -->
-            <div class="border border-black h-[25vh] flex flex-col space-y-4 items-center justify-center">
+            <div class="border border-black h-[33vh] flex flex-col space-y-4 items-center justify-center">
                 @foreach ($videos as $video)
                     <div class="w-full h-full flex items-center justify-center">
                         @if ($video->type == 'local')
@@ -209,11 +217,11 @@
             </div>
 
 
-            <div class="w-full max-w-[600px] mx-auto flex gap-3 overflow-x-hidden" id="scrollBoxHorizontal">
+            <div class="w-full  mx-auto flex gap-3 overflow-hidden" id="scrollBoxHorizontal">
                 @for ($i = 0; $i < 2; $i++) {{-- Ulangi 2x agar bisa looping --}}
                     @foreach ($lokets as $index => $loket)
                         <div
-                            class="min-w-[220px] {{ $index % 2 == 0 ? 'bg-[#455863]' : 'bg-[#4C6E84]' }} rounded content-center h-[170px] flex flex-col justify-center items-center">
+                            class="min-w-[220px] {{ $index % 2 == 0 ? 'bg-[#455863]' : 'bg-[#4C6E84]' }} rounded content-center h-[200px] flex flex-col justify-center items-center ">
                             <p class="text-center text-white font-bold text-2xl">
                                 <span class="text-5xl">{{ $index + 1 }}</span><br />
                                 {{ strtoupper($loket->nama_lokets) }}<br />
@@ -233,7 +241,7 @@
                 const clone = scrollBox.innerHTML;
                 scrollBox.innerHTML += clone;
 
-                let scrollSpeed = 1;
+                let scrollSpeed = .5;
 
                 function autoScroll() {
                     scrollBox.scrollLeft += scrollSpeed;
@@ -248,8 +256,6 @@
 
                 autoScroll();
             </script>
-
-
 
 
 
