@@ -131,38 +131,38 @@
     {{-- <div wire:poll.5s> --}}
         <section class="max-h-[798px] overflow-x-hidden rounded " id="scrollBoxVertical">
 
-            {{--  Header-table --}}
+           {{--  Header-table --}}
             <div class="grid grid-cols-3 sticky top-0 h-[124px]">
-                <div class="col-span-2 bg-[#323949] flex items-center justify-center ">
-                    <h1 class="text-2xl text-white font-bold">NAMA PASIEN</h1>
+                <div class="col-span-2 flex items-center justify-center border-l-4 border-y-4 border-[#323949] ">
+                    <h1 class="text-2xl text-[#323949] font-bold">NAMA PASIEN</h1>
                 </div>
-                <div class="bg-[#6796B4] flex items-center justify-center ">
-                    <h1 class="text-2xl text-white font-bold">NO. ANTRIAN</h1>
+                <div class="bg-[#ffff] flex items-center justify-center border-4 border-[#323949] ">
+                    <h1 class="text-2xl text-[#323949] font-bold">NO. ANTRIAN</h1>
                 </div>
             </div>
 
 
     {{-- content-table --}}
     @forelse ($antrianBelumDipanggil as $index => $antrianItem)
-            @php
+            <!-- @php
                 $isEven = $index % 2 === 0;
                 $bgContent = $isEven ? 'bg-[#6796B4]' : 'bg-[#4C6E84]';
                 $bgStatus = $isEven ? 'text-[#323949]' : 'text-[#fff]';
                 $bgNumber = $isEven ? 'bg-[#323949]' : 'bg-[#455863]';
-            @endphp
-            <div class="grid grid-cols-3 auto-rows-[124px]">
-                <div class="col-span-2 {{ $bgContent }} p-3 px-5 flex flex-col justify-between "> 
-                    <p class="text-3xl text-white font-bold">{{ $antrianItem->nama_pasien }}</p>
+            @endphp -->
+            <div class="grid grid-cols-3 auto-rows-[124px] border-[#323949] border-b-4 border-l-4 ">
+                <div class="col-span-2 p-3 px-5 flex flex-col justify-between "> 
+                    <!-- <p class="text-3xl text-black font-bold">{{ $antrianItem->nama_pasien }}</p> -->
                     <div class='justify-between flex'>
-                        <p class="text-2xl text-white font-bold">
+                        <p class="text-2xl font-bold">
                             {{ \Carbon\Carbon::parse($antrianItem->created_at)->format('d-m-Y H:i') }}
                         </p>
-                        <p class='{{ $bgStatus }} text-2xl font-bold text-[#323949]'>
-                            {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p>
+                        <!-- <p class='text-2xl font-bold text-[#323949]'>
+                            {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p> -->
                     </div>
                 </div>
-                <div class="{{ $bgNumber }} flex items-center justify-center  ">
-                    <h1 class="text-6xl font-bold text-white">{{ $antrianItem->no_antrian }}</h1>
+                <div class=" flex items-center justify-center border-[#323949] border-x-4  ">
+                    <h1 class="text-6xl font-bold ">{{ $antrianItem->no_antrian }}</h1>
                 </div>
             </div>
         @empty
@@ -273,7 +273,6 @@
                     <div class="grid grid-rows-3 bg-[#5FABA3]">
                         @if (isset($antrian))
                             <div class="row-span-2 self-center">
-                                <p class="text-3xl font-bold-600">{{ $antrian->nama_pasien }}</p>
                                 <h1 class="text-9xl font-bold">{{ $antrian->no_antrian }}</h1>
                             </div>
 
