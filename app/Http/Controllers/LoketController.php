@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Loket;
 
 class LoketController extends Controller
 {
@@ -12,7 +13,10 @@ class LoketController extends Controller
             $query->where('nama_lokets', 'LIKE', "%{$search}%");
         })
             ->paginate(5);
-        return view('cms.table.tableloket', compact('lokets'));
+
+        return view('cms.table.tableloket', [
+            'lokets' => $lokets,
+        ]);
     }
 
     public function showcreateloket()
@@ -47,11 +51,11 @@ class LoketController extends Controller
             'id_kategoris' => $validatedData['kategori'],
             'id_dokter' => $validatedData['dokter'],
             'status' => $validatedData['status'],
-            
+
         ]);
 
         $loket->polis()->sync($request->input('poli'));
-        
+
         return redirect()->route('loket.index')->with('success', 'Data loket berhasil ditambahkan!');
     }
 
@@ -92,6 +96,26 @@ class LoketController extends Controller
 
         return redirect()->route('loket.index')->with('success', 'Data loket berhasil diubah!');
     }
+
+
+
+    public function updatestatuslokets(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:true,false',
+        ]);
+
+        $lokets = Loket::findOrFail($id);
+
+        // Ubah status menjadi 1 (true) atau 0 (false)
+        $lokets->status = $request->status === 'true' ? 1 : 0;
+        $lokets->save();
+
+        return redirect()->back()->with('success', 'Status lokets berhasil diperbarui.');
+    }
+
+
+
     public function prosesdeleteloket($id_lokets)
     {
         $lokets = \App\Models\Loket::find($id_lokets);

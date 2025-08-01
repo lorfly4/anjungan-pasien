@@ -17,10 +17,10 @@
 
         {{-- Tombol dan Search --}}
         <div class="d-flex justify-content-between mb-2">
-            <a href="{{ route('loket.showcreateloket')}}" class="btn btn-sm btn-success">Create</a>
-            <form action="{{ route('loket.index')}}" method="GET" class="d-flex">
+            <a href="{{ route('loket.showcreateloket') }}" class="btn btn-sm btn-success">Create</a>
+            <form action="{{ route('loket.index') }}" method="GET" class="d-flex">
                 <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari loket..."
-                    value="{{ request('search')}}">
+                    value="{{ request('search') }}">
                 <button type="submit" class="btn btn-sm btn-primary ml-2">Cari</button>
             </form>
         </div>
@@ -59,7 +59,7 @@
                         <td class="text-center">{{ ($lokets->currentPage() - 1) * $lokets->perPage() + $loop->iteration }}
                         </td>
                         <td>{{ $loket->nama_lokets }}</td>
-                        <td>{{ $loket->jenis_berobat}}</td>
+                        <td>{{ $loket->jenis_berobat }}</td>
                         <td>{{ $loket->keterangan }}</td>
                         <td>{{ $loket->dokter->nama_dokter ?? '-' }}</td>
 
@@ -74,12 +74,12 @@
                         </td>
 
                         <td>{{ $loket->kategori->kategoris ?? '-' }}</td>
-                        <td>{{ $loket->status}}</td>
+                        <td>{{ $loket->status }}</td>
                         <td class="text-center">
                             <a href="{{ route('loket.showeditloket', $loket->id_lokets) }}"
                                 class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('loket.prosesdeleteloket', $loket->id_lokets) }}" method="POST" class="d-inline"
-                                onsubmit="return confirmSweetAlert(event, this)">
+                            <form action="{{ route('loket.prosesdeleteloket', $loket->id_lokets) }}" method="POST"
+                                class="d-inline" onsubmit="return confirmSweetAlert(event, this)">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Hapus</button>
@@ -102,6 +102,46 @@
                                     })
                                 }
                             </script>
+
+                            <button type="button"
+                                class="btn btn-sm btn-{{ $loket->status == 1 ? 'success' : 'secondary' }}"
+                                data-toggle="modal" data-target="#modalStatus{{ $loket->id_lokets }}">
+                                {{ $loket->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalStatus{{ $loket->id_lokets }}" tabindex="-1" role="dialog"
+                                aria-labelledby="modalStatusLabel{{ $loket->id_lokets }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalStatusLabel{{ $loket->id_lokets }}">Ubah
+                                                Status Loket</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin mengubah status loket ini menjadi
+                                            {{ $loket->status == 1 ? 'Tidak Aktif' : 'Aktif' }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Batal</button>
+                                            <form action="{{ route('loket.updatestatuslokets', $loket->id_lokets) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="status"
+                                                    value="{{ $loket->status == 1 ? 'false' : 'true' }}">
+                                                <button type="submit" class="btn btn-primary">Ya, Ubah</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </td>
                     </tr>
                 @empty

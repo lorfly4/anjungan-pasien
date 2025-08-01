@@ -11,6 +11,8 @@
     use App\Http\Controllers\KategoriController;
     use App\Http\Controllers\UserserversideController;
     use App\Http\Controllers\VideoController;
+    use App\Http\Controllers\RSController;
+
 
 
     Route::get('/', function () {
@@ -101,6 +103,8 @@
 
         Route::delete('admin/prosesdeleteloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'prosesdeleteloket'])->name('loket.prosesdeleteloket');
 
+        Route::put('admin/updatestatuslokets/{id_lokets}', [App\Http\Controllers\LoketController::class, 'updatestatuslokets'])->name('loket.updatestatuslokets');
+
         // Serverside
         Route::get('admin/tabeluserserverside', [App\Http\Controllers\UserserversideController::class, 'index'])->name('userserverside.index');
         //Serverside
@@ -147,6 +151,12 @@
         //untuk merubah status aktif video
 
         Route::post('admin/set-active/{id}', [VideoController::class, 'setActive'])->name('video.setActive');
+
+        // Untuk profile logo rumah sakit
+
+        Route::get('admin/createlogors', [RSController::class, 'create'])->name('rs.create');
+        Route::post('admin/rs', [RSController::class, 'store'])->name('rs.store');
+
 
     });
 

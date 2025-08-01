@@ -26,7 +26,7 @@
                                 <form action="{{ route('loket.prosescreateloket')}}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    
+
                                     <div class="form-group">
                                         <label for="name">Nama Loket</label>
                                         <input type="text" class="form-control" name="nama_loket" id="nama_loket"
@@ -79,13 +79,13 @@
                                         </script>
                                     </div>
 
-                                    
+
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="" selected disabled>Pilih Status</option>
-                                            <option value="active">Aktif</option>
-                                            <option value="inactive">Tidak Aktif</option>
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary" onclick="showSweetAlert()">Submit</button>

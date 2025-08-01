@@ -110,7 +110,8 @@
     <!-- Header -->
     <header class="flex justify-between items-center p-3 bg-[#323949] font-bold">
         <div class="flex items-center space-x-3">
-            <img alt="Hospital logo placeholder" class="w-10 h-10 bg-[#323949]" height="40" src=""
+            <img alt="Hospital logo placeholder" class="w-10 h-10" height="40"
+                src="https://storage.googleapis.com/a1aa/image/5a75602b-8737-4946-7dec-48d7ef4960ed.jpg"
                 width="40" />
             <span class="text-lg font-semibold text-white">
                 Rumah Jiwa Sehat
@@ -132,56 +133,48 @@
 
             {{--  Header-table --}}
             <div class="grid grid-cols-3 sticky top-0 h-[124px]">
-                <div class="col-span-2 flex items-center justify-center border-l-4 border-y-4 border-[#323949] ">
-                    <h1 class="text-2xl text-[#323949] font-bold">NAMA PASIEN</h1>
+                <div class="col-span-2 bg-[#323949] flex items-center justify-center ">
+                    <h1 class="text-2xl text-white font-bold">NAMA PASIEN</h1>
                 </div>
-                <div class="bg-[#ffff] flex items-center justify-center border-4 border-[#323949] ">
-                    <h1 class="text-2xl text-[#323949] font-bold">NO. ANTRIAN</h1>
+                <div class="bg-[#6796B4] flex items-center justify-center ">
+                    <h1 class="text-2xl text-white font-bold">NO. ANTRIAN</h1>
                 </div>
             </div>
 
 
             {{-- content-table --}}
             @forelse ($antrianBelumDipanggil as $index => $antrianItem)
-                <!-- @php
-                    $isEven = $index % 2 === 0;
-                    $bgContent = $isEven ? 'bg-[#6796B4]' : 'bg-[#4C6E84]';
-                    $bgStatus = $isEven ? 'text-[#323949]' : 'text-[#fff]';
-                    $bgNumber = $isEven ? 'bg-[#323949]' : 'bg-[#455863]';
-                @endphp -->
-                <div class="grid grid-cols-3 auto-rows-[124px] border-[#323949] border-b-4 border-l-4 ">
-                    <div class="col-span-2 p-3 px-5 flex flex-col justify-between ">
-                        <!-- <p class="text-3xl text-black font-bold">{{ $antrianItem->nama_pasien }}</p> -->
+                <div class="grid grid-cols-3 auto-rows-[124px]">
+                    <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between border-t-2">
+                        <p class="text-3xl text-white font-bold">{{ $antrianItem->nama_pasien }}</p>
                         <div class='justify-between flex'>
-                            <p class="text-2xl font-bold">
-                                {{ \Carbon\Carbon::parse($antrianItem->created_at)->format('d-m-Y H:i') }}
+                            <p class="text-2xl  text-white font-bold ">
+                                {{ \Carbon\Carbon::parse(time: $antrianItem->created_at)->format(format: 'd-m-Y H:i') }}
                             </p>
-                            <!-- <p class='text-2xl font-bold text-[#323949]'>
-                            {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p> -->
+                            <p class='text-2xl font-bold text-[#323949]'>
+                                {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p>
                         </div>
                     </div>
-                    <div class=" flex items-center justify-center border-[#323949] border-x-4  ">
-                        <h1 class="text-6xl font-bold ">{{ $antrianItem->no_antrian }}</h1>
+                    <div class="bg-[#323949] flex items-center justify-center border-t-2 ">
+                        <h1 class="text-6xl font-bold text-white">{{ $antrianItem->no_antrian }}</h1>
                     </div>
                 </div>
             @empty
                 <div class="grid grid-cols-3 auto-rows-[124px]">
-                    <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between ">
+                    <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between border-t-2">
                         <p class="text-3xl text-white font-bold">-</p>
                         <div class='justify-between flex'>
                             <p class="text-xl font-bold text-white">-</p>
                             <p class='text-2xl font-bold text-[#323949]'>-</p>
                         </div>
                     </div>
-                    <div class="bg-[#323949] flex items-center justify-center ">
+                    <div class="bg-[#323949] flex items-center justify-center border-t-2 ">
                         <h1 class="text-6xl font-bold text-white">-</h1>
                     </div>
                 </div>
             @endforelse
-
         </section>
         </div>
-
         <!-- Right side: Videotron and below it carousel and field -->
         <section class="grid grid-rows-[1fr_190px_1fr] gap-5 ">
             <!-- Videotron 1/4 screen height -->
@@ -214,11 +207,13 @@
                 @endforeach
             </div>
 
-            <div class="w-full  mx-auto flex gap-3 overflow-hidden" id="scrollBoxHorizontal">
+
+
+
+            <div class="w-full mx-auto flex gap-3 overflow-hidden" id="scrollBoxHorizontal">
                 @for ($i = 0; $i < 2; $i++) {{-- Ulangi 2x agar bisa looping --}}
                     @foreach ($lokets as $index => $loket)
-                        <div
-                            class="min-w-[220px] {{ $index % 2 == 0 ? 'bg-[#455863]' : 'bg-[#4C6E84]' }} rounded content-center h-[200px] flex flex-col justify-center items-center ">
+                        <div class="min-w-[220px] {{ $index % 2 == 0 ? 'bg-[#455863]' : 'bg-[#4C6E84]' }} rounded content-center h-[200px] flex flex-col justify-center items-center">
                             <p class="text-center text-white font-bold text-2xl">
                                 <span class="text-5xl">{{ $index + 1 }}</span><br />
                                 {{ strtoupper($loket->nama_lokets) }}<br />
@@ -231,39 +226,42 @@
                 @endfor
             </div>
 
-            <script>
-                // Ambil elemen yang ingin di scroll
-                const scrollBox = document.getElementById('scrollBoxHorizontal');
+        <script>
+            // Ambil elemen yang ingin di scroll
+            const scrollBox = document.getElementById('scrollBoxHorizontal');
 
-                let scrollSpeed = 1; // Kecepatan scroll
-                let isScrolling = true; // Flag untuk status scrolling
+            let scrollSpeed = 1;  // Kecepatan scroll
+            let isScrolling = true;  // Flag untuk status scrolling
 
-                // Fungsi untuk menggulir otomatis
-                function autoScroll() {
-                    if (isScrolling) {
-                        scrollBox.scrollLeft += scrollSpeed; // Scroll ke kanan
+            // Fungsi untuk menggulir otomatis
+            function autoScroll() {
+                if (isScrolling) {
+                    scrollBox.scrollLeft += scrollSpeed;  // Scroll ke kanan
 
-                        // Jika sudah mencapai ujung kanan
-                        if (scrollBox.scrollLeft >= scrollBox.scrollWidth - scrollBox.clientWidth) {
-                            scrollBox.scrollLeft = 0; // Reset ke awal
-                        }
+                    // Jika sudah mencapai ujung kanan
+                    if (scrollBox.scrollLeft >= scrollBox.scrollWidth - scrollBox.clientWidth) {
+                        scrollBox.scrollLeft = 0;  // Reset ke awal
                     }
-                    requestAnimationFrame(autoScroll); // Memanggil fungsi untuk scrolling terus menerus
                 }
+                requestAnimationFrame(autoScroll);  // Memanggil fungsi untuk scrolling terus menerus
+            }
 
-                // Mulai scroll otomatis
-                autoScroll();
+            // Mulai scroll otomatis
+            autoScroll();
 
-                // Menghentikan scroll saat mouse hover
-                scrollBox.addEventListener('mouseover', () => {
-                    isScrolling = false; // Hentikan scroll saat hover
-                });
+            // Menghentikan scroll saat mouse hover
+            scrollBox.addEventListener('mouseover', () => {
+                isScrolling = false;  // Hentikan scroll saat hover
+            });
 
-                // Mengaktifkan kembali scroll saat mouse keluar
-                scrollBox.addEventListener('mouseout', () => {
-                    isScrolling = true; // Lanjutkan scroll saat mouse keluar
-                });
-            </script>
+            // Mengaktifkan kembali scroll saat mouse keluar
+            scrollBox.addEventListener('mouseout', () => {
+                isScrolling = true;  // Lanjutkan scroll saat mouse keluar
+            });
+        </script>
+
+
+
 
 
 
@@ -282,6 +280,7 @@
                     <div class="grid grid-rows-3 bg-[#5FABA3]">
                         @if (isset($antrian))
                             <div class="row-span-2 self-center">
+                                <p class="text-3xl font-bold-600">{{ $antrian->nama_pasien }}</p>
                                 <h1 class="text-9xl font-bold">{{ $antrian->no_antrian }}</h1>
                             </div>
 
