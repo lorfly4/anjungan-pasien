@@ -110,7 +110,12 @@
     <!-- Header -->
     <header class="flex justify-between items-center p-3 bg-[#323949] font-bold">
         <div class="flex items-center space-x-3">
+<<<<<<< HEAD
             <img alt="Hospital logo placeholder" class="w-10 h-10 bg-[#323949]" height="40" src=""
+=======
+            <img alt="Hospital logo placeholder" class="w-10 h-10 bg-[#323949]" height="40"
+                src=""
+>>>>>>> e2e71e6839134f1bdc77af1237ad15896da5ca34
                 width="40" />
             <span class="text-lg font-semibold text-white">
                 Rumah Jiwa Sehat
@@ -130,7 +135,7 @@
         {{-- <div wire:poll.5s> --}}
         <section class="max-h-[798px] overflow-x-hidden rounded " id="scrollBoxVertical">
 
-            {{--  Header-table --}}
+           {{--  Header-table --}}
             <div class="grid grid-cols-3 sticky top-0 h-[124px]">
                 <div class="col-span-2 flex items-center justify-center border-l-4 border-y-4 border-[#323949] ">
                     <h1 class="text-2xl text-[#323949] font-bold">NAMA PASIEN</h1>
@@ -141,6 +146,7 @@
             </div>
 
 
+<<<<<<< HEAD
             {{-- content-table --}}
             @forelse ($antrianBelumDipanggil as $index => $antrianItem)
                 <!-- @php
@@ -181,12 +187,58 @@
 
         </section>
         </div>
+=======
+    {{-- content-table --}}
+    @forelse ($antrianBelumDipanggil as $index => $antrianItem)
+            <!-- @php
+                $isEven = $index % 2 === 0;
+                $bgContent = $isEven ? 'bg-[#6796B4]' : 'bg-[#4C6E84]';
+                $bgStatus = $isEven ? 'text-[#323949]' : 'text-[#fff]';
+                $bgNumber = $isEven ? 'bg-[#323949]' : 'bg-[#455863]';
+            @endphp -->
+            <div class="grid grid-cols-3 auto-rows-[124px] border-[#323949] border-b-4 border-l-4 ">
+                <div class="col-span-2 p-3 px-5 flex flex-col justify-between "> 
+                    <!-- <p class="text-3xl text-black font-bold">{{ $antrianItem->nama_pasien }}</p> -->
+                    <div class='justify-between flex'>
+                        <p class="text-2xl font-bold">
+                            {{ \Carbon\Carbon::parse($antrianItem->created_at)->format('d-m-Y H:i') }}
+                        </p>
+                        <!-- <p class='text-2xl font-bold text-[#323949]'>
+                            {{ $antrianItem->dipanggil ? 'Sudah' : 'Belum' }}</p> -->
+                    </div>
+                </div>
+                <div class=" flex items-center justify-center border-[#323949] border-x-4  ">
+                    <h1 class="text-6xl font-bold ">{{ $antrianItem->no_antrian }}</h1>
+                </div>
+            </div>
+        @empty
+            <div class="grid grid-cols-3 auto-rows-[124px]">
+                <div class="col-span-2 bg-[#6796B4] p-3 px-5 flex flex-col justify-between ">
+                    <p class="text-3xl text-white font-bold">-</p>
+                    <div class='justify-between flex'>
+                        <p class="text-xl font-bold text-white">-</p>
+                        <p class='text-2xl font-bold text-[#323949]'>-</p>
+                    </div>
+                </div>
+                <div class="bg-[#323949] flex items-center justify-center ">
+                    <h1 class="text-6xl font-bold text-white">-</h1>
+                </div>
+            </div>
+        @endforelse
+
+        </section>
+    </div>
+>>>>>>> e2e71e6839134f1bdc77af1237ad15896da5ca34
 
         <!-- Right side: Videotron and below it carousel and field -->
         <section class="grid grid-rows-[1fr_190px_1fr] gap-5 ">
             <!-- Videotron 1/4 screen height -->
             <!-- Videotron 1/4 screen height -->
+<<<<<<< HEAD
             <div class="h-[30vh] flex flex-col space-y-4 items-center justify-center">
+=======
+            <div class="border border-black h-[33vh] flex flex-col space-y-4 items-center justify-center">
+>>>>>>> e2e71e6839134f1bdc77af1237ad15896da5ca34
                 @foreach ($videos as $video)
                     <div class="w-full h-full flex items-center justify-center">
                         @if ($video->type == 'local')
@@ -214,6 +266,10 @@
                 @endforeach
             </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e2e71e6839134f1bdc77af1237ad15896da5ca34
             <div class="w-full  mx-auto flex gap-3 overflow-hidden" id="scrollBoxHorizontal">
                 @for ($i = 0; $i < 2; $i++) {{-- Ulangi 2x agar bisa looping --}}
                     @foreach ($lokets as $index => $loket)
@@ -235,8 +291,16 @@
                 // Ambil elemen yang ingin di scroll
                 const scrollBox = document.getElementById('scrollBoxHorizontal');
 
+<<<<<<< HEAD
                 let scrollSpeed = 1; // Kecepatan scroll
                 let isScrolling = true; // Flag untuk status scrolling
+=======
+                // Clone semua isi di dalam scrollBox
+                const clone = scrollBox.innerHTML;
+                scrollBox.innerHTML += clone;
+
+                let scrollSpeed = .5;
+>>>>>>> e2e71e6839134f1bdc77af1237ad15896da5ca34
 
                 // Fungsi untuk menggulir otomatis
                 function autoScroll() {
@@ -264,8 +328,6 @@
                     isScrolling = true; // Lanjutkan scroll saat mouse keluar
                 });
             </script>
-
-
 
 
 
