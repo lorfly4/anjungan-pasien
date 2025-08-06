@@ -15,7 +15,7 @@
       font-family: "Roboto", sans-serif;
     }
 
-    .pattern-stripe {
+    /* .pattern-stripe {
       background-image: radial-gradient(circle at top right, white 0%, transparent 60%);
       background-repeat: no-repeat;
       background-position: top right;
@@ -25,82 +25,54 @@
       background-image: radial-gradient(circle at top left, white 0%, transparent 60%);
       background-repeat: no-repeat;
       background-position: top left;
-    }
+    } */
   </style>
   @if (session('success') || session('error'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @endif
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col items-center">
-  <header class="w-full bg-gray-200 py-3 px-4 flex items-center justify-between">
-    <a href="/umum" class="text-blue-600 hover:text-blue-800 flex items-center mr-4">
-      <i class="fas fa-arrow-left mr-2"></i> Kembali
-    </a>
-    <div class="flex items-center justify-between w-full">
-      <img src="{{ asset('img/rumah-sakit.png') }}" alt="Logo Rumah Sakit" class="h-13">
-      <h1 class="text-gray-600 text-xl" style="font-size: 120%;">
-        Daftar layanan
-      </h1>
-      <img src="{{ asset('img/bpjs.png') }}" alt="Logo BPJS Kesehatan" class="h-13">
+<body class="bg-gradient-to-b from-sky-100 to-white min-h-screen p-0 m-0 w-full">
+  {{-- Logo --}}
+  <div class='w-full flex-col '>
+
+    <div class="flex justify-between mt-[-25px]">
+      <!-- placeholder -->
+      <img
+        src=""
+        alt="icon" class="object-contain max-w-full aspect-[4.41] w-[190px] max-md:mt-10 bg-red-500" />
+        <!-- placeholder -->
+      <img
+        src=""
+        alt="icon" class="object-contain mt-10 max-w-full aspect-[1.41] w-[200px] max-md:mt-10  " />
     </div>
-  </header>
-  <main class="w-full max-w-6xl px-4 py-6">
+  </div>
+  <!-- Tombol Kembali- -->
+  <div>
+    <a href="/umum" class="items-start">
+      <div
+        class='bg-[#5e7291] hover:bg-[#4e617a] text-white px-4 py-2 relative rounded-xl shadow-md flex flex-col items-center space-y-2 w-[200px] mx-5'>
+        <span class='text-4xl font-semibold mr-10'> <span class='absolute left-6 bottom-3 text-4xl'> 
+          </span>Kembali</span>
+      </div>
+    </a>
+  </div>
+  <main class="">
     <form action="/umum/baru" method="POST">
       @csrf
-      <div class="grid grid-cols-2 gap-8 w-full max-w-5xl px-10 mt-6">
+      <div class="grid grid-cols-2 p-6 gap-12 max-w-[1400px] mx-auto ">
         <!-- Tombol Pasien Lama -->
-        <button type="submit" name="validasi" value="Rujukan Rumah Sakit"
-          class="relative bg-blue-600 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe overflow-hidden mx-10 w-full">
-          <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 15c2.637 0 5.084.76 7.121 2.063M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>Rujukan Rumah
-              Sakit</span>
-          </div>
-          <!-- Dekorasi garis -->
-          <div class="absolute top-0 right-0 w-24 h-full flex items-start justify-end pr-2 pt-4 opacity-50">
-            <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-            <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-            <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-          </div>
+        <button type="submit" name="validasi" value="lama"
+          class="bg-[#5e7291] hover:bg-[#4e617a] text-white px-10 py-20 rounded-3xl shadow-lg flex flex-col items-center justify-center space-y-4 ">  
+          <img src="{{ asset('/img/Rujukan.png') }}" class="w-[370px] h-[370px] object-contain" />
+          <span class="text-4xl font-bold">Rujukan Rumah Sakit</span>
         </button>
         <!-- Tombol Pasien Baru -->
-        <button type="submit" name="validasi" value="daftar"
-          class="relative bg-purple-700 text-white rounded-lg shadow-lg h-40 flex items-center justify-center text-2xl font-semibold pattern-stripe-reverse overflow-hidden mx-10 w-full">
-          <div class="flex items-center space-x-4 z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 11c0 3.866-3.134 7-7 7M12 11c0 3.866 3.134 7 7 7M12 11V5m0 0L9 8m3-3l3 3" />
-            </svg>
-            <span>Daftar Baru</span>
-          </div>
-          <!-- Dekorasi garis -->
-          <div class="absolute top-0 left-0 w-24 h-full flex items-start justify-start pl-2 pt-4 opacity-50">
-            <div class="w-6 h-24 bg-white rounded-full mx-0.5"></div>
-            <div class="w-4 h-20 bg-white rounded-full mx-0.5"></div>
-            <div class="w-2 h-16 bg-white rounded-full mx-0.5"></div>
-          </div>
+        <button type="submit" name="validasi" value="baru"
+          class="bg-[#6e88a1] hover:bg-[#5e758d] text-white px-10 py-20 rounded-3xl shadow-lg flex flex-col items-center justify-center space-y-4 ">
+            <img src="{{ asset('/img/Daftar.png') }} " class="w-[370px] h-[370px] object-contain"/>
+            <span class="text-4xl font-semibold">Daftar Baru</span> 
         </button>
       </div>
     </form>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <script>
-    @if (session('error'))
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: "{{ session('error') }}"
-    });
-  @endif
-  </script>
-
-</body>
-
-</html>
