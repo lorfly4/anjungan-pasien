@@ -1,0 +1,224 @@
+    <?php
+
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Middleware\IsUser;
+    use App\Http\Middleware\IsAdmin;
+    use App\Http\Controllers\LoginController;
+    use App\Http\Controllers\DashboardController;
+    use App\Http\Controllers\CreateUserController;
+    use App\Http\Controllers\PoliController;
+    use App\Http\Controllers\DokterController;
+    use App\Http\Controllers\KategoriController;
+    use App\Http\Controllers\UserserversideController;
+    use App\Http\Controllers\VideoController;
+    use App\Http\Controllers\RSController;
+
+
+
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
+
+
+
+    Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+
+    Route::post('/login/proseslogin', [App\Http\Controllers\LoginController::class, 'proseslogin'])->name('login.proseslogin');
+
+    Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+
+    //Tampilan depan
+
+
+    // Tampilan plasma
+    Route::get('/plasmaantrian', [\App\Http\Controllers\PlasmaController::class, 'index'])->name('plasma.index');
+    Route::post('/plasmaantrian/panggil', [\App\Http\Controllers\PlasmaController::class, 'panggil'])->name('plasma.panggil');
+    Route::post('/plasmaantrian/reset', [\App\Http\Controllers\PlasmaController::class, 'reset'])->name('plasma.reset');
+
+
+    // Data
+    Route::get('/data', [\App\Http\Controllers\RiwayatantriansController::class, 'index'])->name('riwayatantrians.index');
+    Route::post('/data/panggil', [\App\Http\Controllers\RiwayatantriansController::class, 'panggil'])->name('riwayatantrians.panggil');
+
+    Route::post('/antrian/reset', [\App\Http\Controllers\RiwayatantriansController::class, 'reset'])->name('riwayatantrians.reset');
+
+
+
+    //ini admin
+    Route::middleware(['auth', 'App\Http\Middleware\IsAdmin', 'App\Http\Middleware\PreventBack'])->group(function () {
+        Route::get('/admin/dashboard', [App\Http\Controllers\DashboardController::class, 'admindashboard'])->name('dashboard.admindashboard');
+
+        Route::get('/admin/createuser', [App\Http\Controllers\CreateUserController::class, 'index'])->name('createuser.index');
+
+        Route::get('/admin/buatuser', [App\Http\Controllers\CreateUserController::class, 'showcreateuser'])->name('createuser.showcreateuser');
+        Route::post('/admin/prosesbuatuser', [App\Http\Controllers\CreateUserController::class, 'prosescreateuser'])->name('createuser.prosescreateuser');
+
+        Route::get('/admin/edituser/{id}', [App\Http\Controllers\CreateUserController::class, 'edituser'])->name('createuser.edituser');
+        Route::post('/admin/prosesedituser/{id}', [App\Http\Controllers\CreateUserController::class, 'updateuser'])->name('createuser.updateuser');
+
+        Route::delete('admin/deleteuser/{id}',[App\Http\Controllers\CreateUserController::class, 'deleteuser'])->name('createuser.deleteuser');
+
+        Route::get('admin/createpoli', [App\Http\Controllers\PoliController::class, 'index'])->name('poli.index');
+        Route::get('admin/showpoli', [App\Http\Controllers\PoliController::class, 'showpoli'])->name('poli.showpoli');
+        Route::post('admin/prosescreatepoli', [App\Http\Controllers\PoliController::class, 'prosescreatepoli'])->name('poli.prosescreatepoli');
+
+        Route::put('admin/statuspoli/{id}', [App\Http\Controllers\PoliController::class, 'updatestatuspoli'])->name('poli.updatestatuspoli');
+
+        Route::get('admin/editpoli/{id_poli}', [App\Http\Controllers\PoliController::class, 'showeditpoli'])->name('poli.showeditpoli');
+        Route::post('admin/proseseditpoli/{id_poli}', [App\Http\Controllers\PoliController::class, 'proseseditpoli'])->name('poli.proseseditpoli');
+
+        Route::delete('admin/deletepoli/{id_poli}',[App\Http\Controllers\PoliController::class, 'deletepoli'])->name('poli.deletepoli');
+
+        Route::get('admin/tablecreatedokter', [App\Http\Controllers\DokterController::class, 'index'])->name('tablecreatedokter.index');
+        Route::get('admin/createdokter', [App\Http\Controllers\DokterController::class, 'showcreatedokter'])->name('tablecreatedokter.showcreatedokter');
+        Route::post('admin/prosescreatedokter', [App\Http\Controllers\DokterController::class, 'prosescreatedokter'])->name('tablecreatedokter.prosescreatedokter');
+
+        Route::get('admin/editdokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'showeditdokter'])->name('tablecreatedokter.showeditdokter');
+        Route::post('admin/proseseditdokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'proseseditdokter'])->name('tablecreatedokter.proseseditdokter');
+
+        Route::delete('admin/prosesdeletedokter/{id_dokter}', [App\Http\Controllers\DokterController::class, 'deletedokter'])->name('tablecreatedokter.deletedokter');
+
+
+        Route::get('admin/tablekategori', [\App\Http\Controllers\KategoriController::class, 'index'])->name('tablecreatekategori.index');
+
+        Route::get('admin/showcreatekategori', [\App\Http\Controllers\KategoriController::class, 'showcreatekategori'])->name('kategori.showcreatekategori');
+
+        Route::post('admin/prosescreatekategori', [\App\Http\Controllers\KategoriController::class, 'prosescreatekategori'])->name('kategori.prosescreatekategori');
+
+        Route::get('admin/showeditkategori/{id_kategoris}', [App\Http\Controllers\KategoriController::class, 'showeditkategori'])->name('kategori.showeditkategori');
+
+        Route::post('admin/proseseditkategori/{id_kategoris}', [App\Http\Controllers\KategoriController::class, 'proseseditkategori'])->name('kategori.proseseditkategori');
+
+        Route::delete('admin/deletekategori/{id_kategoris}',[App\Http\Controllers\KategoriController::class, 'deletekategori'])->name('kategori.deletekategori');
+
+        Route::get('admin/tableloket', [App\Http\Controllers\LoketController::class, 'index'])->name('loket.index');
+
+        Route::get('admin/showcreateloket', [App\Http\Controllers\LoketController::class, 'showcreateloket'])->name('loket.showcreateloket');
+
+        Route::post('admin/prosescreateloket', [App\Http\Controllers\LoketController::class, 'prosescreateloket'])->name('loket.prosescreateloket');
+
+        Route::get('admin/showeditloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'showeditloket'])->name('loket.showeditloket');
+
+        Route::put('admin/proseseditloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'proseseditloket'])->name('loket.proseseditloket');
+
+        Route::delete('admin/prosesdeleteloket/{id_lokets}', [App\Http\Controllers\LoketController::class, 'prosesdeleteloket'])->name('loket.prosesdeleteloket');
+
+        Route::put('admin/updatestatuslokets/{id_lokets}', [App\Http\Controllers\LoketController::class, 'updatestatuslokets'])->name('loket.updatestatuslokets');
+
+        // Serverside
+        Route::get('admin/tabeluserserverside', [App\Http\Controllers\UserserversideController::class, 'index'])->name('userserverside.index');
+        //Serverside
+
+        Route::get('/admin/tablecreatejadwaldokter', [App\Http\Controllers\DokterController::class, 'tablecreatejadwaldokter'])->name('dokter.tablecreatejadwaldokter');
+
+        Route::get('admin/showcreatejadwaldokter', [App\Http\Controllers\DokterController::class, 'showcreatejadwaldokter'])->name('dokter.showcreatejadwaldokter');
+
+        Route::post('admin/prosescreatejadwaldokter', [App\Http\Controllers\DokterController::class, 'prosescreatejadwaldokter'])->name('dokter.prosescreatejadwaldokter');
+
+        Route::get('admin/showeditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'showeditjadwaldokter'])->name('dokter.showeditjadwaldokter');
+
+        Route::put('admin/proseseditjadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'proseseditjadwaldokter'])->name('dokter.proseseditjadwaldokter');
+
+        Route::delete('admin/deletejadwaldokter/{id_jadwal_dokter}', [App\Http\Controllers\DokterController::class, 'deletejadwaldokter'])->name('dokter.deletejadwaldokter');
+
+        Route::get('admin/tablepasienumum/', [App\Http\Controllers\PasienUmumController::class, 'showtablepasienumum'])->name('pasienumum.showtablepasienumum');
+
+        Route::get('admin/createpasienumum/', [App\Http\Controllers\PasienUmumController::class,'showcreatepasienumum'])->name('pasienumum.showcreatepasienumum');
+
+        Route::post('admin/prosescreatepasienumum/', [App\Http\Controllers\PasienUmumController::class,'prosescreatepasienumum'])->name('pasienumum.prosescreatepasienumum');
+
+        Route::get('admin/showeditpasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'showeditpasienumum'])->name('pasienumum.showeditpasienumum');
+
+        Route::put('admin/proseseditpasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'proseseditpasienumum'])->name('pasienumum.proseseditpasienumum');
+
+        Route::delete('admin/deletepasienumum/{id_pasien}', [App\Http\Controllers\PasienUmumController::class, 'deletepasienumum'])->name('pasienumum.deletepasienumum');
+
+        Route::get('admin/tableriwayatantrianpasien/', [App\Http\Controllers\RiwayatantriansController::class, 'showtableriwayatantrian'])->name('riwayatantrians.showtableriwayatantrian');
+
+        // Antarmuka Video
+
+
+        Route::get('admin/videos', [VideoController::class, 'index'])->name('video.index');
+        Route::get('admin/videos/create', [VideoController::class, 'create'])->name('video.create');
+        Route::post('admin/videos', [VideoController::class, 'store'])->name('video.store');
+
+        Route::get('admin/editvideo/{id}', [VideoController::class, 'editvideo'])->name('video.editvideo');
+
+        route::put('admin/proseseditvideo/{id}', [VideoController::class, 'update'])->name('video.update');
+
+        route::delete('admin/deletevideo/{id}', [VideoController::class, 'deletevideo'])->name('video.deletevideo');
+
+        //untuk merubah status aktif video
+
+        Route::post('admin/set-active/{id}', [VideoController::class, 'setActive'])->name('video.setActive');
+
+        // Untuk profile logo rumah sakit
+
+        Route::get('admin/logo-rs', [RSController::class, 'index'])->name('rs.index');
+        Route::get('admin/createlogors', [RSController::class, 'create'])->name('rs.create');
+        Route::get('admin/editlogors/{id_rs}', [RSController::class, 'edit'])->name('rs.edit');
+        Route::put('admin/proseseditlogors/{id_rs}', [RSController::class, 'update'])->name('rs.update');
+        Route::delete('admin/deletelogors/{id_rs}', [RSController::class, 'destroy'])->name('rs.destroy');
+        Route::put('/logos/{id}/status', [RSController::class, 'updateStatus'])->name('logos.updateStatus');
+        Route::post('admin/rs', [RSController::class, 'store'])->name('rs.store');
+
+
+    });
+
+
+
+
+    //ini user
+    Route::middleware(['auth', 'App\Http\Middleware\IsUser', 'App\Http\Middleware\PreventBack'])->group(function () {
+        Route::get('/user/dashboard', [App\Http\Controllers\DashboardController::class, 'userdashboard'])->name('dashboard.userdashboard');
+
+    });
+
+    //apm
+Route::get('/', action: [App\Http\Controllers\awalController::class, 'index']);
+Route::get('/print', action: [App\Http\Controllers\awalController::class, 'print']);
+Route::post('/print/simpan', action: [App\Http\Controllers\awalController::class, 'simpanAntrian']);
+
+// BPJS Routes      
+Route::prefix('bpjs')->group(function () {
+    Route::get('/', [App\Http\Controllers\bpjsController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\bpjsController::class, 'validasiUser']);
+    Route::get('/lama', [App\Http\Controllers\bpjsController::class, 'pasien_lama_bpjs']);
+    Route::post('/lama', [App\Http\Controllers\bpjsController::class, 'cari_pasien']);
+    Route::get('/baru', [App\Http\Controllers\bpjsController::class, 'pasien_baru_bpjs']);
+    Route::post('/baru', [App\Http\Controllers\bpjsController::class, 'pasien_baru_bpjs']);
+    Route::post('/baru', [App\Http\Controllers\bpjsController::class, 'pasien_baru_bpjs_input']);
+    Route::get('/buatPasienBaru', [App\Http\Controllers\bpjsController::class, 'store']);
+    Route::post('/buatPasienBaru', [App\Http\Controllers\bpjsController::class, 'store']);
+    Route::get('/registrasi', [App\Http\Controllers\bpjsController::class, 'registrasi']);
+    Route::post('/registrasi', [App\Http\Controllers\bpjsController::class, 'registrasi']);
+    Route::post('/print', [App\Http\Controllers\bpjsController::class, 'previewAntrian']);
+    Route::post('/print/simpan', [App\Http\Controllers\bpjsController::class, 'simpanAntrian']);
+    Route::get('/dokter', [App\Http\Controllers\bpjsController::class, 'dokter']);
+    Route::post('/dokter', [App\Http\Controllers\bpjsController::class, 'dokter']);
+});
+
+// Umum Routes
+Route::prefix('umum')->group(function () {
+    Route::get('/', [App\Http\Controllers\umumController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\umumController::class, 'validasiUser']);
+    Route::get('/lama', [App\Http\Controllers\umumController::class, 'pasien_lama_umum']);
+    Route::post('/lama', [App\Http\Controllers\umumController::class, 'cari_pasien']);
+    Route::get('/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum']);
+    Route::post('/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum']);
+    Route::post('/baru', [App\Http\Controllers\umumController::class, 'pasien_baru_umum_input']);
+    Route::get('/buatPasienBaru', [App\Http\Controllers\umumController::class, 'store']);
+    Route::post('/buatPasienBaru', [App\Http\Controllers\umumController::class, 'store']);
+    Route::get('/rekap', [App\Http\Controllers\umumController::class, 'rekap']);
+    Route::get('/registrasi', [App\Http\Controllers\umumController::class, 'registrasi']);
+    Route::post('/loket', [App\Http\Controllers\umumController::class, 'pilihLoket']);
+    Route::get('/poli', [App\Http\Controllers\umumController::class, 'poli']);
+    Route::post('/print', [App\Http\Controllers\umumController::class, 'previewAntrian']);
+    Route::post('/print/simpan', [App\Http\Controllers\umumController::class, 'simpanAntrian']);
+    Route::get('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
+    Route::post('/dokter', [App\Http\Controllers\umumController::class, 'dokter']);
+    Route::get('/pilih-jadwal', [App\Http\Controllers\umumController::class, 'pilihJadwal']);
+    Route::post('/pilih-jadwal', [App\Http\Controllers\umumController::class, 'pilihJadwal']);
+});
+
+
